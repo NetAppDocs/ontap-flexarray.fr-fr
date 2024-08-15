@@ -1,0 +1,20 @@
+---
+permalink: implement-e-series/reference_supported_fabric_attached_configurations_for_storage_arrays.html 
+sidebar: sidebar 
+keywords: supported, fabric-attached, configurations, e-series, storage, arrays 
+summary: Vous ne pouvez connecter que certaines baies de stockage E-Series dans des configurations reliées au fabric avec les systèmes ONTAP. 
+---
+= Configurations FAS prises en charge pour les baies de stockage E-Series
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous ne pouvez connecter que certaines baies de stockage E-Series dans des configurations reliées au fabric avec les systèmes ONTAP
+
+La matrice d'interopérabilité contient des informations supplémentaires sur des modèles de baies spécifiques.
+
+*Informations connexes*
+
+https://mysupport.netapp.com/matrix["Matrice d'interopérabilité NetApp"]

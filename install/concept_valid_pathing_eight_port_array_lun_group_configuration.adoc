@@ -1,0 +1,222 @@
+---
+permalink: install/concept_valid_pathing_eight_port_array_lun_group_configuration.html 
+sidebar: sidebar 
+keywords: valid, path, eight-port, array, lun, group, configuration, variation, back-end, connections, crossed, fc initiator, maximum 
+summary: Vous pouvez utiliser une configuration de groupe de LUN à huit ports pour connecter les baies de stockage aux systèmes ONTAP dans les déploiements en cluster de grande envergure qui requièrent une redondance de chemin et un équilibrage de charge supérieurs à ceux possibles avec moins de ports par groupe de LUN. 
+---
+= Chemins d'accès valides : configuration du groupe de LUN de la baie à huit ports
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez utiliser une configuration de groupe de LUN à huit ports pour connecter les baies de stockage aux systèmes ONTAP dans les déploiements en cluster de grande envergure qui requièrent une redondance de chemin et un équilibrage de charge supérieurs à ceux possibles avec moins de ports par groupe de LUN.
+
+Vous pouvez configurer cette configuration avec les connexions back-end croisées ou non croisées.
+
+
+
+== Variation dans laquelle les connexions dorsaux sont croisées
+
+Dans une configuration avec les connexions back-end croisées, les connexions FC du même contrôleur de baie de stockage vont vers les deux commutateurs de structure (redondants).
+
+Ce schéma de connexion permet une meilleure utilisation des ports de commutateur et des ports de matrice de stockage que si les connexions back-end ne sont pas croisées, ce qui réduit l'impact d'une panne de commutateur ou de contrôleur de matrice de stockage.
+
+Pour les baies de stockage équipées de deux contrôleurs seulement, il est préférable d'utiliser une configuration croisée comprenant huit ports pour le groupe de LUN sur une configuration à huit ports qui n'est pas croisée.
+
+Vous ne pouvez croiser le groupe LUN de la baie de huit ports que lorsqu'il existe des chemins dédiés à partir de chaque nœud (un zoning FC initiator-to-one-target-port par chemin).
+
+image::../media/eight_port_array_lun_group_configuration_crossed.gif[la configuration du groupe de lun de la baie de huit ports a été franchie]
+
+Dans cette illustration de connexions back-end croisées, notez la manière dont les systèmes ONTAP sont connectés aux commutateurs et à la baie de stockage. Le VS1 utilise le commutateur 1 lors de la connexion à la matrice de stockage, le port 1A et le port 2C du contrôleur 2, et utilise le commutateur 2 lors de la connexion à la matrice de stockage, les ports 2A du contrôleur 2 et 1C du contrôleur 1.
+
+Le tableau suivant récapitule la segmentation d'un groupe de LUN de baie à huit ports avec des connexions back-end croisées. La segmentation à initiateur unique est la stratégie de segmentation recommandée.
+
+|===
+| Zone | Port FC initiator sur le système ONTAP | Baie de stockage 
+
+
+ a| 
+Contacteur 1
+
+
+
+ a| 
+z1
+ a| 
+vs1, Port 0a
+ a| 
+Contrôleur 1, port 1A
+
+
+
+ a| 
+z2
+ a| 
+vs2, Port 0a
+ a| 
+Contrôleur 1, port 1B
+
+
+
+ a| 
+z3
+ a| 
+vs1, Port 0b
+ a| 
+Contrôleur 2, port 2C
+
+
+
+ a| 
+z4
+ a| 
+vs2, port 0b
+ a| 
+Contrôleur 2, Port 2D
+
+
+
+ a| 
+Contacteur 2
+
+
+
+ a| 
+z5
+ a| 
+vs1, Port 0C
+ a| 
+Contrôleur 2, port 2A
+
+
+
+ a| 
+z6
+ a| 
+vs2, port 0C
+ a| 
+Contrôleur 2, port 2B
+
+
+
+ a| 
+z7
+ a| 
+vs1, Port 0d
+ a| 
+Contrôleur 1, port 1C
+
+
+
+ a| 
+z8
+ a| 
+vs2, port 0d
+ a| 
+Contrôleur 1, port 1D
+
+|===
+
+
+== Variation dans laquelle les connexions back-end sont _non_ croisées
+
+Dans une configuration dans laquelle les connexions back-end ne sont pas croisées, les connexions FC du même contrôleur de baie de stockage ne sont pas établies qu'à un seul commutateur de structure.
+
+L'illustration suivante montre les chemins d'accès dans une configuration avec un groupe de LUN de baie à huit ports dans lequel les connexions back-end ne sont pas croisées :
+
+image::../media/eight_port_array_lun_group_configuration.gif[configuration du groupe de lun de la baie à huit ports]
+
+Le tableau suivant récapitule le zoning d'un groupe de LUN de baie à huit ports lorsque les connexions back-end ne sont pas croisées. La segmentation à initiateur unique est la stratégie de segmentation recommandée.
+
+|===
+| Zone | Port FC initiator sur le système ONTAP | Baie de stockage 
+
+
+ a| 
+Contacteur 1
+
+
+
+ a| 
+z1
+ a| 
+vs1, Port 0a
+ a| 
+Contrôleur 1, port 1A
+
+
+
+ a| 
+z2
+ a| 
+vs2, Port 0a
+ a| 
+Contrôleur 1, port 1B
+
+
+
+ a| 
+z3
+ a| 
+vs1, Port 0b
+ a| 
+Contrôleur 1, port 1C
+
+
+
+ a| 
+z4
+ a| 
+vs2, port 0b
+ a| 
+Contrôleur 1, port 1D
+
+
+
+ a| 
+Contacteur 2
+
+
+
+ a| 
+z5
+ a| 
+vs1, Port 0C
+ a| 
+Contrôleur 2, port 2A
+
+
+
+ a| 
+z6
+ a| 
+vs2, port 0C
+ a| 
+Contrôleur 2, port 2B
+
+
+
+ a| 
+z7
+ a| 
+vs1, Port 0d
+ a| 
+Contrôleur 2, port 2C
+
+
+
+ a| 
+z8
+ a| 
+vs2, port 0d
+ a| 
+Contrôleur 2, Port 2D
+
+|===
+
+
+== Considérations relatives au nombre maximal de LUN de baie par initiateur FC
+
+Lors de la configuration d'une configuration avec un groupe de LUN de baie à huit ports, vous ne pouvez pas dépasser le nombre de LUN de baie pris en charge par ONTAP par port FC initiator.

@@ -1,0 +1,30 @@
+---
+permalink: install/concept_verifying_an_installation_with_storage_arrays.html 
+sidebar: sidebar 
+keywords: verify, installation, storage, arrays 
+summary: Il est important de détecter et de résoudre toute erreur de configuration interne avant de déployer votre système dans un environnement de production. 
+---
+= Vérification de l'installation avec les baies de stockage
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Il est important de détecter et de résoudre toute erreur de configuration interne avant de déployer votre système dans un environnement de production.
+
+Les deux étapes de vérification de la configuration interne sont les suivantes :
+
+. Recherche de toute erreur de configuration interne empêchant ONTAP de fonctionner avec la matrice de stockage.
++
+Il s'agit des erreurs signalées par `storage errors show`. Vous devez corriger ces erreurs.
+
+. Vérifier que la configuration est celle que vous souhaitez.
++
+Il existe un certain nombre de situations qui ne sont pas des erreurs du point de vue du système, mais qui peuvent ne pas être ce que vous avez prévu. Par exemple, le `storage array config show` résultat de la commande affiche deux groupes de LUN, mais vous n'avez utilisé qu'un seul groupe de LUN. Ce document fait référence à des situations telles que des situations qui ne répondent pas à vos « intentions ».
+
+
+
+L'illustration suivante montre le flux de travail dans lequel vous vérifiez d'abord qu'il n'y a pas d'erreur de configuration du point de vue du système, puis vous vérifiez que l'installation est comme vous l'avez prévu.
+
+image::../media/installation_verification_flowchart.gif[Commencez par exécuter Storage array config show. Si vous y êtes invité,run storage errors show,review the messages and review the documentation. Contact technical support if the problem is not resolved.]

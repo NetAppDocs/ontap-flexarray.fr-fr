@@ -1,0 +1,50 @@
+---
+permalink: install/reference_an_access_control_lun_is_presented_to_ontap.html 
+sidebar: sidebar 
+keywords: access, control, lun, presented, ontap 
+summary: 'ONTAP ne prend pas en charge les LUN de la baie de contrôle d"accès. Les erreurs de stockage affichent des alertes de sortie si une LUN de contrôle d"accès est présentée.' 
+---
+= Une LUN de contrôle d'accès est présentée à ONTAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+ONTAP ne prend pas en charge les LUN de la baie de contrôle d'accès. Le `storage errors show` résultat vous alerte si une LUN de contrôle d'accès est présentée.
+
+
+
+== Les erreurs de stockage affichent le message
+
+[listing]
+----
+
+NAME (UID): This array LUN is an access control LUN. It is not supported and should be masked off or disabled.
+----
+
+
+== Explication
+
+ONTAP prend uniquement en charge les LUN de baies de stockage. Lorsqu'une LUN de baie, par exemple, une LUN de contrôle d'accès E-Series est présentée à ONTAP, le `storage array config show` résultat semble normal ; il affiche la LUN de contrôle d'accès dans un groupe de LUN, comme l'exemple suivant le montre. Le message d'avertissement en bas de l'écran indique le problème. Vous devez exécuter `storage errors show` pour découvrir que le problème est qu'une LUN de contrôle d'accès a été présentée et quelle LUN il s'agit.
+
+[listing]
+----
+
+mysystem1::> storage array config show
+
+          LUN     LUN
+Node      Group   Count  Array Name    Array Target Port       Initiator
+------    ------  -----  ------------ ------------------       --------
+mysystem1   0       1    NETAPP_INF_1  20:1A:00:a0:b8:0f:ee:04   0a
+                                       20:2A:00:a0:b8:0f:ee:04   0c
+
+Warning: Configuration errors were detected.  Use 'storage errors show' for detailed information.
+----
+
+
+== Dépannage et résolution des problèmes
+
+. Sur la baie de stockage, masquez la LUN de contrôle d'accès.
+. Dans ONTAP, exécutez `storage errors show` à nouveau pour confirmer que la LUN de contrôle d'accès n'est plus présentée à ONTAP.
+

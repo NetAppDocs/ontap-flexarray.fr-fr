@@ -1,0 +1,88 @@
+---
+permalink: install/concept_example_of_zoning_in_a_configuration_with_storage_arrays.html 
+sidebar: sidebar 
+keywords: example, zone, configuration, storage, arrays, single, 4-port, lun, group 
+summary: 'L"utilisation de la sécurité des LUN lors de la configuration des commutateurs pour le zoning garantit que les différents hôtes ne voient pas les LUN mappées sur un autre hôte.' 
+---
+= Exemple de zoning dans une configuration avec des baies de stockage
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+L'utilisation de la sécurité des LUN lors de la configuration des commutateurs pour le zoning garantit que les différents hôtes ne voient pas les LUN mappées sur un autre hôte.
+
+
+
+== Zoning dans une configuration unique LUN group 4 ports
+
+image::../media/one_4_port_array_lun_gp.gif[Ce graphique est décrit par le texte environnant.]
+
+Le tableau ci-dessous présente la segmentation pour cet exemple de configuration des systèmes ONTAP dans une paire HA. La segmentation à initiateur unique est la stratégie de segmentation recommandée.
+
+|===
+| Zone | Système ONTAP |  | Baie de stockage |  
+
+
+ a| 
+Contacteur 1
+
+
+
+ a| 
+z1
+ a| 
+vs1
+ a| 
+Port 0a
+ a| 
+Contrôleur 1
+ a| 
+Orifice 1A
+
+
+
+ a| 
+z2
+ a| 
+vs2
+ a| 
+Port 0a
+ a| 
+Contrôleur 1
+ a| 
+Port 1B
+
+
+
+ a| 
+Contacteur 2
+
+
+
+ a| 
+z3
+ a| 
+vs1
+ a| 
+Orifice 0C
+ a| 
+Contrôleur 2
+ a| 
+Orifice 2A
+
+
+
+ a| 
+z4
+ a| 
+vs2
+ a| 
+Orifice 0C
+ a| 
+Contrôleur 2
+ a| 
+Port 2B
+
+|===

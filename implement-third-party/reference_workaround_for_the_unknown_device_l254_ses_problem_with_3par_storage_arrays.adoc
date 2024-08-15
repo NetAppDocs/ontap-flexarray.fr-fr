@@ -1,0 +1,86 @@
+---
+permalink: implement-third-party/reference_workaround_for_the_unknown_device_l254_ses_problem_with_3par_storage_arrays.html 
+sidebar: sidebar 
+keywords: 'Workaround, unknown device (l254/ses), problem, 3PAR, storage, arrays, aggregates, luns, created, ontap system, not' 
+summary: 'La définition d"hôte, avec le rôle d"hôte spécifié dans la section Paramètres requis pour les baies 3PAR avec les systèmes ONTAP, doit être créée sur une baie de stockage 3PAR avant que le switch ne soit zoné pour connecter le système ONTAP à une baie de stockage 3PAR. Si la segmentation est configurée avant la définition de l"hôte, ONTAP découvre une LUN de baie 3PAR en tant que LUN 254 et que type de produit ses, que ONTAP ne peut pas utiliser.' 
+---
+= Solution de contournement concernant le problème d'appareil inconnu (L254/ses) avec les baies de stockage 3PAR
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La définition d'hôte, avec le rôle d'hôte spécifié dans la section Paramètres requis pour les baies 3PAR avec les systèmes ONTAP, doit être créée sur une baie de stockage 3PAR avant que le switch ne soit zoné pour connecter le système ONTAP à une baie de stockage 3PAR. Si la segmentation est configurée avant la définition de l'hôte, ONTAP découvre une LUN de baie 3PAR en tant que LUN 254 et que type de produit ses, que ONTAP ne peut pas utiliser.
+
+xref:reference_required_parameters_for_3par_arrays_with_data_ontap_systems.adoc[Paramètres requis pour les baies 3PAR avec les systèmes ONTAP]
+
+Lorsque ONTAP découvre des LUN de baie 3PAR en tant que LUN 254 et ses de type de produit, les LUN 3PAR nouvellement mappées ne peuvent pas être attribuées aux systèmes ONTAP. En outre, certaines LUN 3PAR qui auraient peut-être déjà été ajoutées à un agrégat ne peuvent pas être utilisées, car ONTAP voit un LUN 254. ONTAP génère des messages EMS pour la LUN qu'elle a identifiée comme LUN 254 et le type de produit ses, signalant que certaines LUN sont des périphériques inconnus.
+
+Si la segmentation a été configurée avant la définition de l'hôte, vous pouvez résoudre le problème de périphérique inconnu LUN 254/ses en forçant une nouvelle détection des LUN de baie mappées à partir de la baie de stockage 3PAR. La procédure utilisée dépend si les agrégats avec des LUN de baie 3 ont déjà été configurés sur le système ONTAP. (Dans les procédures suivantes, supposons que les nœuds Node-1 et Node-2 soient les noms des nœuds ONTAP.)
+
+
+
+== Si des agrégats avec des LUN de baie 3PAR ont déjà été créés sur un système ONTAP
+
+. Exécutez la commande suivante pour vous assurer qu'une configuration haute disponibilité est activée sur vos systèmes ONTAP : *`cluster ha show`*
++
+Les valeurs de sortie suivantes sont affichées :
+
++
+[listing]
+----
+
+High Availability Configured: true
+----
+. Exécutez la commande suivante pour vous assurer que le basculement du stockage est configuré sur vos systèmes ONTAP : *`storage failover show`*
++
+Les valeurs de sortie suivantes sont affichées :
+
++
+[listing]
+----
+          Takeover
+Node           Partner        Possible State Description
+-------------- -------------- -------- -------------------------------------
+Node-1    Node-2    true     Connected to Node-2
+Node-2    Node-1    true     Connected to Node-1
+2 entries were displayed.
+----
+. Exécutez une opération de basculement sur le nœud 1 en exécutant la commande suivante : *`storage failover takeover -ofnode Node-1`*
+. Exécutez à nouveau la commande suivante pour vérifier que le nœud 2 est prêt pour une opération de rétablissement : *`storage failover show`*
++
+Les valeurs de sortie suivantes sont affichées :
+
++
+[listing]
+----
+          Takeover
+Node           Partner        Possible State Description
+-------------- -------------- -------- -------------------------------------
+Node-2    Node-1    false    In takeover, Auto giveback will be
+                                      initiated in 348 seconds
+Node-1    Node-2    -        Waiting for giveback (HA mailboxes)
+2 entries were displayed.
+----
+. Exécutez une opération de rétablissement sur le nœud-1 en exécutant la commande suivante : *`storage failover giveback -ofnode Node-1 -require-partner-waiting true`*
+. À partir des autres nœuds du cluster, répétez les étapes 3 à 5.
+
+
+
+
+== Si des agrégats avec des LUN de baie 3PAR n'ont pas été créés sur un système ONTAP
+
+. Exécuter la commande suivante pour lister tous les ports initiateurs FC ONTAP connectés à la baie de stockage 3PAR : *`system node run -node <node name> -command "sysconfig -v"`*
++
+L'exemple suivant montre la commande avec un nom de nœud spécifique inclus : *`system node run -node Node-1 -command "sysconfig -v"`*
+
+. Exécutez la commande suivante pour mettre tous les ports répertoriés hors ligne : *`system node run -node <node name> -command "priv set advanced;fcadmin offline <adapter>"`*
++
+L'exemple suivant montre la commande avec un nom de nœud et un adaptateur spécifiques inclus : *`system node run -node Node-1 -command "priv set advanced;fcadmin offline 0a"`*
+
+. Exécutez la commande suivante pour mettre en ligne tous les ports répertoriés : *`system node run -node <node name> -command "priv set advanced;fcadmin online <adapter>"`*
++
+L'exemple suivant montre la commande avec un nom de nœud et un adaptateur spécifiques inclus : *`system node run -node Node-1 -command "priv set advanced;fcadmin online 0a"`*
+
+

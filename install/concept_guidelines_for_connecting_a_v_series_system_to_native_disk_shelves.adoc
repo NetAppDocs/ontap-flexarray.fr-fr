@@ -1,0 +1,106 @@
+---
+permalink: install/concept_guidelines_for_connecting_a_v_series_system_to_native_disk_shelves.html 
+sidebar: sidebar 
+keywords: guidelines, connect, v-series, system, native, disk, shelves, fc initiator, ports 
+summary: 'Lorsque vous planifiez la connexion de votre système V-Series aux tiroirs disques natifs, votre plan de connectivité port à port doit définir la redondance et d"autres instructions.' 
+---
+= Conseils pour la connexion d'un système V-Series à des tiroirs disques natifs
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Lorsque vous planifiez la connexion de votre système V-Series aux tiroirs disques natifs, votre plan de connectivité port à port doit définir la redondance et d'autres instructions.
+
+
+
+== Nombre de ports FC initiator requis pour les disques
+
+Le nombre de ports initiateurs FC requis pour connecter un système V-Series à un tiroir disque dépend du fait que votre système V-Series soit un système autonome ou une paire haute disponibilité
+
+[cols="2*"]
+|===
+| Configuration | Nombre de ports FC initiator 
+
+
+ a| 
+Système autonome
+ a| 
+* Si vous utilisez une boucle : un port FC initiator.
+* Si vous connectez deux boucles : deux ports FC initiator, un pour chaque boucle.
+
+
+
+
+ a| 
+Dans une paire haute disponibilité
+ a| 
+* Si vous utilisez Multipath Storage, deux ports FC initiator pour chaque boucle.
+* Si vous n'utilisez pas Multipath Storage, un port d'initiateur FC pour chaque contrôleur pour chaque boucle de la configuration.
+
+
+|===
+
+
+== Connexions entre un système V-Series et des disques
+
+Vous suivez les mêmes processus pour connecter un système V-Series à un tiroir disque natif que pour connecter un système FAS à un tiroir disque natif. Lors de la création de votre schéma de connectivité port à port, ce guide et les guides ONTAP et matériels du tableau suivant fournissent des informations sur la configuration et la gestion des disques et des tiroirs disques.
+
+[cols="2*"]
+|===
+| Pour plus d'informations sur... | Voir... 
+
+
+ a| 
+Prise en charge des disques, notamment les vitesses de disque prises en charge et la capacité disque
+ a| 
+https://mysupport.netapp.com/site/global/dashboard["Support NetApp"]
+
+
+
+ a| 
+Installation d'un système V-Series dans un rack ou une armoire système
+ a| 
+Sur les nouveaux systèmes, cette tâche est généralement effectuée par l'usine. Si vous avez besoin d'instructions, reportez-vous au guide de votre armoire.
+
+
+
+ a| 
+Connexion d'un tiroir disque à un système V-Series autonome
+ a| 
+Les instructions d'installation et de configuration de votre plate-forme.
+
+* https://library.netapp.com/ecm/ecm_download_file/ECMP1213632["Instructions d'installation et de configuration des systèmes 32xx"]
+* https://library.netapp.com/ecm/ecm_download_file/ECMP1147995["Instructions d'installation et de configuration des systèmes 62xx"]
+
+
+
+
+ a| 
+Connexion d'une paire haute disponibilité à un tiroir disque
+ a| 
+https://docs.netapp.com/us-en/ontap/high-availability/index.html["Configuration haute disponibilité"]
+
+
+
+ a| 
+Ajout d'un tiroir disque
+ a| 
+Guide approprié pour le type de tiroir disque.
+
+
+
+ a| 
+Déplacement d'un tiroir disque
+ a| 
+Guide approprié pour le type de tiroir disque.
+
+
+
+ a| 
+Gestion des disques
+ a| 
+https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-psmg/home.html["Gestion des disques et des agrégats"]
+
+|===

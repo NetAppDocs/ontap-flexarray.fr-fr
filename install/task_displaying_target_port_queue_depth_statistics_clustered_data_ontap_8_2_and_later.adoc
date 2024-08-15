@@ -1,0 +1,80 @@
+---
+permalink: install/task_displaying_target_port_queue_depth_statistics_clustered_data_ontap_8_2_and_later.html 
+sidebar: sidebar 
+keywords: display, target, queue, depth, statistics 
+summary: 'Si vous pensez qu"un paramètre de profondeur de file d"attente cible provoque des problèmes de performances sur votre baie de stockage, vérifiez la valeur définie pour la profondeur de file d"attente et vérifiez l"état des requêtes sur les ports FC initiator.' 
+---
+= Affichage des statistiques de profondeur de file d'attente cible
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Si vous pensez qu'un paramètre de profondeur de file d'attente cible provoque des problèmes de performances sur votre baie de stockage, vérifiez la valeur définie pour la profondeur de file d'attente et vérifiez l'état des requêtes sur les ports FC initiator.
+
+Il existe différents niveaux de détail auxquels vous pouvez accéder pour déterminer s'il y a des problèmes de traitement des demandes sur les ports cibles. Les étapes suivantes expliquent comment déterminer le paramètre actuel de la profondeur de la file d'attente du port cible, déterminer si des demandes sont en attente sur les ports et afficher des statistiques de port détaillées pour vous aider à comprendre la charge de travail sur le port.
+
+.Étapes
+. Utilisez `storage array show` la commande avec `-instance` le paramètre pour afficher la valeur actuelle de la profondeur de file d'attente du port cible.
++
+[listing]
+----
+> set advanced
+> storage array show -instance
+
+Name: HP2
+                 Prefix: HP-2
+                 Vendor: HP
+                  Model: HSV300
+                options:
+          Serial Number: 50014380025d1500
+Target Port Queue Depth: 512
+        LUN Queue Depth: 32
+        Upgrade Pending: false
+    Optimization Policy: eALUA
+               Affinity: aaa
+             Error Text: -
+----
+. Utilisez `storage array port show -fields max-queue-depth` la commande pour afficher le paramètre de profondeur de file d'attente pour chaque port de la matrice de stockage.
++
+[listing]
+----
+> set advanced
+> storage array port show -fields max-queue-depth
+
+name            wwnn             wwpn             max-queue-depth
+--------------- ---------------- ---------------- ---------------
+EMC_SYMMETRIX_1 50060480000001a0 50060480000001a0 -
+EMC_SYMMETRIX_1 50060480000001a1 50060480000001a1 -
+EMC_SYMMETRIX_1 50060480000001b0 50060480000001b0 -
+EMC_SYMMETRIX_1 50060480000001b1 50060480000001b1 256
+----
++
+Une valeur de «`-` pour `Max Queue Depth` indique que le port n'a pas de paramètre de profondeur de file d'attente max spécifique et utilise la valeur définie au niveau de la matrice de stockage.
+
+. Utiliser `storage array port show` la commande pour afficher les informations de performances sur les ports cibles de la baie de stockage
++
+Les résultats de cette commande vous aident à déterminer s'il existe des problèmes de performances liés aux ports. Les `%busy` valeurs et `%waiting` fournissent une vue de haut niveau des performances d'un port. Si ces valeurs indiquent un pourcentage élevé de demandes en attente de traitement ou indiquent que le port est occupé pendant un pourcentage élevé de temps, vous pouvez examiner plus en détail l'état du port.
+
++
+[listing]
+----
+
+vgv3070f51::*> storage array port show
+
+Array Name: HP2
+WWNN: 50014380025d1500
+WWPN: 50014380025d1508
+Connection Type: fabric
+Switch Port: vgbr300s70:9
+Link Speed: 4   GB/s
+Max Queue Depth: -
+                              LUN                                 Link
+Node       Initiator  Count   IOPS    KB/s    %busy    %waiting   Errs
+---------  ---------  -----  ------  ------  -------  ----------  ----
+vgv51-02       0a     21       2      53        0           0     0
+vgv51-01       0a     21       2      48        1           0     0
+----
+. Vous pouvez obtenir des informations plus détaillées sur les ports en utilisant la `storage array port show -fields` commande avec les `average-latency-per-iop`champs , `average-pending` `average-waiting`, , `max-pending`ou `max-waiting` .
+

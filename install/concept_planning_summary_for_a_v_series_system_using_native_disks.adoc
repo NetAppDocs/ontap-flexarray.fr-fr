@@ -1,0 +1,63 @@
+---
+permalink: install/concept_planning_summary_for_a_v_series_system_using_native_disks.html 
+sidebar: sidebar 
+keywords: plan, summary, v-series, system, native, disks, additional, considerations, setup, array, luns 
+summary: 'Vous pouvez installer des tiroirs disques natifs sur des systèmes V-Series nouveaux ou existants. Toutefois, vous devez tenir compte de quelques facteurs supplémentaires si vous prévoyez d"installer des tiroirs disques natifs sur les systèmes V-Series, par rapport à l"installation de tiroirs disques sur les systèmes FAS.' 
+---
+= Récapitulatif de planification pour un système V-Series utilisant des disques natifs
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez installer des tiroirs disques natifs sur des systèmes V-Series nouveaux ou existants. Toutefois, vous devez tenir compte de quelques facteurs supplémentaires si vous prévoyez d'installer des tiroirs disques natifs sur les systèmes V-Series, par rapport à l'installation de tiroirs disques sur les systèmes FAS.
+
+
+
+== Autres considérations de planification pour la configuration de base sur les systèmes V-Series avec disques
+
+Pour déterminer les exigences de base en matière d'installation et d'installation de votre système V-Series utilisant des disques natifs, vous devez tenir compte des éléments suivants :
+
+* Si le système V-Series est commandé avec des tiroirs disques, l'usine configure le volume racine et installe les licences et le logiciel ONTAP (comme pour les systèmes FAS).
+* Si vous ne commandez pas de système V-Series avec des tiroirs disques, vous devez prévoir d'installer le logiciel ONTAP et les licences appropriées.
+* ONTAP attribue automatiquement la propriété aux disques natifs connectés au système V-Series.
+
+
+
+
+== Autres considérations de planification si le système V-Series utilise à la fois des disques et des LUN de baie
+
+Le tableau suivant récapitule les autres considérations de planification et l'emplacement des informations pour vous aider dans chaque tâche.
+
+|===
+| Planification | Où trouver des directives 
+
+
+ a| 
+Emplacement du volume racine
+ a| 
+xref:concept_location_of_the_root_volume.adoc[Emplacement du volume racine]
+
+
+
+ a| 
+Combien de disques et de LUN de baie peuvent être attribués sans dépasser la limite maximale prise en charge par le système V-Series
+ a| 
+https://hwu.netapp.com["NetApp Hardware Universe"]
+
+
+
+ a| 
+Utilisation du port initiateur FC
+ a| 
+xref:concept_requirements_for_v_series_fc_initiator_port_usage.adoc[Conditions requises pour l'utilisation du port FC initiator]
+
+
+
+ a| 
+Le type de données qui doit résider sur les disques et le type de données qui doit se trouver sur les LUN de la baie
+ a| 
+Vous devez évaluer le type de données à gérer, puis décider si les données peuvent résider sur des disques natifs ou des LUN de baies.
+
+|===

@@ -1,0 +1,67 @@
+---
+permalink: implement-third-party/reference_required_parameters_for_hp_xp_storage_arrays_with_data_ontap_systems.html 
+sidebar: sidebar 
+keywords: required, parameters, hp, xp, storage, arrays, ontap, workaround 
+summary: Pour que cette baie de stockage fonctionne correctement avec les systèmes ONTAP, certains paramètres sont nécessaires sur la baie de stockage. 
+---
+= Paramètres requis pour les matrices de stockage HP XP avec ONTAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Pour que cette baie de stockage fonctionne correctement avec les systèmes ONTAP, certains paramètres sont nécessaires sur la baie de stockage.
+
+
+
+== Paramètres système requis pour les matrices de stockage HP XP
+
+Les paramètres requis sont indiqués dans le tableau suivant :
+
+|===
+| Paramètre | Réglage 
+
+
+ a| 
+`Host mode`
+ a| 
+Standard ou 00
+
+
+
+ a| 
+`Port security`
+ a| 
+Activé
+
+
+
+ a| 
+[NOTE]
+====
+Un groupe d'hôtes distinct des groupes d'hôtes par défaut doit être créé pour chaque paire de ports initiateur-cible.
+
+====
+|===
+Les paramètres de la matrice de stockage doivent être définis et les LUN doivent être mappés aux groupes hôtes avant que le commutateur ne soit zoné pour connecter le système ONTAP à une matrice de stockage HP XP.
+
+Si les ports initiateurs FC ONTAP sont zonés avec les ports cibles de la baie HP XP avant que les paramètres de la baie de stockage ne soient définis et que les LUN soient mappés aux groupes hôtes, il se peut que vous ne puissiez pas voir les LUN présentés à l'interface ONTAP.
+
+Dans ce cas, ONTAP génère l'un des messages EMS suivants :
+
+[listing]
+----
+[fci.device.login.reject:info] The PLOGI transmitted by port XX was rejected by port_id 0xYYYY with reason code 0x9 'Invalid R_CTL Field', explanation code 0x29 'Insufficient Resources to Support Login'
+----
+[listing]
+----
+[fci.device.login.reject:info]: The PLOGI transmitted by port XX was rejected by port_id 0xYYYY with reason code 0x3 'Nx_Port Not Available, Temporary', explanation code 0x29 'Insufficient Resources to Support Login'
+----
+
+
+== Solution de contournement
+
+Si la segmentation a été configurée avant de définir les paramètres et de mapper les LUN aux groupes hôtes, vous pouvez résoudre le problème des LUN qui ne sont pas visibles en effectuant une réinitialisation de chemin pour forcer une nouvelle découverte des LUN de baie mappées à partir de la baie de stockage HP XP.
+
+xref:reference_workaround_when_luns_are_not_visible_with_hp_xp_storage_arrays.adoc[Solution de contournement lorsque les LUN ne sont pas visibles avec les baies de stockage HP XP]

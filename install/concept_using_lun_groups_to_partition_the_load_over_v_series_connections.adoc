@@ -1,0 +1,34 @@
+---
+permalink: install/concept_using_lun_groups_to_partition_the_load_over_v_series_connections.html 
+sidebar: sidebar 
+keywords: benefits, use, multiple, lun, groups 
+summary: Vous pouvez utiliser plusieurs groupes de LUN dans votre configuration de stockage pour augmenter la capacité et pour améliorer les performances du système en répartissant la charge de travail sur davantage de ports cibles. 
+---
+= Avantages de l'utilisation de plusieurs groupes de LUN
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez utiliser plusieurs groupes de LUN dans votre configuration de stockage pour augmenter la capacité et pour améliorer les performances du système en répartissant la charge de travail sur davantage de ports cibles.
+
+Un _LUN group_ est un ensemble de périphériques logiques sur la matrice de stockage auxquels un système ONTAP accède sur les mêmes chemins. L'administrateur de la baie de stockage configure un ensemble de périphériques logiques en tant que groupe pour définir les WWPN des hôtes pouvant y accéder. ONTAP fait référence à cet ensemble de périphériques en tant que _LUN group_.
+
+Plusieurs LUN Group présentent les avantages suivants :
+
+* Il existe des limites sur le nombre de LUN qu'une paire de ports FC initiator donnée peut prendre en charge.
++
+Pour les baies de stockage de grande taille, en particulier, la capacité requise peut être supérieure à celle d'un seul groupe de LUN. En conséquence, l'utilisation de plusieurs LUN Groups peut être avantageuse.
+
+* Vous pouvez partitionner la charge des LUN de baies sur les paires de ports FC initiator.
+
+
+[NOTE]
+====
+L'utilisation de plusieurs groupes de LUN n'est pas prise en charge pour toutes les baies de stockage. Consultez la _matrice d'interopérabilité_ pour déterminer si une configuration utilisant plusieurs LUN groups est prise en charge pour votre baie de stockage.
+
+====
+*Informations connexes*
+
+https://mysupport.netapp.com/matrix["Matrice d'interopérabilité NetApp"]

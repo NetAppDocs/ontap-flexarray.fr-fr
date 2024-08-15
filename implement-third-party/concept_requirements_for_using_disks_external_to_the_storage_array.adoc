@@ -1,0 +1,30 @@
+---
+permalink: implement-third-party/concept_requirements_for_using_disks_external_to_the_storage_array.html 
+sidebar: sidebar 
+keywords: requirements, using, disks, external, storage, array 
+summary: 'ONTAP prend en charge l"utilisation des mêmes disques derrière les matrices de stockage que ceux pris en charge par le fournisseur (c"est-à-dire les disques externes à la matrice de stockage). Lorsque vous déployez des matrices de stockage utilisant des disques externes, ONTAP accepte la configuration entre la matrice de stockage et les disques externes.' 
+---
+= Configuration requise pour l'utilisation de disques externes à la matrice de stockage
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+ONTAP prend en charge l'utilisation des mêmes disques derrière les matrices de stockage que ceux pris en charge par le fournisseur (c'est-à-dire les disques externes à la matrice de stockage). Lorsque vous déployez des matrices de stockage utilisant des disques externes, ONTAP accepte la configuration entre la matrice de stockage et les disques externes.
+
+Voici les restrictions et les meilleures pratiques pour le déploiement de baies de stockage utilisant des disques externes :
+
+* Les volumes root et les LUN de base de spare sont pris en charge sur les disques externes.
+* Les LUN de baie de disques externes et internes ne doivent pas se trouver dans le même agrégat ONTAP.
+* Les LUN de baie des disques SATA et les LUN de baie des disques FC ne doivent pas se trouver dans le même agrégat.
+* Les règles relatives au nombre de chemins vers les LUN de baie sur les disques externes sont les mêmes que pour les LUN de baie sur les disques de la baie de stockage.
++
+Dans le cas de disques externes, les chemins vont du système ONTAP à travers la matrice de stockage vers les disques externes.
+
+* Seule la somme de contrôle de bloc est prise en charge pour les LUN de baie sur les disques externes.
+
+
+*Informations connexes*
+
+https://docs.netapp.com/us-en/ontap-flexarray/install/index.html["Conditions requises pour l'installation et référence de la virtualisation FlexArray"]

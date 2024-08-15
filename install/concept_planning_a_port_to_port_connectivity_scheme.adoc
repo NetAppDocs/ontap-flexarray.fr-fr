@@ -1,0 +1,14 @@
+---
+permalink: install/concept_planning_a_port_to_port_connectivity_scheme.html 
+sidebar: sidebar 
+keywords: plan, port to port, connectivity, scheme 
+summary: 'La planification de la connectivité entre les ports FC initiator sur les systèmes ONTAP et les ports de la baie de stockage inclut la détermination de la manière d"assurer la redondance et le respect des exigences relatives au nombre de chemins vers une LUN de baie.' 
+---
+= Planification d'un schéma de connectivité port à port
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La planification de la connectivité entre les ports FC initiator sur les systèmes ONTAP et les ports de la baie de stockage inclut la détermination de la manière d'assurer la redondance et le respect des exigences relatives au nombre de chemins vers une LUN de baie.

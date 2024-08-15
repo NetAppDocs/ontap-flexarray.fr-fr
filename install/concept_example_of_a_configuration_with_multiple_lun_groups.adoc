@@ -1,0 +1,86 @@
+---
+permalink: install/concept_example_of_a_configuration_with_multiple_lun_groups.html 
+sidebar: sidebar 
+keywords: example, configuration, multiple, lun, groups 
+summary: Vous pouvez utiliser une configuration de plusieurs groupes de LUN pour améliorer les performances du système en répartissant la charge de travail sur plusieurs ports cibles. 
+---
+= Exemple de configuration comportant plusieurs groupes de LUN
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez utiliser une configuration de plusieurs groupes de LUN pour améliorer les performances du système en répartissant la charge de travail sur plusieurs ports cibles.
+
+La plupart des baies de stockage prennent en charge une configuration à groupes de LUN multiples. Consultez la _matrice d'interopérabilité_ pour vérifier que cette configuration est prise en charge par votre baie de stockage.
+
+L'illustration suivante montre comment une paire de ports FC initiator (0C et 0f) sur un système ONTAP accède à un groupe de LUN sur une paire de ports de baie de stockage, et une deuxième paire de ports initiateurs FC (0a et 0h) accède à un second groupe LUN sur la même baie de stockage via une paire de ports de baie de stockage différente.
+
+Cette configuration est appelée _autonome avec deux groupes LUN de baie à 2 ports_. Une configuration de plusieurs groupes de LUN peut disposer d'une paire haute disponibilité au lieu d'un système autonome.
+
+image::../media/multiple_lun_groups_with_stand_alone_6xxx_array_controller.gif[Ce graphique est décrit par le texte environnant.]
+
+Cette configuration permet de répartir les E/S entre les groupes RAID (groupes de parité) de la baie de stockage. Vous configurez de sorte que différentes paires de ports FC initiator accèdent aux différents groupes de LUN de la baie de stockage. Le système ONTAP voit toute LUN de baie donnée sur deux chemins seulement, car un LDEV (périphérique logique) donné est mappé sur seulement deux ports redondants de la baie de stockage. Chaque groupe de LUN est accessible via une paire de ports cibles différente.
+
+Chaque LDEV est identifié en externe par un ID de LUN. Le LDEV doit être mappé sur le même ID de LUN sur tous les ports de la matrice de stockage sur lesquels il sera visible par les systèmes ONTAP.
+
+[NOTE]
+====
+Le même ID de LUN ne peut pas faire référence à deux LDEVs différents, même si les LUN utilisant le même ID se trouvent dans des groupes d'hôtes différents sur un port cible. Bien que la réutilisation de l'ID de LUN ne soit pas prise en charge sur le même port cible, la réutilisation de l'ID de LUN est prise en charge sur une baie de stockage si les LUN sont mappées à différents ports de la baie de stockage.
+
+====
+Le tableau suivant récapitule la segmentation pour cet exemple. La segmentation à initiateur unique est la stratégie de segmentation recommandée.
+
+|===
+| Zone | Port FC initiator sur le système ONTAP | Baie de stockage 
+
+
+ a| 
+Contacteur 1
+
+
+
+ a| 
+z1
+ a| 
+Port 0a
+ a| 
+Port B du contrôleur 1
+
+
+
+ a| 
+z2
+ a| 
+Orifice 0C
+ a| 
+Port A du contrôleur 1
+
+
+
+ a| 
+Contacteur 2
+
+
+
+ a| 
+z3
+ a| 
+Orifice 0f
+ a| 
+Port A du contrôleur 2
+
+
+
+ a| 
+z4
+ a| 
+Port 0h
+ a| 
+Port B du contrôleur 2
+
+|===
+*Informations connexes*
+
+https://mysupport.netapp.com/matrix["Matrice d'interopérabilité NetApp"]

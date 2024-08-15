@@ -1,0 +1,36 @@
+---
+permalink: install/task_modifying_assignment_of_spare_array_luns.html 
+sidebar: sidebar 
+keywords: modify, assignment, spare, array, luns 
+summary: 'Vous pouvez changer la propriété d"une LUN de baie de secours en un autre nœud. Vous pouvez le faire pour l"équilibrage de la charge sur les nœuds.' 
+---
+= Modification de l'affectation des LUN de baie de spare
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez changer la propriété d'une LUN de baie _spare_ en un autre nœud. Vous pouvez le faire pour l'équilibrage de la charge sur les nœuds.
+
+.Étapes
+. Sur la console du nœud qui possède la LUN de baie que vous souhaitez réaffecter, entrez la commande suivante pour afficher la liste des LUN de baie de secours sur le nœud : `storage disk show -owner local`
++
+Les LUN de baie détenues par le nœud, disques de secours et LUN dans les agrégats, sont répertoriées.
+
+. Vérifiez que la LUN que vous souhaitez réaffecter à un autre nœud est une LUN de spare.
+. Entrez la commande suivante pour attribuer la propriété de la LUN de baie à un autre nœud : `storage disk assign arrayLUNname -owner new_owner_name -force`
++
+[NOTE]
+====
+La propriété de la LUN de baie n'est pas modifiée si l'option -force n'est pas utilisée ou si la LUN de baie a déjà été ajoutée à un agrégat.
+
+====
+. Entrez la commande suivante pour vérifier que la propriété de la LUN de la baie de secours a été changée en autre nœud : `storage disk show -owner local`
++
+La LUN de la baie de rechange que vous avez modifiée en tant que nouveau propriétaire ne doit plus apparaître dans la liste des pièces de rechange. Si la LUN de la baie s'affiche toujours, répétez la commande pour modifier la propriété.
+
+. Sur le nœud de destination, entrez la commande suivante pour vérifier que la LUN de baie de rechange dont vous avez modifié la propriété est répertoriée comme un disque de secours appartenant au nœud de destination : `storage disk show -owner local`
+
+
+Vous devez ajouter la LUN de baie à un agrégat avant de pouvoir l'utiliser pour le stockage.

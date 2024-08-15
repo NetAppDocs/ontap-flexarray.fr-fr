@@ -1,0 +1,25 @@
+---
+permalink: install/task_removing_one_array_lun_from_use_by_data_ontap.html 
+sidebar: sidebar 
+keywords: remove, one, array, lun, use, ontap 
+summary: 'Si l"administrateur de la baie de stockage ne souhaite plus utiliser une LUN de baie spécifique pour ONTAP, vous devez supprimer les informations écrites par ONTAP sur la LUN (par exemple, taille et propriété) avant que l"administrateur puisse reconfigurer la LUN pour une utilisation par un autre hôte.' 
+---
+= Suppression d'une LUN de baie de ONTAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Si l'administrateur de la baie de stockage ne souhaite plus utiliser une LUN de baie spécifique pour ONTAP, vous devez supprimer les informations écrites par ONTAP sur la LUN (par exemple, taille et propriété) avant que l'administrateur puisse reconfigurer la LUN pour une utilisation par un autre hôte.
+
+*Ce dont vous aurez besoin*
+
+Si la LUN que l'administrateur de la baie de stockage ne souhaite plus utiliser ONTAP se trouve dans un agrégat, vous devez mettre l'agrégat hors ligne et détruire l'agrégat avant de démarrer cette procédure. Mettre un agrégat hors ligne et le détruire modifie le LUN de données en un LUN de spare.
+
+.Étape
+. Entrez la commande suivante : `storage disk removeowner -disk LUN_name`
++
+_LUN_NAME_ est le nom de la LUN de la baie.
+
+

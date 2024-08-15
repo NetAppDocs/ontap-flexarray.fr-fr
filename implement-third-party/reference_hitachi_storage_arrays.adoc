@@ -1,0 +1,14 @@
+---
+permalink: implement-third-party/reference_hitachi_storage_arrays.html 
+sidebar: sidebar 
+keywords: hitachi, storage, arrays 
+summary: 'Vous devez respecter certaines conditions lors de la configuration des baies de stockage Hitachi pour qu"elles fonctionnent avec des systèmes ONTAP qui utilisent des LUN de baies. Ces exigences incluent la définition des paramètres de configuration sur les baies de stockage et le déploiement de configurations prises en charge uniquement.' 
+---
+= Baies de stockage Hitachi
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez respecter certaines conditions lors de la configuration des baies de stockage Hitachi pour qu'elles fonctionnent avec des systèmes ONTAP qui utilisent des LUN de baies. Ces exigences incluent la définition des paramètres de configuration sur les baies de stockage et le déploiement de configurations prises en charge uniquement.

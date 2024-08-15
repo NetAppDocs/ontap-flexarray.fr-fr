@@ -1,0 +1,71 @@
+---
+permalink: implement-third-party/reference_required_parameters_for_3par_arrays_with_data_ontap_systems.html 
+sidebar: sidebar 
+keywords: required, parameters, 3par, arrays, ontap, systems, host, persona, settings, port, 
+summary: Certains paramètres sont requis sur la matrice de stockage pour que la matrice de stockage fonctionne correctement avec les systèmes ONTAP. 
+---
+= Paramètres requis pour les baies 3PAR avec les systèmes ONTAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Certains paramètres sont requis sur la matrice de stockage pour que la matrice de stockage fonctionne correctement avec les systèmes ONTAP.
+
+
+
+== Paramètres du rôle de l'hôte
+
+Pour les baies 3PAR avec firmware 2.3.1 et versions ultérieures, les valeurs requises pour le rôle d'hôte doivent être définies comme indiqué dans le tableau suivant :
+
+|===
+| Type de connexion | Rôle de l'hôte 
+
+
+ a| 
+Connexion directe
+ a| 
+10
+
+
+
+ a| 
+Connexion à la structure
+ a| 
+10
+
+|===
+La définition d'hôte, avec le rôle d'hôte requis, doit être créée sur une baie de stockage 3PAR avant que le switch soit zoné pour connecter le système ONTAP à une baie de stockage 3PAR. Si la segmentation est configurée avant la définition de l'hôte, ONTAP découvre une LUN 3PAR en tant que LUN 254 et le type de produit ses, que ONTAP ne peut pas utiliser. Il en résulte que des LUN 3PAR nouvellement mappées ne peuvent pas être attribuées au système ONTAP et que certaines Luns 3PAR qui auraient peut-être déjà été ajoutées à un agrégat ne peuvent pas être utilisées, car ONTAP voit une LUN 254 à la place d'une LUN 3PAR. Si ce problème se produit, ONTAP génère le message EMS suivant :
+
+[listing]
+----
+mlm.array.unknown:warning - Array LUN XXXXXXXX.126L254 [S/N 'XXXXXXX' vendor '3PARdata' product 'SES'] is unknown and is not supported in this version of Data ONTAP.
+----
+Si la segmentation a été configurée avant la définition de l'hôte, vous pouvez résoudre le problème en procédant à une réinitialisation du chemin pour forcer la redécouverte des LUN de baie mappées à partir de la baie de stockage 3PAR. Pour résoudre ce problème, consultez la section solution de contournement concernant le problème lié au périphérique inconnu (L254/ses) avec les baies de stockage 3PAR.
+
+xref:reference_workaround_for_the_unknown_device_l254_ses_problem_with_3par_storage_arrays.adoc[Solution de contournement concernant le problème d'appareil inconnu (L254/ses) avec les baies de stockage 3PAR]
+
+
+
+== Paramètres du rôle de port
+
+Pour les baies 3PAR avec firmware 2.2.x, les valeurs requises pour le rôle de port doivent être définies comme indiqué dans le tableau suivant :
+
+|===
+| Type de connexion | Rôle de port 
+
+
+ a| 
+Connexion directe
+ a| 
+18
+
+
+
+ a| 
+Connexion à la structure
+ a| 
+19
+
+|===

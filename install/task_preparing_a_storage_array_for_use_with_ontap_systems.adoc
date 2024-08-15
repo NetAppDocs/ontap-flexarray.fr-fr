@@ -1,0 +1,40 @@
+---
+permalink: install/task_preparing_a_storage_array_for_use_with_ontap_systems.html 
+sidebar: sidebar 
+keywords: prepare, storage, array, use, ontap, systems 
+summary: 'Avant de commencer à configurer des systèmes ONTAP dans une configuration avec des LUN de baie, l"administrateur de baie de stockage doit préparer le stockage pour une utilisation avec ONTAP.' 
+---
+= Préparation d'une baie de stockage à l'utilisation avec les systèmes ONTAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Avant de commencer à configurer des systèmes ONTAP dans une configuration avec des LUN de baie, l'administrateur de baie de stockage doit préparer le stockage pour une utilisation avec ONTAP.
+
+*Ce dont vous aurez besoin*
+
+Les baies de stockage, les firmwares et les commutateurs que vous prévoyez d'utiliser dans la configuration doivent être pris en charge par la version ONTAP spécifique.
+
+* https://mysupport.netapp.com/NOW/products/interoperability["Interopérabilité NetApp"]
++
+Dans le IMT, vous pouvez utiliser le champ solution de stockage pour sélectionner votre solution MetroCluster. Utilisez *Explorateur de composants* pour sélectionner les composants et la version ONTAP pour affiner votre recherche. Vous pouvez cliquer sur *Afficher les résultats* pour afficher la liste des configurations prises en charge qui correspondent aux critères.
+
+* https://hwu.netapp.com["NetApp Hardware Universe"]
+
+
+Vous devez coordonner cette tâche avec l'administrateur de la baie de stockage.
+
+.Étapes
+. Créez au moins quatre LUN sur la baie de stockage que les systèmes ONTAP doivent utiliser.
++
+Chaque nœud de la paire haute disponibilité requiert une LUN de baie pour le volume racine et une LUN de baie pour les « core dumps ».
+
+. Configurez les paramètres de la baie de stockage requis pour fonctionner avec ONTAP.
++
+** https://docs.netapp.com/us-en/ontap-flexarray/implement-third-party/index.html["Implémentation de la virtualisation FlexArray pour stockage tiers"]
+** https://docs.netapp.com/us-en/ontap-flexarray/implement-e-series/index.html["Implémentation de la virtualisation FlexArray pour le stockage NetApp E-Series"]
+
+
+

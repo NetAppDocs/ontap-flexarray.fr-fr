@@ -1,0 +1,60 @@
+---
+permalink: install/reference_reasons_for_more_paths_to_an_array_lun_than_expected.html 
+sidebar: sidebar 
+keywords: reasons, paths, array, lun, expected, output, show, config, issue 
+summary: 'Les principales raisons d"un chemin supplémentaire inattendu vers une LUN de baie sont les problèmes de segmentation et un trop grand nombre de câbles. Il n"est pas recommandé de disposer de trois chemins d"accès à une LUN de baie, mais vous n"êtes pas tenu de résoudre ce problème.' 
+---
+= Raisons pour lesquelles il y a plus de chemins vers une LUN de baie que prévu
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Les principales raisons d'un chemin supplémentaire inattendu vers une LUN de baie sont les problèmes de segmentation et un trop grand nombre de câbles. Il n'est pas recommandé de disposer de trois chemins d'accès à une LUN de baie, mais vous n'êtes pas tenu de résoudre ce problème.
+
+
+
+== Exemple de résultat de l'affichage de la configuration de la baie de stockage
+
+La paire de ports FC initiator sur le système ONTAP est 0a et 0C. L'exemple suivant montre un chemin supplémentaire, 0b, dans la `storage array config show` sortie :
+
+[listing]
+----
+
+mysystem1::> storage array config show
+             LUN   LUN
+Node         Group Count   Array Name       Array Target Port   Initiator
+----------   ----- -----  ----------------  ------------------  ----------
+mysystem1a    1     3     HITACHI_DF600F_1  50060e80004291c0    0a
+                                            50060e80004291c1    0b
+                                                                0c
+
+3 entries were displayed.
+----
+[NOTE]
+====
+Si un initiateur dans la `storage array config show` sortie n'est pas précédé d'un port cible de matrice, l'initiateur se connecte au même port cible de matrice que l'initiateur situé au-dessus.
+
+====
+
+
+== Explication
+
+Les trois chemins d'accès au sein d'un groupe de LUN indiquent qu'il existe un chemin d'accès supplémentaire. Pour les configurations ONTAP, il est recommandé de suivre deux ou quatre chemins.
+
+Les raisons pour lesquelles il pourrait y avoir plus de chemins que prévu sont les suivantes :
+
+* Plus de câbles ont été connectés que nécessaire.
+* Une erreur de configuration de zoning a provoqué un chemin supplémentaire.
+
+
+
+
+== Résolution du problème
+
+Il n'est pas recommandé d'avoir un chemin supplémentaire, mais il n'est pas incorrect du point de vue du système. Vous n'avez pas à résoudre ce problème. Si vous souhaitez résoudre le problème pour l'aligner sur la configuration souhaitée, procédez comme suit :
+
+. Recherchez la cause de votre câblage et de la configuration de zoning, puis résolvez le problème à l'origine du chemin supplémentaire.
+. Une fois le problème résolu, exécutez `storage array config show` à nouveau pour confirmer que le chemin supplémentaire est terminé.
+

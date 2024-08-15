@@ -1,0 +1,14 @@
+---
+permalink: install/concept_factors_that_impact_the_number_and_size_of_array_luns_you_need.html 
+sidebar: sidebar 
+keywords: factors, impact, number, size, array, luns, need 
+summary: 'Lors de la détermination du nombre de LUN de baies nécessaires et de leur taille, vous devez tenir compte d"un certain nombre de facteurs, notamment l"espace utilisable dans une LUN.' 
+---
+= Facteurs qui ont un impact sur le nombre et la taille des LUN de baie dont vous avez besoin
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Lors de la détermination du nombre de LUN de baies nécessaires et de leur taille, vous devez tenir compte d'un certain nombre de facteurs, notamment l'espace utilisable dans une LUN.

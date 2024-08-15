@@ -1,0 +1,97 @@
+---
+permalink: install/reference_reasons_for_more_array_lun_groups_than_expected.html 
+sidebar: sidebar 
+keywords: reasons, array, lun, groups, expected 
+summary: 'Lors de la validation de votre configuration, vous devez vérifier le résultat de l"affichage de la configuration de la baie de stockage pour vous assurer que le nombre de groupes de LUN correspond à ce que vous souhaitez. La raison la plus courante pour les groupes de LUN de baie supplémentaires est que le LDEV couvre les paires de ports cibles.' 
+---
+= Raisons justifiant le nombre de groupes de LUN de baie supérieur à la valeur attendue
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Lors de la validation de votre configuration, vérifiez `storage array config show` le résultat pour vous assurer que le nombre de groupes de LUN correspond au nombre souhaité. La raison la plus courante pour les groupes de LUN de baie supplémentaires est que le LDEV couvre les paires de ports cibles.
+
+
+
+== Explication
+
+Voici les principales raisons pour lesquelles vous pouvez voir plus de groupes de LUN que prévu :
+
+* Un LDEV n'est pas mappé à une paire de ports cible redondants.
++
+La cause la plus courante d'un groupe de LUN supplémentaire est que le LDEV est des paires de chemin d'extension. Un LDEV est dit être _spanning path paires_ si les ID de LUN correspondants pour le LDEV ne sont pas présentés à une paire de ports cible redondants sur la matrice de stockage.
+
+
+
+[NOTE]
+====
+Sur de nombreuses baies de stockage, il n'est pas possible de présenter un LDEV aux ports cibles qui ne sont pas redondants si vous suivez le processus conventionnel de création et de mappage des LDEV.
+
+====
+* ONTAP tente d'équilibrer la charge sur les ports cibles lors de la migration des LUN de baies d'un groupe de LUN vers un autre.
++
+Dans ce cas, les paires de chemins de répartition LDEV sont un état transitoire.
+
+* Trop de connexions sont configurées.
+
+
+ONTAP peut fonctionner avec un seul groupe de LUN de baie ou plusieurs groupes de LUN de baie. Par conséquent, ONTAP ne considère aucun nombre de groupes de LUN comme une configuration incorrecte. Cependant, plusieurs LUN groups ne sont pas pris en charge par toutes les baies de stockage de toutes les versions de ONTAP. Lors de la planification de la configuration, vérifiez les informations de la matrice d'interopérabilité pour vous assurer que plusieurs LUN de baie sont prises en charge pour les baies de stockage utilisées dans votre configuration ONTAP.
+
+
+
+== Scénario de problème
+
+Supposons qu'il existe deux groupes de LUN existants : le groupe de LUN 0 et le groupe de LUN 1. Le groupe de LUN 0 possède deux LUN de baie et le groupe de LUN 1 possède trois LUN de baie. L'administrateur a créé un nouveau LDEV Z, en vue d'ajouter le LUN 3 au groupe de LUN 0. L'administrateur a mappé LDEV Z en tant que LUN 3 sur deux ports de matrice de stockage. Cependant, les ports auxquels le LUN 3 est mappé, les ports de la matrice de stockage 1A et 2B, ne sont pas une paire de ports cible redondants, comme le montre l'illustration suivante.
+
+image::../media/ldev_spans_path_pairs_v2.gif[Ce graphique est décrit dans le texte qui l'entoure.]
+
+Cette erreur entraîne la création d'un troisième groupe de LUN non intentionnel (Groupe 2), comme l'exemple suivant montre :
+
+[listing]
+----
+
+mysystem1::> storage array config show
+
+          LUN   LUN
+Node      Group Count  Array Name  	Array Target Ports     	Switch Port  	Initiator
+-------   ----- ------ ----------- 	-------------------    	-----------  	---------
+
+mysystem1  0     3     DGC_RAID5_1  20:1A:00:a0:b8:0f:ee:04  vnbr20es25:5    0a
+                                   	20:2A:00:a0:b8:0f:ee:04  vnci9124s53:6   0c
+           1     3     DGC_RAID5_1  20:1B:00:a0:b8:0f:ee:04  vnbr20es25:7    0b
+                                   	20:2B:00:a0:b8:0f:ee:04  vnci9124s53:8   0d
+           2     1     DGC_RAID5_1  20:1A:00:a0:b8:0f:ee:04  vnbr20es25:5    0a
+                                   	20:2B:00:a0:b8:0f:ee:04  vnci9124s53:8   0d
+----
+Vous pouvez déduire à partir des informations de la colonne ports cibles de la baie pour les groupes 0 et 1 que les chemins vers les ports cibles de la baie sont redondants. Le groupe 0 va aux ports cibles 1A et 2A, une paire de ports cibles. Le groupe 1 va à 1B et 2B, une paire de ports cibles différente.
+
+Toutefois, les informations de la colonne Array Target ports du groupe 2 suggèrent que les chemins ne sont pas redondants. Un chemin va au port cible 1A et l'autre au port cible 2B. Il ne s'agit pas d'une paire de ports cible redondants ; la LUN de la baie couvre les groupes de LUN. La LUN de la baie doit avoir été mappée sur 1A et 2A ou 1B et 2B.
+
+Comme le système ONTAP peut s'exécuter avec des paires de chemins d'accès étendu LDEV, le message vous demandant d'exécuter `storage errors show` n'apparaît pas après l'exécution de la `storage array config show` commande. Cependant, il ne s'agit pas d'une configuration recommandée.
+
+
+
+== Résolution du problème
+
+. Attendez une minute, puis exécutez `storage array config show` à nouveau pour voir si le groupe de LUN supplémentaire est toujours affiché dans `storage array config show` la sortie.
++
+** Si le groupe de LUN supplémentaire n'est plus dans la sortie, vous pouvez conclure que le problème était transitoire.
+** Si le groupe de LUN supplémentaire apparaît toujours dans la sortie, l'administrateur de la matrice de stockage doit remapper le LDEV, comme indiqué dans les étapes suivantes.
++
+Vous devez maintenir la redondance tout en corrigeant ce problème. Cette procédure vous demande de mapper le LDEV au port cible correct _before_ en supprimant le mappage au port cible incorrect. La redondance est maintenue dans ce cas car vous augmentez le nombre de chemins à trois, temporairement, au lieu de réduire le nombre de chemins à un pendant que vous résolvant le problème.
+
+
+
+. Déterminez quels ports cibles incohérents doivent être remappés.
+. Sur la matrice de stockage, mappez le LDEV sur le nouveau port cible (correct).
+. Dans ONTAP, exécutez `storage array config show` pour confirmer que trois chemins sont affichés.
+. Supprimez le mappage incorrect.
+. Patientez une minute pendant que ONTAP découvre le LUN.
+. Dans ONTAP, exécutez `storage array config show` à nouveau pour vous assurer que le groupe de LUN supplémentaire est disparu.
+
+
+*Informations connexes*
+
+https://mysupport.netapp.com/matrix["Matrice d'interopérabilité NetApp"]

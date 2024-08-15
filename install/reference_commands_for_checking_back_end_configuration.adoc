@@ -1,0 +1,97 @@
+---
+permalink: install/reference_commands_for_checking_back_end_configuration.html 
+sidebar: sidebar 
+keywords: commands, check, back-end, configuration 
+summary: 'Plusieurs commandes ONTAP fournissent des informations sur la configuration de la matrice de stockage, y compris les erreurs de configuration internes. Ces commandes sont particulièrement utiles lors de la vérification de l"installation et du dépannage.' 
+---
+= Commandes de vérification de la configuration back-end
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Plusieurs commandes ONTAP fournissent des informations sur la configuration de la matrice de stockage, y compris les erreurs de configuration internes. Ces commandes sont particulièrement utiles lors de la vérification de l'installation et du dépannage.
+
+La `storage array config show` commande est la première commande à utiliser lors de la vérification de l'installation. Il s'agit également de la première commande à utiliser si vous remarquez que votre système ne fonctionne pas comme vous l'attendez, ou si vous recevez un message d'erreur.
+
+Les commandes particulièrement utiles pour la vérification de l'installation et le dépannage sont présentées dans le tableau suivant :
+
+|===
+| Commande | Description 
+
+
+ a| 
+`storage array config show`
+ a| 
+Fournit des informations, au niveau de la baie de stockage, sur la configuration des périphériques back-end dans un déploiement avec des systèmes ONTAP utilisant des LUN de baie. Cette commande montre comment les matrices de stockage se connectent au cluster. Si ONTAP détecte un problème qui empêcherait les systèmes ONTAP utilisant des LUN de baie et des baies de stockage de fonctionner correctement ensemble, `storage array config show` vous demande d'exécuter `storage errors show` pour obtenir des détails sur l'erreur.
+
+Cette commande est également utile pour vérifier que la configuration est configurée comme vous le souhaitez. Par exemple, vous pouvez vérifier le résultat pour vérifier que le nombre de groupes de LUN de baie que vous souhaitez créer a bien été défini.
+
+
+
+ a| 
+`storage array show -name array_name`
+ a| 
+Affiche des informations sur toutes les matrices de stockage visibles pour le cluster ou sur la matrice de stockage que vous spécifiez. Si le nombre de LUN de baies présentées dépasse la capacité du système, le champ de texte erreur affiche le nombre de LUN que ONTAP n'a pas pu détecter. Vous devez surveiller ce problème sur les systèmes à mémoire faible en particulier.
+
+
+
+ a| 
+`storage path quiesce`
+ a| 
+Suspend temporairement les E/S vers une LUN de baie spécifique sur un chemin spécifique. Le chemin devient à nouveau actif au redémarrage ou en exécutant `storage path resume`. Certaines baies de stockage nécessitent de cesser les E/S pendant un certain temps pour supprimer ou déplacer une LUN de baie.
+
+[NOTE]
+====
+La `storage path quiesce` commande ne peut pas être utilisée avec les matrices de stockage IBM DS.
+
+====
+
+
+ a| 
+`storage path resume`
+ a| 
+Permet aux E/S de reprendre le flux ; il s'agit de l'inverse de la mise en veille. La `storage path resume` commande est principalement utilisée pour la maintenance matérielle (par exemple, les extractions CABLE ou GBIC) ou après une quiescence accidentelle d'un chemin vers une LUN de baie. Il n'est pas toujours nécessaire d'exécuter cette commande après avoir suspendu un chemin. Par exemple, ONTAP peut détecter une LUN de baie nouvellement mappée.
+
+
+
+ a| 
+`storage array show`
+ a| 
+Affiche des informations sur les baies de stockage visibles pour le cluster, par exemple, le nom, le fournisseur, le modèle, et de type basculement.
+
+
+
+ a| 
+`storage disk show`
+ a| 
+Pour entrer `storage disk show` sans paramètres, la figure suivante s'affiche pour l'ensemble des disques et des LUN de baies : le nom, la taille utilisable, le type de conteneur, la position, l'agrégat, et propriétaire. La saisie d' `storage disk show` un nom de disque ou d'un nom de LUN de baie en tant que paramètre affiche des détails sur un disque individuel ou une LUN de baie, par exemple, l'état (attribué ou non attribué), le propriétaire et les chemins de la LUN de baie. Le résultat est divisé en trois sections : informations sur la LUN de la baie, informations sur les chemins d'accès à la LUN de la baie et erreurs associées à la LUN de la baie.
+
+
+
+ a| 
+`storage disk show -errors _**_`
+ a| 
+La saisie `storage disk show` avec le ``-errors` paramètre fournit des détails sur les erreurs de configuration au niveau des LUN de disque et de baie. Bien que le résultat de la commande soit similaire à celui `storage disk error show` de la commande, `storage disk show -errors` fournit des options supplémentaires pour filtrer le résultat par des paramètres tels que la position du nœud, du cluster et du compartiment.
+
+
+
+ a| 
+`storage disk error show`
+ a| 
+Le fournit des détails sur les erreurs de configuration internes au niveau des LUN de disque et de baie. Si vous entrez `storage disk error` show avec un nom de LUN de baie en tant que paramètre, vous trouverez des détails sur les erreurs de configuration liées à la LUN de baie spécifiée. Vous devez corriger ces erreurs avant de configurer ONTAP pour qu'il fonctionne avec des matrices de stockage.
+
+
+
+ a| 
+`storage errors show`
+ a| 
+Fournit des détails, au niveau de la LUN de la baie, sur les erreurs de configuration internes qui empêchent le système ONTAP et la baie de stockage de fonctionner ensemble. Vous devez corriger les erreurs identifiées par `storage errors show` avant de configurer ONTAP pour qu'il fonctionne avec des matrices de stockage.
+
+[NOTE]
+====
+ `storage errors show`La commande ne fournit pas d'informations sur les erreurs de configuration de disque. Pour afficher les informations relatives aux erreurs de configuration des LUN de disques et de baies, vous pouvez utiliser la `storage disk show -errors` commande ou la `storage disk error show` commande.
+
+====
+|===

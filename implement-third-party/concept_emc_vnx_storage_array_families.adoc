@@ -1,0 +1,30 @@
+---
+permalink: implement-third-party/concept_emc_vnx_storage_array_families.html 
+sidebar: sidebar 
+keywords: emc, vnx, storage, array, families 
+summary: ONTAP ne prend pas en charge le mélange de certains types de stockage dans les agrégats. Pour vous aider à déterminer les LUN de baie qui peuvent être associées dans un agrégat, les baies de stockage de chaque fournisseur sont regroupées en familles. Lorsque vous créez des agrégats, vous ne pouvez pas combiner des LUN de baie de différents fournisseurs et des familles de baies de stockage différentes dans un même agrégat. 
+---
+= Gammes de baies de stockage EMC VNX
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+ONTAP ne prend pas en charge le mélange de certains types de stockage dans les agrégats. Pour vous aider à déterminer les LUN de baie qui peuvent être associées dans un agrégat, les baies de stockage de chaque fournisseur sont regroupées en familles. Lorsque vous créez des agrégats, vous ne pouvez pas combiner des LUN de baie de différents fournisseurs et des familles de baies de stockage différentes dans un même agrégat.
+
+Les baies de stockage de la même famille partagent les mêmes performances et les mêmes caractéristiques de basculement. Par exemple, les membres de la même famille effectuent tous un basculement actif-actif ou tous un basculement actif-passif. Plusieurs facteurs peuvent être utilisés pour déterminer les familles de baies de stockage. Par exemple, les baies de stockage ayant des architectures différentes se trouvent dans des familles différentes, même si les autres caractéristiques peuvent être identiques.
+
+Les baies de stockage EMC VNX suivantes sont prises en charge par les systèmes ONTAP :
+
+* Famille 1 : VNX1
+* Famille 2 : VNX2
+
+
+Ces baies utilisent le mode de basculement ALUA (Asymmetric active-active).
+
+La matrice d'interopérabilité est la référence en matière d'informations sur les baies de stockage prises en charge par chaque fournisseur.
+
+*Informations connexes*
+
+https://mysupport.netapp.com/matrix["Matrice d'interopérabilité NetApp"]

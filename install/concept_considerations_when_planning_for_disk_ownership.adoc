@@ -1,0 +1,30 @@
+---
+permalink: install/concept_considerations_when_planning_for_disk_ownership.html 
+sidebar: sidebar 
+keywords: considerations, plan, disk, ownership 
+summary: 'Si vous déployez plusieurs systèmes ONTAP pour une utilisation avec des LUN de baies, vous devez déterminer quel système possède les LUN de baies. Disk Ownership garantit que seul le système ONTAP propriétaire d"une LUN de baie donnée peut lire et écrire des données sur la LUN de baie.' 
+---
+= Considérations relatives à la planification de la propriété des disques
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Si vous déployez plusieurs systèmes ONTAP pour les utiliser avec des LUN de baie, vous devez déterminer quel système possède_ les LUN de baie. Disk Ownership garantit que seul le système ONTAP propriétaire d'une LUN de baie donnée peut lire et écrire des données sur la LUN de baie.
+
+Lors de la planification du système propriétaire des LUN de baies, tenez compte des points suivants :
+
+* Limite maximale de périphérique attribuée prise en charge par votre plate-forme
++
+Le _Hardware Universe_ affiche la limite maximale de périphérique attribuée qui est prise en charge pour différentes plates-formes. Il s'agit d'une limite codée en dur. Si votre système utilise à la fois des LUN de baie et des disques, cette limite maximale correspond au maximum de disques et de LUN de baie combinés. Vous devez tenir compte des deux types de stockage pour déterminer le nombre de LUN de baies et de disques que vous pouvez attribuer à un système.
+
+* Quantité de charge que vous prévoyez générer par différentes applications utilisées dans votre environnement
++
+Certains types d'applications sont susceptibles de générer un grand nombre de demandes, tandis que d'autres (par exemple, les applications d'archivage) génèrent moins de demandes. Vous pouvez envisager de peser les affectations de propriété en fonction de la charge attendue à partir d'applications spécifiques.
+
+
+
+*Informations connexes*
+
+https://hwu.netapp.com["NetApp Hardware Universe"]

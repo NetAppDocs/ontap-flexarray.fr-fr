@@ -1,0 +1,90 @@
+---
+permalink: install/concept_dependency_between_zone_and_host_group_definitions.html 
+sidebar: sidebar 
+keywords: dependency, between, zone, host, group, definitions, common, errors, cascading, effect 
+summary: 'Les erreurs commises dans les définitions de zone peuvent nécessiter la reconfiguration des définitions de groupe d"hôtes et l"inverse.' 
+---
+= Dépendance entre les définitions de zone et de groupe hôte
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Les erreurs commises dans les définitions de zone peuvent nécessiter la reconfiguration des définitions de groupe d'hôtes et l'inverse.
+
+Lorsqu'une définition de zone est créée, deux ports sont spécifiés : le WWPN du port FC initiator du système ONTAP et le port WWPN ou WWNN de la baie de stockage pour ce segment. De même, lorsque le groupe hôte du système ONTAP est configuré sur la baie de stockage, les WWPN des ports FC initiator que vous souhaitez être membre du groupe hôte sont spécifiés.
+
+L'ordre de configuration type est le suivant :
+
+. Construire une définition de zone.
+. Construisez le groupe d'hôtes sur la baie de stockage (en sélectionnant le WWPN du port FC initiator sur le système ONTAP dans la liste déroulante).
+. Présentez les LUN de baie aux ports.
+
+
+Cependant, les groupes d'hôtes sont parfois configurés avant les définitions de zone, ce qui nécessite la saisie manuelle de WWPN dans la configuration du groupe d'hôtes sur la baie de stockage.
+
+
+
+== Erreurs courantes
+
+Dans la sortie ONTAP, les ports initiateurs FC sur le système ONTAP sont identifiés par le numéro d'adaptateur, par exemple 0a, 0b, 0C, 0d, et ainsi de suite pour les modèles avec ports intégrés. Les WWPN sont affichés dans l'interface graphique du switch et dans l'interface graphique de la baie de stockage. Les WWPN étant longs et au format hexadécimal, les erreurs suivantes sont courantes :
+
+[cols="2*"]
+|===
+| Comment les WWPN sont spécifiés | Erreur courante 
+
+
+ a| 
+L'administrateur saisit les WWPN
+ a| 
+Une erreur de saisie est commise.
+
+
+
+ a| 
+Les WWPN sont automatiquement détectés par le commutateur
+ a| 
+Le WWPN de port initiateur FC incorrect est sélectionné dans la liste de sélection.
+
+|===
+[NOTE]
+====
+Lorsque les systèmes ONTAP, les commutateurs et la baie de stockage sont câblés ensemble, le commutateur détecte automatiquement les WWPN des systèmes ONTAP et des ports de la baie de stockage. Les WWPN sont ensuite disponibles dans des listes de sélection dans l'interface graphique du commutateur, ce qui permet de sélectionner le WWPN de chaque membre de zone au lieu de le saisir. Pour éviter tout risque d'erreurs de saisie, il est recommandé que le switch découvre les WWPN.
+
+====
+
+
+== Effet en cascade des erreurs
+
+La première étape évidente du dépannage des problèmes de configuration FAS consiste à vérifier si le zoning a été correctement configuré. Il est également important de tenir compte de la relation entre le groupe hôte et les définitions de zone. Pour résoudre un problème, il peut être nécessaire de reconfigurer à la fois la définition de la zone et la définition du groupe d'hôtes, selon l'endroit où l'erreur a été commise pendant le processus de configuration.
+
+Si le commutateur détecte automatiquement les WWPN et que les définitions de zone sont configurées en premier, les WWPN des ports FC initiator qui seront utilisés pour accéder aux LUN sur la baie de stockage sont automatiquement propagés aux listes déroulantes de configuration du groupe d'hôtes dans l'interface graphique de la baie de stockage. Par conséquent, toutes les erreurs de segmentation sont également propagées aux listes déroulantes des groupes d'hôtes de la matrice de stockage. Les listes de sélection indiquent les WWPN longs et hexadécimaux, plutôt que les étiquettes courtes de ports initiateurs FC visibles sur le système ONTAP (par exemple, 0a, 0b, etc.). Par conséquent, il n'est pas facile de voir que le WWPN que vous prévoyez d'afficher n'est pas là.
+
+Le tableau suivant présente les effets de certaines erreurs :
+
+[cols="3*"]
+|===
+| Définition de zone sur le commutateur | Configuration du groupe d'hôtes sur la matrice de stockage | Symptôme dans la sortie ONTAP 
+
+
+ a| 
+Le port initiateur FC dans la définition de zone est incorrect. Cela a provoqué la propagation du WWPN du port initiateur FC incorrect à la configuration du groupe hôte.
+ a| 
+Le WWPN du port initiateur FC indiqué dans la liste de sélection a été sélectionné, et non le WWPN que vous aviez prévu.
+ a| 
+Les LUN de baie ne sont pas visibles sur le port initiateur FC sur lequel les LUN attendues seraient visibles.
+
+
+
+ a| 
+La définition de zone inclut le port FC initiator correct.
+ a| 
+Le WWPN dans la définition du groupe d'hôtes est incorrect pour l'une des raisons suivantes :
+
+* Un WWPN incorrect a été sélectionné.
+* Les groupes hôtes ont été configurés manuellement avant la configuration de la définition de zone et une erreur de typage a été détectée lors de la saisie du WWPN du port initiateur FC.
+
+ a| 
+
+|===

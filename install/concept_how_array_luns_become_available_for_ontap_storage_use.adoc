@@ -1,0 +1,28 @@
+---
+permalink: install/concept_how_array_luns_become_available_for_ontap_storage_use.html 
+sidebar: sidebar 
+keywords: how, array, luns, available, ontap, storage, use 
+summary: 'Un système ONTAP ne peut pas utiliser une LUN de baie qui lui est présentée tant que ONTAP n"a pas été configuré pour utiliser la LUN de baie.' 
+---
+= Mise à disposition des LUN de baie pour l'utilisation du stockage ONTAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Un système ONTAP ne peut pas utiliser une LUN de baie qui lui est présentée tant que ONTAP n'a pas été configuré pour utiliser la LUN de baie.
+
+Bien que l'administrateur de la baie de stockage ait accès à ONTAP à une LUN de baie, ONTAP ne peut pas utiliser cette LUN pour le stockage tant que les deux tâches suivantes ne sont pas terminées :
+
+. Un système ONTAP (sous licence pour utiliser des LUN de baie) doit être attribué au _propriétaire_ de la LUN de baie.
+. La LUN de baie doit être ajoutée à un agrégat.
+
+
+Lorsque vous attribuez une LUN de baie à un système ONTAP, ONTAP écrit des données sur la LUN de baie pour identifier le système affecté en tant que propriétaire de la LUN de baie. Cette relation logique est appelée _Disk Ownership_.
+
+Lorsque vous attribuez une LUN de baie à un système ONTAP, celle-ci devient une LUN de spare appartenant à ce système et n'est plus disponible pour aucun autre système ONTAP.
+
+Une LUN de baie de spare ne peut pas être utilisée pour le stockage tant que vous ne l'avez pas ajoutée à un agrégat. Par la suite, ONTAP s'assure que seul le propriétaire de la LUN de baie peut écrire des données et lire des données de la LUN.
+
+Dans une paire haute disponibilité, les deux nœuds doivent pouvoir afficher le même stockage, mais un seul nœud de la paire est le propriétaire de la LUN de baie. Le nœud partenaire assure l'accès en lecture/écriture à une LUN de baie en cas de défaillance du nœud propriétaire. Le nœud propriétaire d'origine reprend la propriété après le problème qui a provoqué l'indisponibilité du nœud est résolu.

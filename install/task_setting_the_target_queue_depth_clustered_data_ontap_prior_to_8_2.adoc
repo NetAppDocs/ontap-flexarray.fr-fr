@@ -1,0 +1,20 @@
+---
+permalink: install/task_setting_the_target_queue_depth_clustered_data_ontap_prior_to_8_2.html 
+sidebar: sidebar 
+keywords: set, target, queue, depth, ontap, 8.2 
+summary: 'La profondeur de file d"attente cible par défaut est acceptable pour la plupart des implémentations, mais vous pouvez modifier la valeur par défaut si nécessaire.' 
+---
+= Définition de la profondeur de la file d'attente cible (ONTAP avant 8.2)
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La profondeur de file d'attente cible par défaut est acceptable pour la plupart des implémentations, mais vous pouvez modifier la valeur par défaut si nécessaire.
+
+Ce paramètre est défini par système ONTAP et s'applique à tous les ports cibles de toutes les matrices de stockage. Pour les systèmes ONTAP exécutant une version antérieure à 8.2, vous pouvez utiliser cette option.
+
+.Étape
+. Utilisez l'option suivante pour définir la profondeur de la file d'attente cible : `options disk.target_port.cmd_queue_depth value`
+

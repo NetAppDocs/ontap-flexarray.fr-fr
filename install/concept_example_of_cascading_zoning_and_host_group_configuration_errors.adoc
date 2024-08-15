@@ -1,0 +1,91 @@
+---
+permalink: install/concept_example_of_cascading_zoning_and_host_group_configuration_errors.html 
+sidebar: sidebar 
+keywords: example, cascade, zone, host, group, configuration, errors, troubleshoot 
+summary: 'Les erreurs commises dans les définitions de zone peuvent avoir un impact sur les définitions de groupe d"hôtes, et vice versa. Lorsque les LUN ne sont pas visibles sur un chemin, vous devez vérifier à la fois les erreurs de segmentation et de configuration de groupe d"hôtes.' 
+---
+= Exemple d'erreurs de segmentation en cascade et de configuration de groupe d'hôtes
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Les erreurs commises dans les définitions de zone peuvent avoir un impact sur les définitions de groupe d'hôtes, et vice versa. Lorsque les LUN ne sont pas visibles sur un chemin, vous devez vérifier à la fois les erreurs de segmentation et de configuration de groupe d'hôtes.
+
+Supposons que votre séquence de configuration est la suivante :
+
+. La définition de zone a été créée sur le commutateur.
++
+Le WWPN du port FC initiator 0a du système ONTAP a été placé dans la définition de zone. Toutefois, l'intention était de placer le WWPN pour le port initiateur FC 0C dans la définition de zone.
+
+. Le groupe d'hôtes a été créé sur la matrice de stockage.
++
+Le WWPN du port FC initiateur 0a a été sélectionné (car il s'agissait du seul WWPN disponible et il n'était pas évident qu'il s'agissait du WWPN pour 0a et non du 0c).
+
+. Dans ONTAP, vous avez examiné les LUN de baie sur les ports initiateurs FC, en attendant de voir les LUN de baie sur 0C.
++
+Cependant, il n'y avait pas de LUN de baie sur 0C, car la définition de zone et la définition de groupe d'hôtes incluent de manière incorrecte le WWPN pour le port FC initiator 0a.
+
++
+[NOTE]
+====
+Vous avez utilisé `storage array config show` la commande pour afficher les informations relatives aux LUN de la baie.
+
+====
+. Vous commencez le dépannage, car les LUN ne s'affichent pas sur l'initiateur sur lequel vous vous attendions à les voir.
+
+
+Vous devez vérifier à la fois la configuration du zoning et celle du groupe hôte, mais peu importe la procédure suivante que vous commencez en premier. Vous pouvez voir différents messages, selon que vous commencez à réparer les éléments du groupe d'hôtes en premier ou du zoning en premier.
+
+
+
+== Dépannage en vérifiant d'abord le zonage
+
+. Vérifiez les définitions de zone du système ONTAP.
++
+Vous vous rendez compte que vous avez deux zones avec le WWPN pour le port initiateur FC 0a dans celui-ci et qu'aucune zone ne contient le WWPN pour le port FC 0a.
+
+. Corrigez les définitions de zone incorrectes et activez-les.
++
+[NOTE]
+====
+Vous ne pouvez pas voir les LUN de la baie sur les ports initiateurs lors de l'exécution de `storage array config show`.
+
+====
+. Accédez à la baie et reconfigurez le groupe d'hôtes pour inclure le WWPN du port FC initiator 0C.
++
+Maintenant que le WWPN pour 0C fait partie d'une définition de zone activée, le WWPN pour 0C s'affiche dans la liste déroulante de la configuration du groupe d'hôtes sur la baie de stockage.
+
+. Sur le système ONTAP, exécutez `storage array config show` pour vérifier les LUN de baie sur les ports FC initiator pour vérifier que les LUN de baie sont affichées sur 0C.
+
+
+
+
+== Dépannage en vérifiant d'abord le groupe hôte
+
+. Dans la console du système ONTAP, exécutez `storage show adapteradapter#``, puis notez le WWPN de l'adaptateur manquant--0C dans cet exemple.
+. Accédez à la baie de stockage et comparez le WWPN que vous avez noté avec les WWPN affichés dans la liste déroulante des groupes d'hôtes pour voir si le WWPN du port FC initiateur attendu est répertorié.
++
+Si le WWPN que vous attendiez ne s'affiche pas, l'initiateur souhaité ne figure pas dans la définition de zone.
+
+. Si la baie de stockage vous permet de modifier les WWPN dans le groupe d'hôtes, vous pouvez modifier le WWPN affiché comme étant le WWPN que vous avez noté.
++
+[NOTE]
+====
+Si la baie de stockage ne vous permet pas de modifier les WWPN dans le groupe d'hôtes, vous devez modifier la définition du groupe d'hôtes après avoir modifié la définition de zone.
+
+====
++
+Vous ne pouvez toujours pas voir les LUN sur l'initiateur que vous aviez l'intention, car le zoning n'a pas encore été corrigé.
+
+. Allez sur le commutateur et remplacez le WWPN incorrect par l'initiateur de port FC correct, puis activez la définition de zone.
+. Si vous n'avez pas pu corriger le WWPN dans la définition de groupe d'hôtes précédemment définie dans le processus, accédez à la baie de stockage et reconfigurez le groupe d'hôtes pour inclure le WWPN du port initiateur FC 0C.
++
+Maintenant que le WWPN pour 0C fait partie d'une définition de zone activée, le WWPN pour 0C s'affiche dans la liste déroulante de la configuration du groupe d'hôtes sur la baie de stockage.
+
+. Sur le système ONTAP, exécutez `storage array config show` pour vérifier les LUN de baie sur les ports FC initiator pour vérifier que les LUN de baie sont affichées sur 0C.
++
+Vous devez maintenant voir l'accès aux LUN sur le port FC initiator.
+
+

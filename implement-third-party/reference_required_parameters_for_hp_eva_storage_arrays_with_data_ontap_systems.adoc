@@ -1,0 +1,41 @@
+---
+permalink: implement-third-party/reference_required_parameters_for_hp_eva_storage_arrays_with_data_ontap_systems.html 
+sidebar: sidebar 
+keywords: required, parameters, hp, eva, arrays, ontap, systems 
+summary: Certains paramètres sont requis sur la matrice de stockage pour que la matrice de stockage fonctionne correctement avec les systèmes ONTAP. 
+---
+= Paramètres requis pour les baies HP EVA avec systèmes ONTAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Certains paramètres sont requis sur la matrice de stockage pour que la matrice de stockage fonctionne correctement avec les systèmes ONTAP.
+
+Les paramètres système sont indiqués dans le tableau suivant :
+
+|===
+| Paramètre | Réglage 
+
+
+ a| 
+`Redundancy`
+ a| 
+Tout niveau RAID sauf VRAID0
+
+
+
+ a| 
+`Preferred path/mode`
+ a| 
+Aucune préférence (par défaut)
+
+
+
+ a| 
+`Host type`
+ a| 
+SUN Solaris
+
+|===

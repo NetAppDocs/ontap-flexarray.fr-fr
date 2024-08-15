@@ -1,0 +1,32 @@
+---
+permalink: install/task_configuring_lun_security.html 
+sidebar: sidebar 
+keywords: configure, lun, security 
+summary: 'L"administrateur de la baie de stockage doit configurer la baie de stockage et créer des groupes d"hôtes de sorte que les autres hôtes ne puissent pas accéder aux LUN de baie destinées à ONTAP.' 
+---
+= Configuration de la sécurité des LUN
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+L'administrateur de la baie de stockage doit configurer la baie de stockage et créer des groupes d'hôtes de sorte que les autres hôtes ne puissent pas accéder aux LUN de baie destinées à ONTAP.
+
+Le concept de sécurité des LUN est similaire au zoning, sauf que la sécurité des LUN est configurée sur la baie de stockage. La sécurité des LUN empêche les différents serveurs d'utiliser le stockage des autres serveurs sur le SAN. La sécurité des LUN peut également être appelée _LUN masking_.
+
+.Étapes
+. Configurez la sécurité des LUN sur la matrice de stockage.
++
+Pour plus d'informations sur la configuration de la sécurité des LUN, reportez-vous à la documentation de la matrice de stockage.
+
++
+Pour plus d'informations sur la sécurité des LUN des baies de stockage de votre fournisseur, consultez également la https://docs.netapp.com/us-en/ontap-flexarray/implement-third-party/index.html["Implémentation de la virtualisation FlexArray pour stockage tiers"] page. Certaines baies de stockage doivent être dédiées aux systèmes ONTAP.
+
+. Créez des groupes d'hôtes, ou l'équivalent, pour le système ONTAP.
++
+Le terme _host group_ est utilisé sur certaines matrices de stockage pour décrire un paramètre de configuration qui vous permet de spécifier l'accès de l'hôte à des ports spécifiques de la matrice de stockage. Différentes baies de stockage utilisent différents termes pour décrire ce paramètre de configuration. Chaque fournisseur de baie de stockage dispose de son propre processus de création d'un groupe d'hôtes ou d'un équivalent.
+
+
+
+*Informations connexes*

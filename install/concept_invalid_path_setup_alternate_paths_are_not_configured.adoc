@@ -1,0 +1,46 @@
+---
+permalink: install/concept_invalid_path_setup_alternate_paths_are_not_configured.html 
+sidebar: sidebar 
+keywords: invalid, path, setup, alternate, paths, configured 
+summary: 'Il est important de configurer d"autres chemins vers toutes les LUN de baie à partir des deux initiateurs FC sur le système ONTAP, évitant ainsi un point de défaillance unique (SPOF).' 
+---
+= Configuration de chemin non valide : les autres chemins ne sont pas configurés
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Il est important de configurer d'autres chemins vers toutes les LUN de baie à partir des deux initiateurs FC sur le système ONTAP, évitant ainsi un point de défaillance unique (SPOF).
+
+La configuration suivante n'est pas valide, car elle ne fournit pas d'autres chemins d'accès entre chaque port FC initiator des systèmes ONTAP et chaque LUN de la baie de stockage. Les deux ports FC initiator du même système ONTAP sont connectés à la baie de stockage via le même commutateur.
+
+image::../media/invalid_config_no_alternate_paths.gif[Ce graphique est décrit dans le texte qui l'entoure.]
+
+Supposons que le zoning suivant est en place dans cet exemple non valide :
+
+* Pour vs1 :
++
+** 0a est zoné pour voir le port A. du contrôleur 1
+** 0c est zoné pour voir le port B. du contrôleur 1
+
+
+* Pour vs2 :
++
+** 0a est zoné pour voir le port A. du contrôleur 2
+** 0c est zoné pour voir le port B. du contrôleur 2
+
+
+
+
+Dans cet exemple de configuration, chaque commutateur devient SPOF.
+
+Pour que cette configuration soit valide, les modifications suivantes doivent être apportées :
+
+* Le port d'initiateur FC 0C du vs1 doit être connecté au commutateur 2.
+* Le port 0a de l'initiateur FC du vs2 doit être connecté au commutateur 1.
+* La segmentation appropriée doit être configurée.
++
+Si vous utilisez plusieurs ports sur une baie de stockage qui prend en charge la configuration d'un ensemble spécifique de LUN sur un ensemble de ports sélectionné, un port FC initiator donné doit pouvoir voir toutes les LUN de baie présentées sur la structure.
+
+

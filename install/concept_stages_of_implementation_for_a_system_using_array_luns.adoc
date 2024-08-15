@@ -1,0 +1,47 @@
+---
+permalink: install/concept_stages_of_implementation_for_a_system_using_array_luns.html 
+sidebar: sidebar 
+keywords: stages, implementation, system, use, array, luns, back end, front end 
+summary: 'L"implémentation d"une configuration dans laquelle votre système utilise des LUN à partir d"une baie de stockage se déroule en deux étapes : une implémentation interne et une implémentation frontale. Lors de la planification de votre configuration, il est utile de comprendre les tâches générales à chaque étape.' 
+---
+= Étapes de mise en œuvre d'un système utilisant des LUN de baie
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+L'implémentation d'une configuration dans laquelle votre système utilise des LUN à partir d'une baie de stockage se déroule en deux étapes : une implémentation interne et une implémentation frontale. Lors de la planification de votre configuration, il est utile de comprendre les tâches générales à chaque étape.
+
+
+
+== Étape 1 : implémentation back-end
+
+La configuration de l'implémentation back-end inclut toutes les tâches requises pour configurer le système ONTAP avec une baie de stockage, à l'emplacement où vous pouvez installer le logiciel ONTAP.
+
+Les tâches de configuration de l'implémentation back-end sont les suivantes :
+
+. Création et formatage des LUN de baies
+. Affectation de ports
+. Câblage
+. Commutateurs de segmentation (le cas échéant)
+. Dans ONTAP, attribution de LUN de baie spécifiques à un système ONTAP
+. Dans ONTAP, fournir des informations pour configurer un système ONTAP sur le réseau
+. Installation du logiciel ONTAP
+
+
+Si un système ONTAP est commandé avec des tiroirs disques, le logiciel ONTAP est installé en usine. Dans une telle configuration, il n'est pas nécessaire de créer le volume racine et d'installer les licences et le logiciel ONTAP.
+
+Si un système ONTAP est commandé sans tiroir disque, vous devez configurer ONTAP avant de configurer le cluster.
+
+
+
+== Étape 2 : mise en œuvre frontale
+
+Les tâches de configuration de l'implémentation frontale sont les mêmes que pour un système utilisant des disques, notamment :
+
+* Configuration du système ONTAP pour tous les protocoles (NAS, FC ou les deux)
+* Configuration de fonctionnalités ONTAP telles que les copies SnapVault, SnapMirror, SnapValidator et Snapshot
+* Création de volumes et d'agrégats
+* Configuration de la protection des données, y compris le vidage NDMP sur bandes
+

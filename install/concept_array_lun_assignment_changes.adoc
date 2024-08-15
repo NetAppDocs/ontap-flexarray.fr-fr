@@ -1,0 +1,14 @@
+---
+permalink: install/concept_array_lun_assignment_changes.html 
+sidebar: sidebar 
+keywords: array, lun, assignment, changes 
+summary: 'Vous pouvez modifier l"affectation d"une LUN de baie de secours d"un système ONTAP à un autre. Vous pouvez modifier la propriété de l"équilibrage de la charge sur les nœuds.' 
+---
+= Modifications d'affectation des LUN de la baie
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez modifier l'affectation d'une LUN de baie de stockage _spare_ d'un système ONTAP à un autre. Vous pouvez modifier la propriété de l'équilibrage de la charge sur les nœuds.

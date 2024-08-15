@@ -1,0 +1,33 @@
+---
+permalink: install/concept_array_lun_name_format.html 
+sidebar: sidebar 
+keywords: array, lun, name, format 
+summary: 'Le nom attribué à une LUN de baie a un nouveau format pour s"assurer que le nom est unique sur l"ensemble du cluster.' 
+---
+= Format du nom de LUN de la baie
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Le nom attribué à une LUN de baie a un nouveau format pour s'assurer que le nom est unique sur l'ensemble du cluster.
+
+Le nom de LUN de la baie se compose de deux composants et se présente comme suit :
+
+``<array_prefix>.<offset>``, par exemple `EMC-1.1`.
+
+* Le `array_prefix` est un préfixe unique que ONTAP attribue par défaut à chaque baie de stockage.
++
+Ce champ est composé de ``<array_name-array_instance> (EMC-1`` dans ce cas).
+
++
+`array_name` peut être indiqué par les trois premières lettres du nom du fournisseur.
+
++
+S'il y a plusieurs tableaux du même fournisseur, la valeur de `array_instance` se produit dans un ordre croissant.
+
+* Le décalage est le numéro de disque virtuel croissant attribué par ONTAP à chaque LUN. Elle n'est pas liée à l'ID de LUN de l'hôte.
+
+
+Vous pouvez modifier le ``<array_prefix>`` champ à l'aide de la `storage array modify -name -prefix` commande.

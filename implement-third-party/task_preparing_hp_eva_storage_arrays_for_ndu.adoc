@@ -1,0 +1,41 @@
+---
+permalink: implement-third-party/task_preparing_hp_eva_storage_arrays_for_ndu.html 
+sidebar: sidebar 
+keywords: prepare, hp, eva, storage, arrays, ndu 
+summary: 'Les baies de stockage HP EVA ont tendance à mettre les ports cibles hors ligne lors d"une mise à niveau du micrologiciel. ONTAP fournit des commandes qui augmentent la résilience ONTAP afin que le système ONTAP ne soit pas interrompu si les ports cibles passent hors ligne lors de la mise à niveau du firmware. Ces commandes ne peuvent être utilisées que sur les systèmes de stockage exécutant ONTAP.' 
+---
+= Préparation des baies de stockage HP EVA pour la mise à niveau sans interruption
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Les baies de stockage HP EVA ont tendance à mettre les ports cibles hors ligne lors d'une mise à niveau du micrologiciel. ONTAP fournit des commandes qui augmentent la résilience ONTAP afin que le système ONTAP ne soit pas interrompu si les ports cibles passent hors ligne lors de la mise à niveau du firmware. Ces commandes ne peuvent être utilisées que sur les systèmes de stockage exécutant ONTAP.
+
+Vous devez suivre les instructions fournies par HP pour effectuer la mise à niveau du micrologiciel, y compris les instructions relatives à la recommandation de charge (HP EVA). Vous ne pouvez effectuer la mise à niveau que vers le micrologiciel pris en charge par HP. Cette procédure s'applique au type de mise à niveau du micrologiciel HP EVA _online upgrade_.
+
+[NOTE]
+====
+Pendant la mise à niveau du micrologiciel, les deux contrôleurs HP EVA sont redémarrés.
+
+====
+Cette procédure vous demande d'utiliser des commandes ONTAP qui améliorent la résilience des ONTAP tout au long de la mise à niveau du firmware. Une fois la mise à niveau du firmware terminée, vous utilisez de nouveau les commandes ONTAP pour rétablir le mode de fonctionnement normal des ports.
+
+.Étapes
+. Sur le système ONTAP, définissez le niveau de privilège de la session de commande sur Advanced : *`set -privilege advanced`*
+. Définissez le `is-upgrade-pending` paramètre sur *true* pour la matrice de stockage HP EVA qui subit une mise à niveau du micrologiciel : *`storage array modify -name array_name -is-upgrade-pending true`*
+. Sur la matrice de stockage, démarrez la mise à niveau du micrologiciel.
+. Une fois la mise à niveau du micrologiciel terminée, définissez de nouveau le niveau de privilège sur Advanced, si nécessaire, puis, sur le système ONTAP, définissez le `is-upgrade-pending` paramètre sur *FALSE* pour rétablir le fonctionnement normal des ports de la matrice de stockage : *`storage array modify -name array_name -is-upgrade-pending false`*
++
+Si vous n'avez pas quitté le mode avancé à l'étape 2, vous n'avez pas besoin d'y accéder à nouveau.
+
++
+Le `is-upgrade-pending` paramètre contient les fonctions suivantes pour assurer une utilisation correcte de la commande :
+
++
+** Si vous tentez de définir `is-upgrade-pending` sur *FALSE* pendant la mise à niveau sur la matrice de stockage, la commande échoue et un message EMS est renvoyé.
+** Si l' `is-upgrade-pending` état n'est pas renvoyé à *FALSE* dans les 60 minutes qui suivent la définition de *true*, les messages EMS sont consignés toutes les heures jusqu'à ce que `is-upgrade-pending` soit retourné à *FALSE*.
+
+
+

@@ -1,0 +1,32 @@
+---
+permalink: install/concept_prerequisites_to_reconfiguring_an_array_lun_on_the_storage_array.html 
+sidebar: sidebar 
+keywords: prerequisites, reconfigure, array. lun, storage, array 
+summary: 'Si une LUN de baie a déjà été attribuée (via ONTAP) à un système ONTAP particulier, les informations écrites par ONTAP sur la LUN de baie doivent être supprimées avant que l"administrateur de stockage ne tente de reconfigurer la LUN de baie sur la baie de stockage.' 
+---
+= Conditions préalables à la reconfiguration d'une LUN de baie sur la baie de stockage
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Si une LUN de baie a déjà été attribuée (via ONTAP) à un système ONTAP particulier, les informations écrites par ONTAP sur la LUN de baie doivent être supprimées avant que l'administrateur de stockage ne tente de reconfigurer la LUN de baie sur la baie de stockage.
+
+Lorsque la baie de stockage présente une LUN de baie à ONTAP, ONTAP collecte des informations sur la LUN de baie (par exemple, sa taille) et écrit ces informations sur la LUN de la baie. ONTAP ne peut pas mettre à jour dynamiquement les informations qu'il a écrites sur une LUN de baie. Par conséquent, avant que l'administrateur de la baie de stockage ne reconfigure une LUN de baie, vous devez utiliser ONTAP pour modifier l'état de la LUN de la baie en _unused_. Le LUN de baie n'est pas utilisé du point de vue de ONTAP.
+
+Lors de la modification de l'état de la LUN de baie sur inutilisé, ONTAP effectue les opérations suivantes :
+
+* Met fin aux opérations d'E/S sur la LUN de la baie
+* Supprime l'étiquette des informations de configuration RAID et des réservations permanentes de la LUN de la baie, ce qui rend la LUN de la baie non possédée par un système ONTAP
+
+
+Une fois ce processus terminé, aucune information ONTAP ne reste dans la LUN de la baie.
+
+Une fois l'état de la LUN de la baie défini sur inutilisé, procédez comme suit :
+
+* Supprimez le mappage de la LUN de baie sur ONTAP et rendez la LUN de baie disponible pour les autres hôtes.
+* Redimensionnez la LUN de la baie ou modifiez sa composition.
+
+
+Si vous souhaitez que ONTAP reprenne l'utilisation de la LUN de la baie après modification de sa taille ou de sa composition, vous devez présenter à nouveau la LUN de la baie à ONTAP, puis affecter à nouveau la LUN de la baie à un système ONTAP. ONTAP a connaissance de la nouvelle taille ou composition des LUN de la baie.

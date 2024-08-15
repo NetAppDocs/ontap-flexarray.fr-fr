@@ -1,0 +1,20 @@
+---
+permalink: install/concept_minimum_array_lun_size_for_the_root_volume.html 
+sidebar: sidebar 
+keywords: array, lun, size, required, root, volume 
+summary: 'Vous devez définir la taille du volume racine pour qu"elle soit supérieure à la taille minimale de LUN de la baie prise en charge, afin de vous assurer qu"il y a suffisamment d"espace dans le volume racine pour les fichiers système, les fichiers journaux et les fichiers core. Vous devez fournir ces fichiers au support technique en cas de problème système.' 
+---
+= Taille de LUN de baie requise pour le volume racine
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez définir la taille du volume racine pour qu'elle soit supérieure à la taille minimale de LUN de la baie prise en charge, afin de vous assurer qu'il y a suffisamment d'espace dans le volume racine pour les fichiers système, les fichiers journaux et les fichiers core. Vous devez fournir ces fichiers au support technique en cas de problème système.
+
+Le _Hardware Universe_ répertorie la taille minimale de LUN de la baie pour un volume racine.
+
+*Informations connexes*
+
+https://hwu.netapp.com["NetApp Hardware Universe"]

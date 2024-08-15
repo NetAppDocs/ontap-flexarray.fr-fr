@@ -1,0 +1,14 @@
+---
+permalink: implement-third-party/concept_restriction_on_using_a_gatekeeper_lun.html 
+sidebar: sidebar 
+keywords: restriction, using, gatekeeper, luns 
+summary: 'Si un périphérique logique (LUN) de contrôle d"accès est présenté, vous ne devez pas le mapper au système ONTAP. Les systèmes ONTAP ne peuvent pas utiliser de LUN de contrôle d"accès. Une LUN Gatekeeper est un périphérique logique Symmetrix par lequel SYMAPI ou l"agent ControlCenter communique avec la matrice de stockage.' 
+---
+= Restriction à l'utilisation des LUN de gatekeeper
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Si un périphérique logique (LUN) de contrôle d'accès est présenté, vous ne devez pas le mapper au système ONTAP. Les systèmes ONTAP ne peuvent pas utiliser de LUN de contrôle d'accès. Une LUN Gatekeeper est un périphérique logique Symmetrix par lequel SYMAPI ou l'agent ControlCenter communique avec la matrice de stockage.

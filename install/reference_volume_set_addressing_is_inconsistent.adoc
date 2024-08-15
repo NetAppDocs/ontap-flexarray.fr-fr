@@ -1,0 +1,57 @@
+---
+permalink: install/reference_volume_set_addressing_is_inconsistent.html 
+sidebar: sidebar 
+keywords: volume, set, address, inconsistent, show, message, troubleshoot, problem, resolution 
+summary: 'ONTAP peut détecter les ID de LUN incohérents sur un jeu de chemins pour les baies de stockage. Pour les baies de stockage sur lesquelles l"adressage de l"ensemble de volumes est défini, une incompatibilité des paramètres des ports sur lesquels la LUN est mappée est un problème qui provoque une discordance des ID de LUN.' 
+---
+= L'adressage de l'ensemble de volumes est incohérent
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+ONTAP peut détecter les ID de LUN incohérents sur un jeu de chemins pour les baies de stockage. Pour les baies de stockage sur lesquelles l'adressage de l'ensemble de volumes est défini, une incompatibilité des paramètres des ports sur lesquels la LUN est mappée est un problème qui provoque une discordance des ID de LUN.
+
+Sur les baies de stockage EMC Symmetrix, par exemple, un paramétrage incohérent du paramètre d'adressage Volume Set sur les ports Channel Director auxquels une LUN est mappée déclenche une erreur de non-concordance de LUN.
+
+
+
+== Les erreurs de stockage affichent le message
+
+[listing]
+----
+
+EMC-1.128 (4849544143484920443630303035323430303132): This Array LUN is using multiple LUN IDs.  Only one LUN ID per serial number is supported.
+----
+
+
+== Explication
+
+Un certain nombre d'erreurs de configuration peuvent être à l'origine du message d'erreur. Cette explication concerne l'affichage de ce message lorsque l'adressage de l'ensemble de volumes est défini de manière incohérente.
+
+ONTAP vérifie explicitement si le paramètre d'adressage de l'ensemble de volumes est incohérent sur les ports vers lesquels une LUN est mappée. Si les paramètres sont différents, ONTAP indique qu'il s'agit d'une incompatibilité d'ID de LUN dans `storage errors show` les messages de sortie et EMS.
+
+[NOTE]
+====
+ONTAP ne vous avertit pas si l'adressage de l'ensemble de volumes n'est pas configuré comme prévu ; il vous alerte uniquement si la configuration est incohérente sur les ports Channel Director auxquels la LUN est mappée.
+
+====
+
+
+== Dépannage et résolution des problèmes
+
+Si la `storage errors show` commande affiche un message d'erreur particulier et que votre baie de stockage est une baie EMC Symmetrix, l'une des actions suivantes vous permet d'identifier si le problème est dû à une incohérence d'adressage de l'ensemble de volumes :
+
+* Dans ONTAP, exécutez `storage disk show -disk` pour la LUN de baie identifiée.
++
+Cette commande affiche tous les chemins d'accès à la LUN de la baie et l'ID de LUN attribué à chaque chemin.
+
+* Sur la matrice de stockage, vérifiez les paramètres d'adressage de l'ensemble de volumes pour les ports du directeur de canal auxquels la LUN identifiée est mappée.
+
+
+Si vous déterminez que les paramètres sont incohérents, corrigez le problème de configuration sur la matrice de stockage, en vous assurant que vous définissez le paramètre sur les deux ports Channel Director sur le paramètre requis par ONTAP.
+
+*Informations connexes*
+
+https://docs.netapp.com/us-en/ontap-flexarray/implement-third-party/index.html["Implémentation de la virtualisation FlexArray pour stockage tiers"]

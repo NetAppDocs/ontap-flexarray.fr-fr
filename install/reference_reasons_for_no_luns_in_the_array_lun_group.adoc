@@ -1,0 +1,58 @@
+---
+permalink: install/reference_reasons_for_no_luns_in_the_array_lun_group.html 
+sidebar: sidebar 
+keywords: reasons, luns, array, group, host, ontap, operation, empty 
+summary: 'Lors de la validation de la configuration interne, vous devez vérifier le résultat de l"affichage de la configuration de la baie de stockage pour déterminer si les LUN sont affichées dans les groupes de LUN. Lorsque le résultat de l"affichage de la configuration de la baie de stockage n"affiche aucune LUN dans un groupe de LUN de baie, ONTAP peut voir le port cible sur la structure, mais le port cible ne présente pas de LUN de baie à ONTAP.' 
+---
+= Motifs de l'absence de LUN dans le groupe de LUN de baie
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Lors de la validation de la configuration back-end, vérifiez le `storage array config show` résultat pour déterminer si les LUN sont affichées dans les groupes de LUN. Lorsque le `storage array config show` résultat de la commande n'affiche aucune LUN dans un groupe de LUN de baie, ONTAP peut voir le port cible sur la structure, mais le port cible ne présente pas de LUN de baie à ONTAP.
+
+Il existe plusieurs raisons pour lesquelles un port cible ne peut pas présenter de LUN de baie à ONTAP (un port _open target_). Les raisons d'un port cible ouvert peuvent différer d'une matrice de stockage à l'autre. En outre, les méthodes de gestion des problèmes de port cible ouvert diffèrent d'une matrice de stockage à l'autre. Pour toutes les matrices de stockage, le dépannage de la cause d'un port cible ouvert doit inclure la vérification de la configuration de la matrice de stockage, y compris la configuration du groupe d'hôtes.
+
+Par exemple, la cause peut être un _groupe d'hôtes vide_, qui se présente à ONTAP comme un port cible ouvert. Avec un groupe d'hôtes vide, le groupe d'hôtes définit l'initiateur FC et les ports cibles, mais ne répertorie aucune LUN de baie (c'est-à-dire que le groupe d'hôtes est vide).
+
+[NOTE]
+====
+Le fonctionnement des systèmes ONTAP n'est pas affecté par un groupe d'hôtes vide.
+
+====
+L'illustration suivante représente une situation de port cible ouvert et une situation de groupe d'hôtes vide. (Un système ONTAP autonome est utilisé dans l'illustration pour plus de simplicité.)
+
+Le port cible ouvert est causé par l'absence d'ID de LUN dans la définition de groupe d'hôtes pour le contrôleur de stockage 1A. Dans la définition du groupe d'hôtes pour le contrôleur de stockage 1A, l'initiateur FC 0b est zoné dans le port cible et un groupe d'hôtes est défini pour le port FC initiator 0b, mais il n'y a pas d'ID de LUN dans le groupe d'hôtes. Comme l'illustre la figure, la définition de groupe d'hôtes pour le contrôleur de stockage 2A inclut à la fois les initiateurs et les LUN.
+
+Le groupe d'hôtes vide est causé par des LUN de baie qui ne sont pas répertoriées dans la définition de groupe d'hôtes pour les contrôleurs de stockage 1B et 2B. Les initiateurs FC 0a et 0d sont zonés dans les ports cibles, mais aucune LUN n'est affichée.
+
+image::../media/ldevs_missing_from_host_group.gif[ldevs manquant dans le groupe d'hôtes]
+
+L'exemple suivant montre le `storage array config show` résultat pour les situations illustrées où le système ONTAP est zoné sur la baie de stockage mais qu'il n'y a pas de LUN dans les définitions de groupe d'hôtes pour le contrôleur de stockage 1A, ce qui entraîne un port cible ouvert. Les contrôleurs 1B et 2B n'ont pas de LUN dans leurs définitions de groupe d'hôtes respectives, ce qui entraîne un groupe d'hôtes vide.
+
+Dans le résultat des situations illustrées, les initiateurs FC 0a, 0b et 0d n'affichent aucune LUN dans le champ nombre de LUN. Pour l'initiateur FC 0C, deux LUN sont affichées dans le groupe de LUN p1.
+
+[listing]
+----
+cluster-1::> storage array config show
+          LUN   LUN
+Node      Group Count  Array Name       Array Target Port   Initiator
+--------- ----- -----  ------------     ------------------- ---------
+vs1
+           0     2     EMC_SYMMETRIX_1  50060480000001b0       0c
+
+           1     0     EMC_SYMMETRIX_1  50060480000001a0       0b
+
+           2     0     EMC_SYMMETRIX_1  50060480000001b1       0a
+
+                 0     EMC_SYMMETRIX_1  50060480000001a1       0d
+
+4 entries were displayed.
+----
+[NOTE]
+====
+Dans le résultat de cette commande, vous pouvez déterminer que le problème n'est pas dû à des initiateurs FC manquants dans le groupe d'hôtes. Si les initiateurs FC n'existaient pas dans le groupe hôte, ONTAP ne pourrait pas voir les groupes de LUN ne disposant pas de LUN.
+
+====

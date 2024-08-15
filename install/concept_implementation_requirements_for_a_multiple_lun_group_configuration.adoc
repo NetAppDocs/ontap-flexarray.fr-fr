@@ -1,0 +1,43 @@
+---
+permalink: install/concept_implementation_requirements_for_a_multiple_lun_group_configuration.html 
+sidebar: sidebar 
+keywords: implementation, requirements, multiple, lun, group, configuration 
+summary: 'Vous pouvez améliorer les performances du système en implémentant une configuration à plusieurs LUN group dans votre environnement de stockage. Certaines tâches d"installation doivent être effectuées sur les systèmes ONTAP et les baies de stockage pour implémenter cette configuration.' 
+---
+= Conditions requises pour la mise en œuvre d'une configuration à plusieurs LUN Group
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez améliorer les performances du système en implémentant une configuration à plusieurs LUN group dans votre environnement de stockage. Certaines tâches d'installation doivent être effectuées sur les systèmes ONTAP et les baies de stockage pour implémenter cette configuration.
+
+La plupart des baies de stockage prennent en charge une configuration à groupes de LUN multiples. Consultez la _matrice d'interopérabilité_ pour vérifier que cette configuration est prise en charge par votre baie de stockage spécifique.
+
+Vous devez travailler avec l'administrateur de la matrice de stockage pour configurer les éléments suivants sur la _matrice de stockage_ pour une configuration de groupes de LUN multiples :
+
+* Utilisez autant de ports que possible, pour fournir l'accès aux LUN de baie allouées au système ONTAP.
+* Utilisez les groupes d'hôtes (ou l'équivalent de votre fournisseur) pour définir les groupes de LUN de baie présentés à chaque port FC initiator sur un système ONTAP.
+
+
+Vous pouvez configurer les éléments suivants sur le système ONTAP afin d'implémenter plusieurs configurations de groupe de LUN :
+
+* Utilisez une paire de ports FC initiator pour chaque groupe de LUN de baies.
++
+Chaque paire de ports FC initiator accède à un autre groupe de LUN de la baie de stockage via des chemins redondants.
+
+* Créez un grand agrégat de la configuration ONTAP et ajoutez des LUN de baie de plusieurs RAID Groups (groupes de parité) à l'agrégat.
++
+Ce faisant, les E/S sont réparties sur plus de disques. L'association de l'extension des E/S aux groupes RAID et de la création d'un agrégat de grande taille entraîne une nette amélioration des performances.
+
+
+
+Vous devez configurer les éléments suivants sur le _switch_ pour implémenter une configuration de groupes de LUN multiples :
+
+* Configurer la segmentation du commutateur pour définir les ports cibles que les ports FC initiator du système ONTAP doivent utiliser pour accéder à chaque Array LUN group.
+
+
+*Informations connexes*
+
+https://mysupport.netapp.com/matrix["Matrice d'interopérabilité NetApp"]

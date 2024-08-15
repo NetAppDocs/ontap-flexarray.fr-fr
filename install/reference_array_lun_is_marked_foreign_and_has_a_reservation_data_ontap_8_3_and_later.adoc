@@ -1,0 +1,60 @@
+---
+permalink: install/reference_array_lun_is_marked_foreign_and_has_a_reservation_data_ontap_8_3_and_later.html 
+sidebar: sidebar 
+keywords: array, lun, marked, foreign, reservation, show, message, troubleshoot, resolution, problem 
+summary: 'Vous pouvez importer dans ONTAP les données hébergées sur des LUN de baies dans leur format natif. Le processus d"importation du contenu d"une telle LUN de baie marquée comme étrangère peut être affecté si la LUN de baie possède des réservations d"hôte externes lors de l"importation.' 
+---
+= La LUN de la baie est marquée comme étrangère et possède une réservation
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez importer dans ONTAP les données hébergées sur des LUN de baies dans leur format natif. Le processus d'importation du contenu d'une telle LUN de baie marquée *Foreign* peut être affecté si la LUN de baie possède des réservations d'hôte externes lors de l'importation.
+
+
+
+== Les erreurs de stockage affichent le message
+
+[listing]
+----
+
+EMC-1.3 (600000e00d1000000010000e00030000): This array LUN is marked foreign and has a reservation.
+----
+
+
+== Explication
+
+Cette condition d'erreur se produit lorsque les réservations créées par les applications hôtes externes sur la LUN ne sont pas effacées avant que l'administrateur ONTAP n'initie le processus d'importation. L'opération d'importation échoue et le message s'affiche comme sortie de la `storage errors show` commande.
+
+Les réservations doivent être effacées pour que l'opération d'importation réussisse.
+
+
+
+== Dépannage et résolution des problèmes
+
+Pour résoudre le problème, l'administrateur de la baie de stockage doit supprimer la réservation permanente de la LUN de la baie.
+
+Vous pouvez supprimer la réservation persistante soit de l'hôte externe qui accède aux données LUN de la baie dans son format natif, soit à l'aide des commandes ONTAP. Vous pouvez utiliser les commandes ONTAP suivantes pour supprimer la réservation :
+
+. Vérifiez `storage errors show` le résultat pour identifier le LUN de la baie avec des réservations, comme illustré dans l'exemple suivant :
++
+[listing]
+----
+
+system1a::> storage errors show
+EMC_SYMMETRIX_1
+--------------------------------------
+EMC-1.3 (600000e00d1000000010000e00030000): This array LUN is marked foreign and has a reservation.
+----
+. Exécutez `set -privilege advanced` la commande pour passer en mode _Advanced_, car vous ne pouvez pas importer le contenu de la LUN de la baie en mode _admin_.
+. Utilisez `storage disk -remove-reservation` la commande pour supprimer la réservation persistante de la LUN de baie identifiée.
++
+[listing]
+----
+
+system1a::>* storage disk remove-reservation -disk EMC-1.3
+----
+. Utiliser `lun import start` la commande pour lancer le processus d'importation du contenu des LUN de la baie vers ONTAP.
+

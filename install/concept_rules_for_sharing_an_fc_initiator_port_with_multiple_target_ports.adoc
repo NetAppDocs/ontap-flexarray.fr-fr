@@ -1,0 +1,56 @@
+---
+permalink: install/concept_rules_for_sharing_an_fc_initiator_port_with_multiple_target_ports.html 
+sidebar: sidebar 
+keywords: rules, share, fc initiator, port, multiple, target, connect, storage, arrays 
+summary: 'Vous pouvez connecter un port FC initiator d"un système ONTAP à un maximum de quatre ports cibles sur des baies de stockage distinctes. Le partage d"un port FC initiator avec plusieurs cibles est utile lorsque vous souhaitez réduire le nombre de ports FC initiator utilisés.' 
+---
+= Règles de partage d'un port FC initiator avec plusieurs ports target
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez connecter un port d'initiateur FC sur un système ONTAP à un maximum de quatre ports cibles sur des matrices de stockage _separate_. Le partage d'un port FC initiator avec plusieurs cibles est utile lorsque vous souhaitez réduire le nombre de ports FC initiator utilisés.
+
+Vous pouvez également connecter un port d'initiateur FC à un maximum de quatre ports cibles sur la baie de stockage _same_ si la baie peut présenter différents ensembles de périphériques logiques à l'initiateur FC en fonction du port cible auquel elle accède.
+
+Le nombre de LUN de baies visibles sur un port FC initiator est limité. Ces limites varient en fonction de la version.
+
+
+
+== Règles lorsque le port FC initiator est connecté à plusieurs ports cibles sur les matrices de stockage _separate_
+
+Les règles de cette configuration sont les suivantes :
+
+* Toutes les baies de stockage doivent provenir de la même famille de modèles de fournisseurs.
++
+Les baies de stockage de la même famille partagent les mêmes performances et les mêmes caractéristiques de basculement. Par exemple, les membres de la même famille effectuent tous un basculement actif-actif ou tous un basculement actif-passif. Plusieurs facteurs peuvent être utilisés pour déterminer les familles de baies de stockage. Par exemple, les baies de stockage ayant des architectures différentes se trouvent dans des familles différentes, même si les autres caractéristiques peuvent être identiques.
+
+* La connexion d'un seul port FC initiator à plusieurs ports target est prise en charge dans les configurations MetroCluster.
+* Un seul port FC initiator peut se connecter à un maximum de quatre ports cibles sur plusieurs matrices de stockage.
+* Vous devez disposer de chaque paire de ports FC initiator-target dans une zone distincte (1:1), même si le même port FC initiator accède à plusieurs ports cible.
+
+
+
+
+== Règles lorsque le port FC initiator est connecté à plusieurs ports cibles sur la baie de stockage _same_
+
+Cette configuration ne peut être utilisée qu'avec des baies de stockage dont la fonctionnalité de masquage de LUN, de présentation ou de groupe d'hôtes autorise différentes présentations de LUN Group vers le même initiateur FC en fonction du port cible auquel vous accédez.
+
+Certaines baies de stockage peuvent présenter différents ensembles de périphériques logiques à un initiateur FC en fonction du port cible auquel vous accédez. Ces types de baies de stockage permettent au même initiateur FC de appartenir à plusieurs groupes hôtes. Sur les baies de stockage dotées de cette fonctionnalité, chaque port FC initiator peut accéder à plusieurs ports Array target de la même baie de stockage, chaque port cible présentant un LUN group différent à l'initiateur FC. Consultez la documentation de votre baie de stockage pour savoir si votre baie de stockage autorise le même initiateur FC à appartenir à plusieurs groupes hôtes.
+
+Voici les règles de cette configuration :
+
+* Un seul port d'initiateur FC peut se connecter à un maximum de quatre ports cibles sur une matrice de stockage.
+* La connexion d'un seul port FC initiator à plusieurs ports target est prise en charge dans les configurations MetroCluster.
+* Vous devez disposer de chaque paire de ports FC initiator-target dans une zone distincte (1:1), même si le même initiateur FC accède à plusieurs ports cibles.
+
+
+*Informations connexes*
+
+https://docs.netapp.com/us-en/ontap-flexarray/implement-third-party/index.html["Implémentation de la virtualisation FlexArray pour stockage tiers"]
+
+https://docs.netapp.com/us-en/ontap-flexarray/implement-e-series/index.html["Implémentation de la virtualisation FlexArray pour le stockage NetApp E-Series"]
+
+https://docs.netapp.com/us-en/ontap-metrocluster/install-fc/index.html["Installation et configuration de la solution Fabric-Attached MetroCluster"]

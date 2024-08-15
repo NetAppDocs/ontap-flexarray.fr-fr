@@ -1,0 +1,24 @@
+---
+permalink: implement-third-party/concept_two_4_port_array_lun_group_configuration.html 
+sidebar: sidebar 
+keywords: two, 4-port, array, lun, group, configuration 
+summary: Dans cette configuration, chaque paire de ports initiateurs FC ONTAP accède à un groupe de LUN de baie distinct. Le zoning est un initiateur FC ONTAP unique vers un port cible baie unique. 
+---
+= Deux configurations LUN group de baie à 4 ports
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Dans cette configuration, chaque paire de ports initiateurs FC ONTAP accède à un groupe de LUN de baie distinct. Le zoning est un initiateur FC ONTAP unique vers un port cible baie unique.
+
+Cette configuration est prise en charge pour une utilisation avec toutes les baies de stockage répertoriées dans la matrice d'interopérabilité, comme prise en charge pour la version de ONTAP exécutée sur votre système.
+
+L'illustration suivante présente un schéma fonctionnel de cette configuration :
+
+image::../media/two_4_port_array_lun_groups.gif[deux groupes lun de baie de 4 ports]
+
+*Informations connexes*
+
+https://mysupport.netapp.com/matrix["Matrice d'interopérabilité NetApp"]

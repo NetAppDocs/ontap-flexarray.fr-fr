@@ -1,0 +1,20 @@
+---
+permalink: install/concept_planning_a_configuration_with_array_luns.html 
+sidebar: sidebar 
+keywords: plan, configuration, array, luns 
+summary: 'Pour planifier une configuration ONTAP avec des LUN de baie, vous devez vérifier si la baie de stockage est prise en charge pour une version particulière de ONTAP. De plus, vous devez vérifier les informations d"interopérabilité et de support pour vous assurer que tous les systèmes répondent aux exigences d"une configuration avec des LUN de baie.' 
+---
+= Planification d'une configuration avec des LUN de baies
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Pour planifier une configuration ONTAP avec des LUN de baie, vous devez vérifier si la baie de stockage est prise en charge pour une version particulière de ONTAP. De plus, vous devez vérifier les informations d'interopérabilité et de support pour vous assurer que tous les systèmes répondent aux exigences d'une configuration avec des LUN de baie.
+
+*Informations connexes*
+
+https://mysupport.netapp.com/site/global/dashboard["Support NetApp"]
+
+https://mysupport.netapp.com/matrix["Matrice d'interopérabilité NetApp"]

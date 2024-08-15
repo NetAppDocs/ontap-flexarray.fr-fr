@@ -1,0 +1,18 @@
+---
+permalink: install/concept_required_number_of_paths_to_an_array_lun.html 
+sidebar: sidebar 
+keywords: required, number, paths, array, lun 
+summary: ONTAP prend en charge quatre ou deux chemins vers les LUN de baies. 
+---
+= Nombre requis de chemins vers une LUN de baie
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+ONTAP prend en charge quatre ou deux chemins vers les LUN de baies.
+
+ONTAP attend et exige qu'une baie de stockage fournisse l'accès à une LUN de baie spécifique sur au moins deux ports de baie de stockage redondants, c'est-à-dire via au moins deux chemins redondants.
+
+Assurez-vous que les ports de la baie de stockage que vous sélectionnez pour accéder à une LUN donnée proviennent de différents composants afin d'éviter un point de défaillance unique, par exemple des autres contrôleurs, clusters ou armoires. En effet, vous ne souhaitez pas que tous les accès à une LUN de baie soient perdus en cas de défaillance d'un composant.

@@ -1,0 +1,28 @@
+---
+permalink: install/concept_target_queue_depth_customization.html 
+sidebar: sidebar 
+keywords: target, queue, depth, customization 
+summary: 'La profondeur de file d"attente cible définit le nombre de commandes ONTAP pouvant être mises en file d"attente (en attente) sur un port cible de la matrice de stockage. ONTAP fournit une valeur par défaut. Pour la plupart des déploiements, la profondeur de file d"attente cible par défaut est appropriée ; vous pouvez cependant la modifier pour corriger les problèmes de performances.' 
+---
+= Personnalisation de la profondeur de la file d'attente cible
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La profondeur de file d'attente cible définit le nombre de commandes ONTAP pouvant être mises en file d'attente (en attente) sur un port cible de la matrice de stockage. ONTAP fournit une valeur par défaut. Pour la plupart des déploiements, la profondeur de file d'attente cible par défaut est appropriée ; vous pouvez cependant la modifier pour corriger les problèmes de performances.
+
+La profondeur de file d'attente cible par défaut diffère selon les versions de ONTAP :
+
+* Pour ONTAP, la valeur par défaut est 512.
+* Pour toutes les versions antérieures à Data ONTAP 8.2, la valeur par défaut est 256.
+
+
+Lorsqu'une matrice de stockage est configurée avec plusieurs initiateurs partageant des ports cibles, vous ne voulez pas que les commandes en attente de tous les initiateurs soient toutes deux supérieures à ce que la matrice de stockage peut gérer. Sinon, les performances de tous les hôtes peuvent être affectées. Les matrices de stockage diffèrent quant au nombre de commandes qu'elles peuvent traiter dans la mémoire tampon de la file d'attente.
+
+[NOTE]
+====
+La profondeur de file d'attente cible peut également être appelée « longueur de file d'attente cible » « profondeur Q » ou « accélérateur max ».
+
+====

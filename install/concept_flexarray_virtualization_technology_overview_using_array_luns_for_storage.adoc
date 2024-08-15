@@ -1,0 +1,20 @@
+---
+permalink: install/concept_flexarray_virtualization_technology_overview_using_array_luns_for_storage.html 
+sidebar: sidebar 
+keywords: flexarray, virtualization, technology, overview, use, array, luns, storage 
+summary: 'Le logiciel ONTAP fournit une plateforme logicielle de stockage unifié qui simplifie la gestion des tiroirs disques natifs et des LUN sur les baies de stockage. Ajoutez de la capacité de stockage quand et où vous en avez besoin, sans interrompre l"activité. Cette fonctionnalité est fournie par le logiciel de virtualisation FlexArray, précédemment appelé V-Series.' 
+---
+= Présentation de la technologie de virtualisation FlexArray — ​using LUN de baies pour le stockage
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Le logiciel ONTAP fournit une plateforme logicielle de stockage unifié qui simplifie la gestion des tiroirs disques natifs et des LUN sur les baies de stockage. Ajoutez de la capacité de stockage quand et où vous en avez besoin, sans interrompre l'activité. Cette fonctionnalité est fournie par _le logiciel de virtualisation FlexArray_, anciennement appelé V-Series.
+
+L'illustration suivante présente une configuration dans laquelle les systèmes ONTAP sous licence pour la connexion à des baies de stockage mettent en pool des LUN depuis les baies de stockage et les présentent aux clients.
+
+image::../media/how_v_series_uses_storage.gif[Ce graphique est décrit par le texte environnant.]
+
+Un système ONTAP présente le stockage aux clients sous la forme de volumes de système de fichiers ONTAP, que vous gérez sur le système à l'aide des fonctionnalités de gestion ONTAP ou sous la forme d'une cible SCSI qui crée des LUN pour les clients. Dans les deux cas (clients de système de fichiers et clients LUN), sur les systèmes qui peuvent utiliser des LUN de baie, vous combinez les LUN de baie en un ou plusieurs agrégats LUN de baie. Dans un environnement ONTAP, vous pouvez associer ces agrégats de LUN de baie à des serveurs de stockage virtuels (SVM), et créer des volumes ONTAP pour les présenter aux clients en tant que fichiers ou LUN servis par ONTAP.

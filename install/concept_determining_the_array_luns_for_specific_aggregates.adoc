@@ -1,0 +1,14 @@
+---
+permalink: install/concept_determining_the_array_luns_for_specific_aggregates.html 
+sidebar: sidebar 
+keywords: determine, array, luns, specific, aggregates 
+summary: Il existe un certain nombre de règles concernant la combinaison de différents types de stockage dans des agrégats spécifiques aux systèmes ONTAP qui utilisent des LUN de baies. Vous devez comprendre ces règles lors de la planification des LUN de baie et des disques à ajouter à quels agrégats. 
+---
+= Détermination des LUN de baie pour des agrégats spécifiques
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Il existe un certain nombre de règles concernant la combinaison de différents types de stockage dans des agrégats spécifiques aux systèmes ONTAP qui utilisent des LUN de baies. Vous devez comprendre ces règles lors de la planification des LUN de baie et des disques à ajouter à quels agrégats.

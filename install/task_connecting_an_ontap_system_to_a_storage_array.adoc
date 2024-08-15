@@ -1,0 +1,85 @@
+---
+permalink: install/task_connecting_an_ontap_system_to_a_storage_array.html 
+sidebar: sidebar 
+keywords: connect, ontap, system, storage, array 
+summary: La connexion du système ONTAP à une baie de stockage implique de relier le système ONTAP, les commutateurs et les baies de stockage et de connecter des périphériques supplémentaires, tels que des périphériques de sauvegarde sur bande. 
+---
+= Connexion d'un système ONTAP à une matrice de stockage
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La connexion du système ONTAP à une baie de stockage implique de relier le système ONTAP, les commutateurs et les baies de stockage et de connecter des périphériques supplémentaires, tels que des périphériques de sauvegarde sur bande.
+
+*Ce dont vous aurez besoin*
+
+* Vous devez avoir identifié les ports intégrés et les ports d'adaptateur d'extension de votre système ONTAP pour la connexion à la matrice de stockage.
+* Vous devez avoir localisé les ports de la matrice de stockage que vous souhaitez utiliser pour vous connecter au système ONTAP.
+
+
+Cette procédure décrit comment connecter un système ONTAP à une matrice de stockage via deux chemins, chaque initiateur étant dédié à un port cible.
+
+.Étapes
+. Connectez le système ONTAP aux commutateurs comme indiqué dans le tableau suivant :
++
+|===
+| Pour... | Suivez ces étapes... 
+
+
+ a| 
+Un système autonome
+ a| 
+.. Connectez un câble entre le port FC initiator du système ONTAP et le port du commutateur 1.
+.. Connectez un autre câble entre un port d'initiateur FC redondant et un port du commutateur 2.
+
+
+
+
+ a| 
+Une paire haute disponibilité
+ a| 
+.. Sur le premier nœud de la paire haute disponibilité, connectez un câble entre un port FC initiator et un port du commutateur 1.
+.. Connectez un autre câble entre un port d'initiateur FC redondant du même nœud et un port du commutateur 2.
+.. Sur le second nœud de la paire haute disponibilité, connectez un câble entre un port FC initiator et un port du commutateur 1.
+.. Connectez un autre câble entre un port d'initiateur FC redondant du même nœud et un port du commutateur 2.
+
+
+|===
+. Connectez les switchs à la baie de stockage en suivant les instructions du tableau suivant et, dans le cas d'une paire HA, l'illustration suivante du tableau :
++
+|===
+| Pour un système autonome... | Dans le cas d'une paire haute disponibilité... 
+
+
+ a| 
+.. Connectez le commutateur 1 au port 1A du contrôleur de matrice de stockage 1.
+.. Connectez le commutateur 2 au port 2A du contrôleur de matrice de stockage 2.
+
+ a| 
+.. Connectez le commutateur 1 au port 1A du contrôleur de matrice de stockage 1.
+.. Connectez le commutateur 2 au port 2A du contrôleur de matrice de stockage 2.
+.. Connectez le commutateur 1 au contrôleur de matrice de stockage 1, port 1B.
+.. Connectez le commutateur 2 au port 2B du contrôleur de matrice de stockage 2.
+
+
+|===
++
+L'illustration suivante montre les connexions d'une paire HA.
+
++
+image::../media/one_4_port_array_lun_gp.gif[Les connexions de vs1 0a et de vs2 0a passent au contrôleur de matrice de stockage 1,ports 1A and 1B. Connections from vs1 0c and vs2 0c go to storage array controller 2,ports 2A and 2B.]
+
+. *Facultatif :* Connectez le système ONTAP à un périphérique de sauvegarde sur bande via un port initiateur FC ou un adaptateur de bande SCSI séparé.
+. Vérifiez que la matrice de stockage est correctement configurée et connectée, et qu'elle est sous tension.
++
+Votre matrice de stockage configurée et connectée doit être sous tension avant de mettre votre système ONTAP sous tension. Pour savoir comment mettre la matrice de stockage sous tension, reportez-vous à la documentation de la matrice de stockage.
+
+. Si votre déploiement inclut des commutateurs, assurez-vous que tous les ID de commutateur sont définis, puis activez-les toutes les 10 minutes.
+. *Facultatif:* le cas échéant, activez les périphériques de sauvegarde sur bande.
+. Mettez le système ONTAP sous tension et effectuez la configuration et l'installation réseau initiales.
+. Si la baie de stockage ne détecte pas automatiquement les WWN du système ONTAP après avoir connecté le système ONTAP à la baie de stockage, vous devez obtenir les WWN manuellement.
+
+
+Vous devez continuer à configurer correctement les fonctionnalités de gestion ONTAP pour qu'elles fonctionnent avec les baies de stockage.

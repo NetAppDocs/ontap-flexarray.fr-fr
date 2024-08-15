@@ -1,0 +1,27 @@
+---
+permalink: install/concept_requirements_for_connecting_to_storage_arrays.html 
+sidebar: sidebar 
+keywords: requirements, connect, storage, arrays 
+summary: 'Lors de la planification de la connexion du système ONTAP à une baie de stockage, votre plan de connectivité port à port doit respecter les consignes de redondance, de chemins d"accès et autres.' 
+---
+= Configuration requise pour la connexion aux matrices de stockage
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Lors de la planification de la connexion du système ONTAP à une baie de stockage, votre plan de connectivité port à port doit respecter les consignes de redondance, de chemins d'accès et autres.
+
+Les conditions requises pour configurer les connexions sont les suivantes :
+
+* Chaque connexion d'une paire de ports redondants sur la baie de stockage doit être connectée à un autre port d'initiateur FC sur le système ONTAP.
+* Les ports utilisés sur les commutateurs FC doivent être redondants.
+* La connectivité doit être configurée pour éviter un SPOF.
++
+Assurez-vous que les ports de la baie de stockage que vous sélectionnez pour accéder à une LUN donnée proviennent de différents composants afin d'éviter un point de défaillance unique, par exemple des autres contrôleurs, clusters ou armoires. En effet, vous ne souhaitez pas que tous les accès à une LUN de baie soient perdus en cas de défaillance d'un composant.
+
+* Le nombre de chemins d'accès ne peut pas dépasser le nombre de chemins pris en charge par votre version de ONTAP.
+* Si vous souhaitez configurer une configuration dans laquelle un port FC initiator est partagé avec plusieurs ports target ou qu'un port cible soit partagé avec plusieurs ports FC initiator, vous devez respecter les règles appropriées.
+* Si votre baie de stockage prend en charge moins de LUN par groupe d'hôtes et par port que le nombre de LUN utilisé par les systèmes ONTAP, vous devez ajouter des câbles supplémentaires entre le système ONTAP et la baie de stockage.
+

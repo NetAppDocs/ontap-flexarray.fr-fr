@@ -1,0 +1,26 @@
+---
+permalink: implement-third-party/concept_emc_symmetrix_storage_array_families.html 
+sidebar: sidebar 
+keywords: emc, symmetrix, storage, array, families 
+summary: ONTAP ne prend pas en charge le mélange de certains types de stockage dans les agrégats. Pour vous aider à déterminer les LUN de baie qui peuvent être associées dans un agrégat, les baies de stockage de chaque fournisseur sont regroupées en familles. Lorsque vous créez des agrégats, vous ne pouvez pas combiner des LUN de baie de différents fournisseurs et des familles de baies de stockage différentes dans un même agrégat. 
+---
+= Gammes de baies de stockage EMC Symmetrix
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+ONTAP ne prend pas en charge le mélange de certains types de stockage dans les agrégats. Pour vous aider à déterminer les LUN de baie qui peuvent être associées dans un agrégat, les baies de stockage de chaque fournisseur sont regroupées en familles. Lorsque vous créez des agrégats, vous ne pouvez pas combiner des LUN de baie de différents fournisseurs et des familles de baies de stockage différentes dans un même agrégat.
+
+Les baies de stockage EMC Symmetrix suivantes sont prises en charge par les systèmes ONTAP :
+
+* Famille 1 : VMAX
+* Famille 2 : VMAX3
+
+
+La matrice d'interopérabilité est la référence en matière d'informations sur les baies de stockage prises en charge par chaque fournisseur.
+
+*Informations connexes*
+
+https://mysupport.netapp.com/matrix["Matrice d'interopérabilité NetApp"]

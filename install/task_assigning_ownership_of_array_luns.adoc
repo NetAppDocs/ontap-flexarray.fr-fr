@@ -1,0 +1,45 @@
+---
+permalink: install/task_assigning_ownership_of_array_luns.html 
+sidebar: sidebar 
+keywords: assign, ownership, array, luns 
+summary: Sur un système ONTAP sur lequel réside le volume racine des tiroirs disques, vous devez attribuer la propriété des LUN de baie à un nœud avant de les ajouter à un agrégat pour les utiliser comme stockage. 
+---
+= Attribution de la propriété des LUN de baie
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Sur un système ONTAP sur lequel réside le volume racine des tiroirs disques, vous devez attribuer la propriété des LUN de baie à un nœud avant de les ajouter à un agrégat pour les utiliser comme stockage.
+
+*Ce dont vous aurez besoin*
+
+* Le test de configuration interne (test de la connectivité et de la configuration des dispositifs derrière les systèmes ONTAP) doit être effectué.
+* Les LUN de baie que vous souhaitez attribuer doivent être présentées aux systèmes ONTAP.
+
+
+Vous pouvez attribuer la propriété des LUN de baie ayant les caractéristiques suivantes :
+
+* Ils ne sont pas possédés.
+* Ils ne comportent aucune erreur de configuration de la baie de stockage, par exemple :
++
+** La taille de la LUN de baie est inférieure ou supérieure à celle prise en charge par ONTAP.
+** Le LDEV est mappé sur un seul port.
+** Des ID de LUN incohérents lui sont attribués pour le système LDEV.
+** La LUN n'est disponible que sur un seul chemin.
+
+
+
+
+ONTAP émet un message d'erreur si vous tentez d'attribuer la propriété d'une LUN de baie contenant des erreurs de configuration back-end qui interfèrent avec le système ONTAP et la baie de stockage en fonctionnant ensemble. Vous devez corriger ces erreurs avant de poursuivre l'affectation des LUN de la baie.
+
+ONTAP vous alerte si vous tentez d'attribuer une LUN de matrice avec une erreur de redondance : par exemple, tous les chemins d'accès à cette LUN de matrice sont connectés au même contrôleur ou à un seul chemin d'accès à la LUN de matrice. Vous pouvez corriger une erreur de redondance avant ou après l'affectation de la propriété de la LUN.
+
+.Étapes
+. Entrez la commande suivante pour afficher les LUN de baie qui n'ont pas encore été attribuées à un nœud :``storage disk show -container-type unassigned``
+. Pour attribuer une LUN de baie à ce nœud, entrez la commande suivante :``storage disk assign -disk arrayLUNname -owner nodename``
++
+Si vous souhaitez corriger une erreur de redondance après l'affectation des disques au lieu d'auparavant, vous devez utiliser `-force` le paramètre avec la `storage disk assign` commande.
+
+

@@ -1,0 +1,39 @@
+---
+permalink: install/concept_number_of_storage_arrays_supported_with_a_ontap_system.html 
+sidebar: sidebar 
+keywords: considerations, connect, multiple, storage, arrays, ontap, system 
+summary: Selon le modèle de baie de stockage pris en charge par les systèmes ONTAP, vous pouvez connecter plusieurs baies de stockage ou une seule baie de stockage au système ONTAP. 
+---
+= Facteurs à prendre en compte lors de la connexion de plusieurs baies de stockage à un système ONTAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Selon le modèle de baie de stockage pris en charge par les systèmes ONTAP, vous pouvez connecter plusieurs baies de stockage ou une seule baie de stockage au système ONTAP.
+
+[NOTE]
+====
+La matrice d'interopérabilité identifie tout modèle de baie de stockage pour lequel une seule baie de stockage est prise en charge par un système ONTAP.
+
+====
+Lorsque vous connectez plusieurs baies de stockage à un système ONTAP, tenez compte des points suivants :
+
+* Si vous pouvez connecter plusieurs baies du même modèle de baie de stockage pris en charge au système ONTAP, le nombre de baies de stockage que vous pouvez déployer n'est pas limité.
+* Les baies de stockage peuvent provenir du même fournisseur pris en charge ou de fournisseurs différents.
++
+Si les baies de stockage proviennent du même fournisseur, elles peuvent provenir de la même famille ou de familles différentes.
+
+
+
+[NOTE]
+====
+Les baies de stockage de la même famille partagent les mêmes performances et les mêmes caractéristiques de basculement. Par exemple, les membres de la même famille effectuent tous un basculement actif-actif ou tous un basculement actif-passif. Plusieurs facteurs peuvent être utilisés pour déterminer les familles de baies de stockage. Par exemple, les baies de stockage ayant des architectures différentes se trouvent dans des familles différentes, même si les autres caractéristiques peuvent être identiques.
+
+====
+*Informations connexes*
+
+https://docs.netapp.com/us-en/ontap-flexarray/implement-third-party/index.html["Implémentation de la virtualisation FlexArray pour stockage tiers"]
+
+https://mysupport.netapp.com/matrix["Matrice d'interopérabilité NetApp"]

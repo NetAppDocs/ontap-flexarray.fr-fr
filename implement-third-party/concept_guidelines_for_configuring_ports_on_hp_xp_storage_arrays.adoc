@@ -1,0 +1,20 @@
+---
+permalink: implement-third-party/concept_guidelines_for_configuring_ports_on_hp_xp_storage_arrays.html 
+sidebar: sidebar 
+keywords: guidelines, configuring, ports, hp xp, storage, arrays 
+summary: Vous devez suivre certaines instructions lors de la configuration des ports sur les baies de stockage HP XP. 
+---
+= Instructions pour la configuration des ports sur les baies de stockage HP XP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez suivre certaines instructions lors de la configuration des ports sur les baies de stockage HP XP.
+
+Les instructions de configuration des ports sur les baies de stockage HP XP sont les suivantes :
+
+* Vous ne devez ajouter qu'un seul groupe d'hôtes par port.
+* Assurez-vous qu'un groupe d'hôtes inclut tous les ports FC initiator des systèmes V-Series dans un voisinage de LUN de baie.
+

@@ -1,0 +1,39 @@
+---
+permalink: install/concept_requirement_for_redundant_setup_of_components_in_a_path.html 
+sidebar: sidebar 
+keywords: requirements, redundant, setup, components, path, fc switch, ontap, systems, storage, array 
+summary: 'Les systèmes ONTAP doivent se connecter à la baie de stockage via un réseau Fibre Channel (FC) redondant. Deux réseaux FC sont requis pour assurer la protection contre les défaillances de connexion et de sorte que les ports et commutateurs de la structure puissent être mis hors ligne à des fins de mise à niveau et de remplacement sans affecter les systèmes ONTAP.' 
+---
+= Configuration redondante des composants dans un chemin
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Les systèmes ONTAP doivent se connecter à la baie de stockage via un réseau Fibre Channel (FC) redondant. Deux réseaux FC sont requis pour assurer la protection contre les défaillances de connexion et de sorte que les ports et commutateurs de la structure puissent être mis hors ligne à des fins de mise à niveau et de remplacement sans affecter les systèmes ONTAP.
+
+
+
+== Exigences de redondance des systèmes ONTAP
+
+* Vous devez connecter chaque connexion à un autre port FC initiator dans la paire de ports des systèmes ONTAP.
+* Chaque port FC initiator d'une même paire de ports FC initiator doit être sur un bus différent.
+
+
+
+
+== Exigences de redondance des commutateurs FC
+
+* Vous devez utiliser des commutateurs redondants.
+
+
+
+
+== Exigences de redondance des baies de stockage
+
+Assurez-vous que les ports de la baie de stockage que vous sélectionnez pour accéder à une LUN donnée proviennent de différents composants afin d'éviter un point de défaillance unique, par exemple des autres contrôleurs, clusters ou armoires. En effet, vous ne souhaitez pas que tous les accès à une LUN de baie soient perdus en cas de défaillance d'un composant.
+
+L'illustration suivante montre une sélection de port de matrice de stockage correcte et incorrecte pour la redondance. La configuration du chemin dans l'exemple de gauche est correcte car les chemins d'accès à la LUN de la baie sont redondants, chaque connexion étant reliée à un port d'un autre contrôleur de la baie de stockage.
+
+image::../media/redundant_array_port_selection.gif[Les chemins d'accès à une LUN de baie doivent être redondants. Il est incorrect que les deux chemins passent au même contrôleur de matrice de stockage.]

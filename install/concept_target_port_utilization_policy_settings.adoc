@@ -1,0 +1,75 @@
+---
+permalink: install/concept_target_port_utilization_policy_settings.html 
+sidebar: sidebar 
+keywords: target, port, utilization, policy, settings, output, examples, array 
+summary: 'ONTAP peut détecter des conflits de ressources, tels que la file d"attente d"E/S saturée, les commandes dont le délai d"attente a expiré ou la ressource HBA épuisée, sur un port cible.' 
+---
+= Paramètres de stratégie d'utilisation des ports cibles
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+ONTAP peut détecter des conflits de ressources, tels que la file d'attente d'E/S saturée, les commandes dont le délai d'attente a expiré ou la ressource HBA épuisée, sur un port cible.
+
+Vous pouvez définir les stratégies d'utilisation des ports cibles à l'aide de la `storage array port modify` commande si vous détectez de tels événements sur un port cible de baie donné.
+
+Le tableau ci-dessous décrit les deux stratégies d'utilisation associées à un port cible :
+
+|===
+| Politique | Description 
+
+
+ a| 
+*normal*
+ a| 
+Lorsque ONTAP détecte des conflits de ressources de port cible sur un port cible de baie donné, il réduit la profondeur de file d'attente du port cible et limite les E/S vers le port cible. Dans ce mode, la réduction de la profondeur de la file d'attente du port cible est inférieure à la règle *dedifférer* pour chaque événement de conflit de ressources du port cible. L'augmentation subséquente de la profondeur de la file d'attente du port cible est plus rapide que la règle *deply*. *normal* est la stratégie par défaut.
+
+
+
+ a| 
+*différer*
+ a| 
+Lorsque ONTAP détecte des conflits de ressources de port cible sur un port cible de baie donné, il réduit la profondeur de file d'attente du port cible et limite les E/S vers le port cible. Dans ce mode, la réduction de la profondeur de la file d'attente du port cible est supérieure à la règle *normal* pour chaque événement de conflit de ressources de port cible. L'augmentation subséquente de la profondeur de la file d'attente du port cible est plus lente que la stratégie d'utilisation *normal*.
+
+|===
+
+
+== Exemples de résultats permettant d'afficher et de modifier les stratégies d'utilisation des ports cibles de la baie
+
+La commande suivante affiche la stratégie d'utilisation des ports cibles associée à un port cible de la baie :
+
+[listing]
+----
+vgv3170_jon::> storage array port show -wwnn 2703750270235
+        Array Name: HITACHI_DF600F_1
+              WWNN: 2703750270235
+              WWPN: 2703750270235
+   Connection Type: fabric
+       Switch Port: vgbr300s89:9
+        Link Speed: 4 GB/s
+   Max Queue Depth: 1024
+Utilization Policy: defer
+                              LUN                                        Link
+Node              Initiator  Count   IOPS    KB/s    %busy    %waiting   Errs
+----------------  ---------  -----  ------  ------  -------  ----------  ----
+     vgv3170f54a         0a      2       50   1956       85           0     0
+     vgv3170f54b         0a      2      350  15366      100          40     0
+----
+Par défaut, la stratégie d'E/S pour un port cible de baie donné est *normal*. Vous pouvez modifier la politique d'E/S associée au port en exécutant la commande suivante :
+
+[listing]
+----
+vgv3070f50ab::> storage array port modify -wwpn 50014380025d1509 -utilization-policy ?
+
+
+
+normal      This policy aggressively competes for target port resources, in effect competing with other hosts.
+             (normal)
+
+defer      	This policy does not aggressively compete for target port resources, in effect deferring to other hosts.
+
+vgv3070f50ab::> storage array port modify -wwpn 50014380025d1509 -utilization-policy defer
+1 record updated.
+----

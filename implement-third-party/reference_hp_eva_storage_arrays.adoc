@@ -1,0 +1,14 @@
+---
+permalink: implement-third-party/reference_hp_eva_storage_arrays.html 
+sidebar: sidebar 
+keywords: hp, eva, storage, arrays 
+summary: 'Vous devez respecter certaines conditions lors de la configuration des baies de stockage pour qu"elles fonctionnent avec les systèmes ONTAP. Ces exigences incluent la définition des paramètres de configuration sur les baies de stockage et le déploiement de configurations prises en charge uniquement.' 
+---
+= Baies de stockage HP EVA
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez respecter certaines conditions lors de la configuration des baies de stockage pour qu'elles fonctionnent avec les systèmes ONTAP. Ces exigences incluent la définition des paramètres de configuration sur les baies de stockage et le déploiement de configurations prises en charge uniquement.

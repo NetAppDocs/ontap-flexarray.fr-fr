@@ -1,0 +1,20 @@
+---
+permalink: install/concept_array_lun_types_supported_by_ontap.html 
+sidebar: sidebar 
+keywords: array, lun, type, supported, ontap 
+summary: 'Vous pouvez uniquement mapper les LUN de la baie de stockage sur ONTAP. Vous pouvez mapper la LUN 0 sur la ONTAP s"il s"agit d"une LUN de type de stockage.' 
+---
+= Type de LUN de baie pris en charge par ONTAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez uniquement mapper les LUN de la baie de stockage sur ONTAP. Vous pouvez mapper la LUN 0 sur la ONTAP s'il s'agit d'une LUN de type de stockage.
+
+Certaines baies de stockage ont une LUN _command_ non Storage. Vous ne pouvez pas mapper une LUN de type de commande sur un système ONTAP.
+
+*Informations connexes*
+
+https://docs.netapp.com/us-en/ontap-flexarray/implement-third-party/index.html["Implémentation de la virtualisation FlexArray pour stockage tiers"]

@@ -1,0 +1,18 @@
+---
+permalink: implement-third-party/concept_use_of_storage_array_advanced_features.html 
+sidebar: sidebar 
+keywords: support, advanced, features, storage, arrays 
+summary: 'ONTAP ne prend pas en charge les fonctionnalités avancées des baies de stockage, sauf mention contraire dans la matrice d"interopérabilité.' 
+---
+= Prise en charge des fonctionnalités avancées des baies de stockage
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+ONTAP ne prend pas en charge les fonctionnalités avancées des baies de stockage, sauf mention contraire dans la matrice d'interopérabilité.
+
+*Informations connexes*
+
+https://mysupport.netapp.com/matrix["Matrice d'interopérabilité NetApp"]

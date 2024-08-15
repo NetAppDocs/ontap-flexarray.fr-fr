@@ -1,0 +1,18 @@
+---
+permalink: implement-third-party/concept_requirements_for_configuring_the_hp_eva_storage_management_server.html 
+sidebar: sidebar 
+keywords: requirements, configuring, hp, eva, storage, management, server 
+summary: 'Le partage des ports d"initiateur FC présents sur un système ONTAP et des ports d"initiateur présents sur un serveur de gestion de stockage HP EVA avec des ports cibles EVA courants entraîne des problèmes de compatibilité.' 
+---
+= Configuration requise pour HP EVA Storage Management Server
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Le partage des ports d'initiateur FC présents sur un système ONTAP et des ports d'initiateur présents sur un serveur de gestion de stockage HP EVA avec des ports cibles EVA courants entraîne des problèmes de compatibilité.
+
+Les problèmes de compatibilité résultent des différents paramètres d'hôte pour les ports initiateurs FC présents sur un système ONTAP et les ports initiateurs du serveur de gestion de stockage EVA.
+
+HP recommande que tout serveur HP EVA Storage Management Server résidant dans une structure soit configuré dans une zone distincte de tous les systèmes d'exploitation.

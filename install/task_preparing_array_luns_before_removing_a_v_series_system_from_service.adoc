@@ -1,0 +1,20 @@
+---
+permalink: install/task_preparing_array_luns_before_removing_a_v_series_system_from_service.html 
+sidebar: sidebar 
+keywords: prepare, array, luns, before, remove, ontap, system, service 
+summary: Vous devez libérer les réservations permanentes sur toutes les LUN de baie attribuées à un système ONTAP avant de mettre le système hors service. 
+---
+= Préparation des LUN de baie avant de retirer un système ONTAP du service
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez libérer les réservations permanentes sur toutes les LUN de baie attribuées à un système ONTAP avant de mettre le système hors service.
+
+Lorsque vous attribuez la propriété ONTAP d'une LUN de baie, ONTAP place des réservations permanentes (verrouillage de propriété) sur cette LUN de baie pour identifier le système ONTAP qui possède la LUN. Si vous souhaitez que les LUN de baie soient disponibles pour d'autres types d'hôtes, vous devez supprimer les réservations permanentes que ONTAP a placées sur ces LUN de baie ; certaines baies ne vous permettent pas de détruire une LUN réservée si vous ne supprimez pas les réserves de propriété et persistantes écrites par ONTAP sur cette LUN.
+
+Par exemple, la baie de stockage Hitachi USP ne dispose pas de commande utilisateur permettant de supprimer les réservations persistantes des LUN. Si vous ne supprimez pas les réservations permanentes via ONTAP avant de supprimer le système ONTAP du service, vous devez appeler le support technique Hitachi pour supprimer les réservations.
+
+Consultez l'article de la base de connaissances https://kb.netapp.com/Advice_and_Troubleshooting/Data_Storage_Software/ONTAP_OS/What_are_SCSI_Reservations_and_SCSI_Persistent_Reservations["Qu'est-ce que les réservations SCSI et les réservations persistantes SCSI"^]

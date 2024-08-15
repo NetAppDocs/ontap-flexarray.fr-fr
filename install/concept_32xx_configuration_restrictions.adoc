@@ -1,0 +1,16 @@
+---
+permalink: install/concept_32xx_configuration_restrictions.html 
+sidebar: sidebar 
+keywords: 32xx, system, configuration, restrictions 
+summary: 'Certaines restrictions s"appliquent aux systèmes 32xx qui ne s"appliquent pas aux autres modèles. Vous devez en connaître les informations lors de la configuration des systèmes.' 
+---
+= restrictions de configuration du système 32xx
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Certaines restrictions s'appliquent aux systèmes 32xx qui ne s'appliquent pas aux autres modèles. Vous devez en connaître les informations lors de la configuration des systèmes.
+
+Les deux ports FC intégrés libellés 0C et 0d ne se trouvent pas sur des bus indépendants. Par conséquent, ils n'assurent pas la redondance du stockage. Certaines défaillances de port peuvent provoquer une panique du système. Pour configurer des paires de ports redondants, vous devez utiliser une carte HBA FC dans un connecteur d'extension disponible.

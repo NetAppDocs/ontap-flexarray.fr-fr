@@ -1,0 +1,215 @@
+---
+permalink: install/concept_example_configuration_shared_fc_initiator_ports.html 
+sidebar: sidebar 
+keywords: example, configuration, shared, fc initiator, ports, separate, storage, arrays, multiple, targets 
+summary: 'Un port FC initiator d"un système ONTAP peut être connecté à un maximum de quatre ports cibles sur des baies de stockage distinctes ou, pour certaines baies de stockage, à quatre ports cibles sur les mêmes baies de stockage.' 
+---
+= Exemple de configuration : ports FC initiator partagés
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Un port FC initiator d'un système ONTAP peut être connecté à un maximum de quatre ports cibles sur des baies de stockage distinctes ou, pour certaines baies de stockage, à quatre ports cibles sur les mêmes baies de stockage.
+
+Il est recommandé de connecter chaque paire de ports FC initiator-target dans une zone séparée (1:1), même si le même initiateur FC communique avec plusieurs ports cibles.
+
+
+
+== Port d'initiateur FC partagé connecté à plusieurs ports cibles sur les baies de stockage _separate_
+
+L'illustration suivante montre les connexions et le zoning pour le partage d'un port FC initiator avec des ports cibles sur des matrices de stockage _different_.
+
+Les lignes continues de l'illustration suivante montrent les connexions des ports FC initiator sur le système vs1 et les lignes en pointillés indiquent les connexions des ports FC initiator sur le système vs2.
+
+image::../media/shared_initiator_ports_different_arrays.gif[ports initiateurs partagés sur différentes baies]
+
+Le tableau ci-dessous présente les définitions de segmentation 1:1 dans l'exemple d'un port FC initiator partageant plusieurs ports cibles sur différentes baies de stockage.
+
+|===
+| Zone | Système ONTAP et port FC initiator | Baie de stockage 
+
+
+ a| 
+*Commutateur 1*
+
+
+
+ a| 
+z1
+ a| 
+vs1 : 0a
+ a| 
+Matrice de stockage 1 : port 1A du contrôleur 1
+
+
+
+ a| 
+z2
+ a| 
+vs1 : 0a
+ a| 
+Matrice de stockage 2 : port 1A du contrôleur 1
+
+
+
+ a| 
+z3
+ a| 
+vs2 : 0a
+ a| 
+Matrice de stockage 1 : port 1B du contrôleur 1
+
+
+
+ a| 
+z4
+ a| 
+vs2 : 0a
+ a| 
+Matrice de stockage 2 : port 1B du contrôleur 1
+
+
+
+ a| 
+*Commutateur 2*
+
+
+
+ a| 
+z5
+ a| 
+vs1:0c
+ a| 
+Matrice de stockage 1 : contrôleur 2, port 2A
+
+
+
+ a| 
+z6
+ a| 
+vs1:0c
+ a| 
+Matrice de stockage 2 : contrôleur 2, port 2A
+
+
+
+ a| 
+z7
+ a| 
+vs2:0c
+ a| 
+Matrice de stockage 1 : port 2B du contrôleur 2
+
+
+
+ a| 
+z8
+ a| 
+vs2:0c
+ a| 
+Matrice de stockage 2 : port 2B du contrôleur 2
+
+|===
+
+
+== Port d'initiateur FC partagé connecté à plusieurs ports cibles sur la baie de stockage _même_
+
+Cette configuration ne peut être utilisée qu'avec des baies de stockage dont la fonctionnalité de masquage de LUN, de présentation ou de groupe d'hôtes autorise différentes présentations de LUN Group vers le même initiateur FC en fonction du port cible auquel vous accédez.
+
+Certaines baies de stockage peuvent présenter différents ensembles de périphériques logiques à un initiateur FC en fonction du port cible auquel vous accédez. Ces types de baies de stockage permettent au même initiateur FC de appartenir à plusieurs groupes hôtes. Sur les baies de stockage dotées de cette fonctionnalité, chaque initiateur FC peut accéder à plusieurs ports cibles de baie sur la même baie de stockage, chaque port cible présentant un LUN group différent à l'initiateur FC. Consultez la documentation de votre baie de stockage pour déterminer si votre baie de stockage autorise le même initiateur FC à appartenir à plusieurs groupes hôtes.
+
+L'illustration suivante montre les connexions et la segmentation pour le partage d'un port FC initiator avec plusieurs ports cibles sur la _même_ baie de stockage. Dans cet exemple, les définitions de zoning sont configurées comme 1:1, c'est-à-dire un initiateur FC pour un port cible.
+
+Les lignes continues de l'illustration suivante montrent les connexions des ports FC initiator sur le système vs1 et les lignes en pointillés indiquent les connexions des ports FC initiator sur le système vs2. Deux LUN groups sont requis pour cette configuration.
+
+image::../media/shared_initiator_ports_same_array.gif[Les connexions et la segmentation sont décrites dans le texte qui les entoure.]
+
+Le tableau ci-dessous présente les définitions de zoning 1:1 dans l'exemple d'un port FC initiator partageant plusieurs ports cibles sur la même baie de stockage.
+
+|===
+| Zone | Système ONTAP et port FC initiator | Baie de stockage et port 
+
+
+ a| 
+Contacteur 1
+
+
+
+ a| 
+z1
+ a| 
+vs1 : 0a
+ a| 
+Port 1A du contrôleur 1
+
+
+
+ a| 
+z2
+ a| 
+vs1 : 0a
+ a| 
+Port 1C du contrôleur 1
+
+
+
+ a| 
+z3
+ a| 
+vs2 : 0a
+ a| 
+Port 1B du contrôleur 1
+
+
+
+ a| 
+z4
+ a| 
+vs2 : 0a
+ a| 
+Port 1D du contrôleur 1
+
+
+
+ a| 
+Contacteur 2
+
+
+
+ a| 
+z5
+ a| 
+vs1:0c
+ a| 
+Port 2A du contrôleur 2
+
+
+
+ a| 
+z6
+ a| 
+vs1:0c
+ a| 
+Port 2C du contrôleur 2
+
+
+
+ a| 
+z7
+ a| 
+vs2:0c
+ a| 
+Port 2B du contrôleur 2
+
+
+
+ a| 
+z8
+ a| 
+vs2:0c
+ a| 
+Port 2D du contrôleur 2
+
+|===

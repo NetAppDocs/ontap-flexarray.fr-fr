@@ -1,0 +1,14 @@
+---
+permalink: install/concept_invalid_path_setup_examples.html 
+sidebar: sidebar 
+keywords: invalid, path, setup, examples 
+summary: La configuration du chemin peut être incorrecte car les chemins vers une LUN de baie ne sont pas redondants ou le nombre de chemins vers une LUN de baie ne répond pas aux exigences de ONTAP. 
+---
+= Exemples de configuration de chemin non valides
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La configuration du chemin peut être incorrecte car les chemins vers une LUN de baie ne sont pas redondants ou le nombre de chemins vers une LUN de baie ne répond pas aux exigences de ONTAP.

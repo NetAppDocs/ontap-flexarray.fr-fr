@@ -1,0 +1,42 @@
+---
+permalink: implement-e-series/concept_eight_port_array_lun_group_configuration.html 
+sidebar: sidebar 
+keywords: eight-port, array, lun group, configuration, crossed, back-end, connections, not 
+summary: Une configuration de groupe de LUN à huit ports est prise en charge sur les systèmes V-Series en cluster et sur les systèmes ONTAP qui peuvent utiliser des LUN de baies. 
+---
+= Configuration du groupe de LUN de la baie à huit ports
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Une configuration de groupe de LUN à huit ports est prise en charge sur les systèmes V-Series en cluster et sur les systèmes ONTAP qui peuvent utiliser des LUN de baies.
+
+Cette configuration est prise en charge pour une utilisation avec toutes les baies de stockage répertoriées dans la matrice d'interopérabilité, comme prise en charge pour la version de ONTAP exécutée sur votre système.
+
+Il existe deux manières de déployer cette configuration : les connexions back-end croisées et non croisées.
+
+
+
+== Connexions dorsaux croisées
+
+Dans cette configuration avec les connexions back-end croisées, les connexions FC du même contrôleur de baie de stockage sont reparties aux deux commutateurs de structure (redondants).
+
+Dans cette illustration de connexions back-end croisées, notez comment les nœuds sont connectés aux commutateurs et à la matrice de stockage. Le VS1 utilise le commutateur 1 lors de la connexion à la matrice de stockage, le port 1A et le port 2C du contrôleur 2, et utilise le commutateur 2 lors de la connexion à la matrice de stockage, les ports 2A du contrôleur 2 et 1C du contrôleur 1. Cela optimise l'utilisation des ports de commutateur et des ports de matrice, ce qui réduit l'impact d'une panne de commutateur ou de contrôleur de matrice de stockage.
+
+image::../media/eight_port_array_lun_group_configuration_crossed.gif[la configuration du groupe de lun de la baie de huit ports a été franchie]
+
+
+
+== Les connexions arrière ne sont pas croisées
+
+Dans cette configuration dans laquelle les connexions back-end ne sont pas croisées, les connexions FC du même contrôleur de baie de stockage ne sont pas établies qu'à un seul commutateur de structure.
+
+L'illustration suivante montre cette configuration lorsque les connexions arrière ne sont pas croisées.
+
+image::../media/eight_port_array_lun_group_configuration.gif[configuration du groupe de lun de la baie à huit ports]
+
+*Informations connexes*
+
+https://mysupport.netapp.com/matrix["Matrice d'interopérabilité NetApp"]

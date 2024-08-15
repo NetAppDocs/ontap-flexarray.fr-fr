@@ -1,0 +1,45 @@
+---
+permalink: implement-third-party/reference_requirements_for_configuring_ibm_xiv_storage_arrays_with_data_ontap_systems.html 
+sidebar: sidebar 
+keywords: requirements, configuring, ibm xiv, arrays, ontap, systems, parameter, settings 
+summary: Certains paramètres sont requis sur la matrice de stockage pour que la matrice de stockage fonctionne correctement avec les systèmes ONTAP. 
+---
+= Conditions requises pour la configuration des baies IBM XIV avec les systèmes ONTAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Certains paramètres sont requis sur la matrice de stockage pour que la matrice de stockage fonctionne correctement avec les systèmes ONTAP.
+
+
+
+== Réglages des paramètres système
+
+Le tableau suivant répertorie les paramètres système des baies IBM XIV Gen3 :
+
+|===
+| Paramètre | Réglage 
+
+
+ a| 
+`Type`
+ a| 
+Valeur par défaut
+
+
+
+ a| 
+`Host`
+ a| 
+Nom d'hôte fourni par l'utilisateur
+
+
+
+ a| 
+`Cluster`
+ a| 
+Nom de cluster fourni par l'utilisateur
+
+|===

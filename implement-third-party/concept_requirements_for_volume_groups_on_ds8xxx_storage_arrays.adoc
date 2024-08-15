@@ -1,0 +1,22 @@
+---
+permalink: implement-third-party/concept_requirements_for_volume_groups_on_ds8xxx_storage_arrays.html 
+sidebar: sidebar 
+keywords: requirements, volume, groups, ds8xxx, storage, arrays 
+summary: Vous devez connaître les limites du nombre de groupes de volumes que vous pouvez utiliser avec un groupe de LUN lors de la configuration des matrices DS8xxx. 
+---
+= Configuration requise pour les groupes de volumes sur les baies de stockage DS8xxx
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez connaître les limites du nombre de groupes de volumes que vous pouvez utiliser avec un groupe de LUN lors de la configuration des matrices DS8xxx.
+
+Vous devez utiliser un seul groupe de volumes pour chaque groupe de LUN d'une baie de stockage DS8xxx afin de garantir que les LUN de la baie DS8xxx sont systématiquement présentées à tous les initiateurs FC (situés sur le système ONTAP) qui y accèdent.
+
+[NOTE]
+====
+Si les LUN de baie ne sont pas présentées de manière cohérente, il existe un risque de corruption des données.
+
+====

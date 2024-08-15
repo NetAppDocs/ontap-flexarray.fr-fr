@@ -1,0 +1,16 @@
+---
+permalink: install/concept_zoning_for_a_configuration_with_storage_arrays.html 
+sidebar: sidebar 
+keywords: zone, configuration, storage, arrays 
+summary: 'Le zoning permet à un administrateur de stockage de restreindre les LUN de baie auxquelles un système ONTAP particulier peut accéder. ONTAP requiert qu"une LUN de baie soit visible sur un seul port cible pour chaque port initiateur.' 
+---
+= Segmentation dans une configuration avec des baies de stockage
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Le zoning permet à un administrateur de stockage de restreindre les LUN de baie auxquelles un système ONTAP particulier peut accéder. ONTAP requiert qu'une LUN de baie soit visible sur un seul port cible pour chaque port initiateur.
+
+La configuration de la segmentation sur un commutateur Fibre Channel (FC) vous permet de définir des chemins entre les nœuds connectés, limitant ainsi la visibilité et la connectivité entre les périphériques connectés à un SAN FC commun.

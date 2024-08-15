@@ -1,0 +1,62 @@
+---
+permalink: install/concept_requirements_for_v_series_fc_initiator_port_usage.html 
+sidebar: sidebar 
+keywords: requirements, use, fc initiator, ports 
+summary: Si vous souhaitez utiliser des ports initiateurs FC dans une configuration ONTAP avec des LUN de baie, vous devez suivre les exigences spécifiques en matière de redondance de paire de ports, de paramètres de port pour les HBA, de connexion aux ports cibles, de limites de LUN de baie et de connexion à un stockage et à des périphériques différents. 
+---
+= Conditions requises pour l'utilisation des ports FC initiator
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Si vous souhaitez utiliser des ports initiateurs FC dans une configuration ONTAP avec des LUN de baie, vous devez suivre les exigences spécifiques en matière de redondance de paire de ports, de paramètres de port pour les HBA, de connexion aux ports cibles, de limites de LUN de baie et de connexion à un stockage et à des périphériques différents.
+
+|===
+| Pour cette fonction... | Les exigences sont... 
+
+
+ a| 
+Redondance de la paire de ports
+ a| 
+Vous devez utiliser des paires de ports FC initiator redondants lors de la connexion d'un système ONTAP à des LUN de baies.
+
+
+
+ a| 
+Paramètre de port pour les HBA
+ a| 
+Vous devez définir tous les HBA utilisés pour accéder aux disques ou aux LUN de la baie en tant que ports _initiator_.
+
+
+
+ a| 
+Connexion aux ports cibles de la matrice de stockage
+ a| 
+Vous pouvez connecter le même port FC initiator à plusieurs ports cibles de la baie de stockage.
+
+Vous pouvez connecter un maximum de deux ports FC initiator à un seul port cible.
+
+
+
+ a| 
+Limites des LUN de baie
+ a| 
+Le nombre de LUN de baies visibles sur un port FC initiator est limité. Ces limites varient selon les versions de ONTAP.
+
+
+
+ a| 
+Connexion à différents périphériques et périphériques de stockage
+ a| 
+Vous devez utiliser un port FC initiator distinct pour connecter le système ONTAP à chacun des éléments suivants :
+
+* Tiroirs disques
+* LUN de baies
+* Les lecteurs de bande
+
+
+Si le système ONTAP ne dispose pas de suffisamment de ports internes pour répondre à vos besoins, vous devez commander un HBA supplémentaire.
+
+|===

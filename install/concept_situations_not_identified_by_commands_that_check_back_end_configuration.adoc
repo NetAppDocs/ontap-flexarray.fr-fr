@@ -1,0 +1,27 @@
+---
+permalink: install/concept_situations_not_identified_by_commands_that_check_back_end_configuration.html 
+sidebar: sidebar 
+keywords: situations, not, identified, commands, check, back end, configuration 
+summary: 'Il peut y avoir des situations que vous considérez comme un problème, mais ne sont pas des erreurs du point de vue de ONTAP parce que la situation n"empêche pas le système de fonctionner. Les commandes ONTAP qui vérifient la configuration interne n"identifient pas les configurations qui n"empêchent pas le fonctionnement du système.' 
+---
+= Situations non identifiées par des commandes qui vérifient la configuration back-end
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Il peut y avoir des situations que vous considérez comme un problème, mais ne sont pas des erreurs du point de vue de ONTAP parce que la situation n'empêche pas le système de fonctionner. Les commandes ONTAP qui vérifient la configuration interne n'identifient pas les configurations qui n'empêchent pas le fonctionnement du système.
+
+Les commandes telles que `storage errors show`, `storage disk error show`et `storage disk show -errors` ne vous alertent pas des situations suivantes :
+
+* Les configurations qui ne sont pas conformes aux recommandations des meilleures pratiques, c'est-à-dire qu'elles ne sont pas requises
+* Conditions qui peuvent se produire pendant les États de transition
++
+Par exemple, vous pouvez voir plus de groupes de LUN que vous ne le souhaitez `storage array config show` dans le résultat jusqu'à ce que la migration de LUN d'un groupe de LUN vers un autre soit terminée.
+
+* Conditions qui ne correspondent pas aux configurations prévues
++
+Par exemple, si vous souhaitez configurer plusieurs groupes de LUN et qu'un seul a été configuré, ONTAP ne l'identifie pas comme une erreur, car un seul groupe de LUN est pris en charge.
+
+

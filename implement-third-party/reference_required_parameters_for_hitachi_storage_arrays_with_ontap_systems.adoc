@@ -1,0 +1,111 @@
+---
+permalink: implement-third-party/reference_required_parameters_for_hitachi_storage_arrays_with_ontap_systems.html 
+sidebar: sidebar 
+keywords: required, parameters, hitachi, storage, arrays, ontap, systems, ams, hus, vsp, hus vm, workaround 
+summary: Certains paramètres sont requis sur la matrice de stockage pour que la matrice de stockage fonctionne correctement avec les systèmes ONTAP. 
+---
+= Paramètres requis pour les baies de stockage Hitachi avec des systèmes ONTAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Certains paramètres sont requis sur la matrice de stockage pour que la matrice de stockage fonctionne correctement avec les systèmes ONTAP.
+
+
+
+== Paramètres système requis pour les matrices de stockage AMS et HUS
+
+Les paramètres à définir sont répertoriés dans le tableau suivant :
+
+|===
+| Paramètre | Réglage 
+
+
+ a| 
+`Mapping mode`
+ a| 
+Activé
+
+
+
+ a| 
+`Host group security`
+ a| 
+Activé
+
+
+
+ a| 
+`Mode Setting > Common Setting`
+ a| 
+Mode standard
+
+
+
+ a| 
+`Platform`
+ a| 
+Non spécifié
+
+
+
+ a| 
+`Middleware`
+ a| 
+Non spécifié
+
+|===
+
+
+== Paramètres système requis pour les baies de stockage VSP et HUS VM
+
+Les paramètres à définir sont répertoriés dans le tableau suivant :
+
+|===
+| Paramètre | Réglage 
+
+
+ a| 
+`Host mode`
+ a| 
+Standard ou 00
+
+
+
+ a| 
+`Port security`
+ a| 
+Activé
+
+
+
+ a| 
+[NOTE]
+====
+Un groupe d'hôtes distinct des groupes d'hôtes par défaut doit être créé pour chaque paire de ports initiateur-cible.
+
+====
+|===
+Les paramètres de la matrice de stockage doivent être définis et les LUN doivent être mappées aux groupes hôtes avant que le commutateur ne soit zoné pour connecter le système ONTAP à la baie de stockage Hitachi.
+
+Si les ports ONTAP FC initiator sont zonés avec des ports Hitachi array target avant que les paramètres de la baie de stockage soient définis et que les LUN soient mappées sur les groupes hôtes, il se peut que vous ne puissiez pas voir les LUN présentées à l'interface ONTAP.
+
+Dans ce cas, ONTAP génère l'un des messages EMS suivants :
+
+[listing]
+----
+[fci.device.login.reject:info] The PLOGI transmitted by port XX was rejected by port_id 0xYYYY with reason code 0x9 'Invalid R_CTL Field', explanation code 0x29 'Insufficient Resources to Support Login'
+----
+[listing]
+----
+[fci.device.login.reject:info]: The PLOGI transmitted by port XX was rejected by port_id 0xYYYY with reason code 0x3 'Nx_Port Not Available, Temporary', explanation code 0x29 'Insufficient Resources to Support Login'
+----
+
+
+== Solution de contournement
+
+Si la segmentation a été configurée avant de définir les paramètres et de mapper les LUN aux groupes hôtes, vous pouvez résoudre le problème des LUN qui ne sont pas visibles en effectuant une réinitialisation de chemin pour forcer une nouvelle découverte des LUN de baie mappées à partir de la baie de stockage Hitachi. Consultez la section solution de contournement lorsque les LUN ne sont pas visibles avec les baies de stockage Hitachi pour trouver une solution à ce problème.
+
+xref:reference_workaround_when_luns_are_not_visible_with_hitachi_storage_arrays.adoc[Solution de contournement lorsque les LUN ne sont pas visibles avec les baies de stockage Hitachi]

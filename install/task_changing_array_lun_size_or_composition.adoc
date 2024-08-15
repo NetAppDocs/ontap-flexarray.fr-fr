@@ -1,0 +1,36 @@
+---
+permalink: install/task_changing_array_lun_size_or_composition.html 
+sidebar: sidebar 
+keywords: change, array, lun, size, composition 
+summary: 'La reconfiguration de la taille ou de la composition d"une LUN de baie doit être effectuée sur la baie de stockage. Si une LUN de baie a déjà été attribuée à un système ONTAP, vous devez utiliser ONTAP pour définir l"état de la LUN de baie sur inutilisé avant que l"administrateur de la baie de stockage puisse la reconfigurer.' 
+---
+= Modification de la taille ou de la composition des LUN de la baie
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La reconfiguration de la taille ou de la composition d'une LUN de baie doit être effectuée sur la baie de stockage. Si une LUN de baie a déjà été attribuée à un système ONTAP, vous devez utiliser ONTAP pour définir l'état de la LUN de baie sur inutilisé avant que l'administrateur de la baie de stockage puisse la reconfigurer.
+
+*Ce dont vous aurez besoin*
+
+La LUN de baie doit être une LUN de baie de secours avant que vous puissiez en changer l'état sur inutilisé.
+
+.Étapes
+. Sur le système ONTAP, entrez la commande suivante pour supprimer les informations de propriété : `storage disk removeowner  -disk arrayLUNname`
+. Sur la matrice de stockage, procédez comme suit :
++
+.. Annulez le mappage (l'unité logique de la baie n'est pas présente) sur les systèmes ONTAP afin qu'ils ne puissent plus voir la LUN de la baie.
+.. Modifiez la taille ou la composition de la LUN de la baie.
+.. Si vous souhaitez que ONTAP utilise à nouveau la LUN de la baie, présentez à nouveau la LUN de la baie aux systèmes ONTAP.
++
+À ce stade, la LUN de la baie est visible pour les ports initiateurs FC sur lesquels la LUN de la baie a été présentée, mais elle ne peut pas encore être utilisée par les systèmes ONTAP.
+
+
+
+. Entrez la commande suivante sur le système ONTAP que vous souhaitez être le propriétaire de la LUN de baie : `storage disk assign -disk arrayLUNname -owner nodename`
++
+Une fois les informations de propriété supprimées, la LUN de baie ne peut pas être utilisée par un système ONTAP tant que la LUN de baie n'est pas affectée à nouveau à un système. Vous pouvez laisser la LUN de baie comme disque de secours ou l'ajouter à un agrégat. Vous devez ajouter la LUN de baie à un agrégat avant de pouvoir l'utiliser pour le stockage.
+
+

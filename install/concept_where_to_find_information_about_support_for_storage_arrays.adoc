@@ -1,0 +1,77 @@
+---
+permalink: install/concept_where_to_find_information_about_support_for_storage_arrays.html 
+sidebar: sidebar 
+keywords: non-ontap, storage, third-party, storage, e-series 
+summary: Les versions de ONTAP ne prennent pas toutes en charge les mêmes fonctionnalités, configurations, modèles de système et modèles de baie de stockage. Lors de la planification du déploiement, vous devez consulter les informations de support de ONTAP pour vérifier que votre déploiement est conforme à la configuration matérielle et logicielle ONTAP requise pour tous les systèmes pendant le déploiement. 
+---
+= Où trouver des informations sur le support ONTAP pour les baies de stockage
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Les versions de ONTAP ne prennent pas toutes en charge les mêmes fonctionnalités, configurations, modèles de système et modèles de baie de stockage. Lors de la planification du déploiement, vous devez consulter les informations de support de ONTAP pour vérifier que votre déploiement est conforme à la configuration matérielle et logicielle ONTAP requise pour tous les systèmes pendant le déploiement.
+
+Le tableau suivant répertorie les sources d'information qui contiennent le détail des exigences matérielles et logicielles associées aux systèmes ONTAP :
+
+|===
+| Pour plus d'informations sur... | Vous devriez regarder ici... 
+
+
+ a| 
+ONTAP utilisant des périphériques, notamment :
+
+* Baies de stockage et micrologiciels de baie de stockage pris en charge
+* Commutateurs et micrologiciels de commutateur pris en charge
+* Si votre baie de stockage prend en charge la mise à niveau dynamique du micrologiciel de la baie de stockage sans interruption
+* Indique si une configuration MetroCluster est prise en charge par votre baie de stockage
+
+ a| 
+https://mysupport.netapp.com/matrix["Matrice d'interopérabilité NetApp"]
+
+
+
+ a| 
+Limites de ONTAP pour les versions et les plateformes, notamment :
+
+* Tailles minimale et maximale des LUN de baie, y compris la taille minimale des LUN de baie pour le volume racine et les LUN de baie principale de secours
+* Taille minimale de l'agrégat pour les agrégats avec LUN de baie
+* Taille de bloc prise en charge
+* Capacité minimale et maximale
+* Limites du voisinage
+
+ a| 
+https://hwu.netapp.com["NetApp Hardware Universe"]
+
+
+
+ a| 
+Configuration des baies de stockage E-Series, notamment :
+
+* Exigences de préparation du site
+* Instructions de câblage
+* Instructions d'installation et de configuration du logiciel SANtricity
+
+ a| 
+La documentation E-Series suivante :
+
+* _Guide de préparation du site des systèmes de stockage E-Series_
+* _Guide de câblage matériel des systèmes de stockage E-Series_
+* _SANtricity ES Storage Manager documentation_
+
+
+Vous pouvez accéder à ces documents depuis le site de support NetApp.
+
+https://mysupport.netapp.com/site/global/dashboard["Support NetApp"]
+
+
+
+ a| 
+Ce qui est pris en charge pour des baies de stockage spécifiques, y compris les configurations prises en charge
+ a| 
+* https://docs.netapp.com/us-en/ontap-flexarray/implement-third-party/index.html["Implémentation de la virtualisation FlexArray pour stockage tiers"]
+* https://docs.netapp.com/us-en/ontap-flexarray/implement-e-series/index.html["Implémentation de la virtualisation FlexArray pour le stockage NetApp E-Series"]
+
+
+|===

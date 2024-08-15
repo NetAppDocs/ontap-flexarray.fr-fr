@@ -1,0 +1,36 @@
+---
+permalink: install/concept_how_array_luns_are_made_available_for_host_use.html 
+sidebar: sidebar 
+keywords: how, array, luns, available, host, use 
+summary: Un administrateur de baie de stockage doit créer des LUN de baie et les mettre à disposition des ports FC initiator spécifiés des systèmes ONTAP. 
+---
+= Mise à disposition des LUN de baie pour l'utilisation de l'hôte
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Un administrateur de baie de stockage doit créer des LUN de baie et les mettre à disposition des ports FC initiator spécifiés des systèmes ONTAP.
+
+Le processus de mise à disposition des LUN pour les hôtes et la terminologie à décrire varient selon les fournisseurs de baies de stockage. Le processus de base que l'administrateur de la baie de stockage suit pour mettre les LUN à disposition de l'hôte est le suivant :
+
+. Crée des périphériques logiques (LDEVs).
++
+[NOTE]
+====
+_LDEV_ est un terme utilisé par certains fournisseurs et ce contenu pour décrire un élément de stockage RAID logique configuré à partir de disques.
+
+====
+. Crée un groupe d'hôtes (ou un équivalent fournisseur).
++
+Le groupe d'hôtes inclut les WWPN des ports initiateurs des hôtes autorisés à voir le LDEV.
+
++
+[NOTE]
+====
+Pour simplifier la gestion, la plupart des baies de stockage vous permettent de définir un ou plusieurs groupes d'hôtes. Vous pouvez définir des WWPN (ports) et des WWN (hôtes) spécifiques à faire partie du même groupe. Vous associez ensuite des LUN de baies spécifiques à un groupe d'hôtes. Les hôtes du groupe d'hôtes peuvent accéder aux LUN associées au groupe d'hôtes ; les hôtes qui ne font pas partie de ce groupe ne peuvent pas accéder à ces LUN. Chaque fournisseur utilise des termes différents pour décrire ce concept. Le processus de création d'un groupe d'hôtes diffère selon les fournisseurs.
+
+====
+. Mappe les LDEV sur les groupes hôtes en tant que LUN.
+

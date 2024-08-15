@@ -1,0 +1,14 @@
+---
+permalink: install/concept_troubleshooting.html 
+sidebar: sidebar 
+keywords: troubleshoot, configurations, storage, arrays 
+summary: 'Vous devez valider votre configuration lors de l"installation initiale afin de pouvoir résoudre les problèmes avant de la placer dans un environnement de production.' 
+---
+= Dépannage des configurations avec des baies de stockage
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez valider votre configuration lors de l'installation initiale afin de pouvoir résoudre les problèmes avant de la placer dans un environnement de production.

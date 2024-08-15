@@ -1,0 +1,35 @@
+---
+permalink: install/task_obtaining_wwns_manually.html 
+sidebar: sidebar 
+keywords: obtain, wwpns, manually 
+summary: 'Si le système ONTAP n"est pas connecté au commutateur SAN, vous devez obtenir les WWPN (World Wide Port Name) des ports initiateurs FC du système qui seront utilisés pour connecter le système au commutateur.' 
+---
+= Obtention manuelle des WWPN
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Si le système ONTAP n'est pas connecté au commutateur SAN, vous devez obtenir les WWPN (World Wide Port Name) des ports initiateurs FC du système qui seront utilisés pour connecter le système au commutateur.
+
+Il est préférable de demander au commutateur de détecter automatiquement les WWPN pour obtenir les WWPN, car vous pouvez éviter les erreurs potentielles liées à la saisie des WWPN dans la configuration du commutateur.
+
+.Étapes
+. Connectez la connexion de la console du système à un ordinateur portable.
+. Mettez le système sous tension.
++
+Interrompre le processus de démarrage en appuyant sur Ctrl-c lorsque le message suivant s'affiche sur la console :
+
++
+[listing]
+----
+Press CTRL-C for boot menu
+----
+. Sélectionnez l'option mode Maintenance dans le menu des options de démarrage.
+. Entrez la commande suivante pour lister les WWPN des ports FC initiator du système : `storage show adapter`
++
+Pour afficher la liste d'un WWPN d'adaptateur spécifique, ajoutez le nom de l'adaptateur, par exemple, Storage show adapter 0a.
+
+. Enregistrez les WWPN qui seront utilisés et quittez le mode Maintenance.
+

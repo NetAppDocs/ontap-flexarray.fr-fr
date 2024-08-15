@@ -1,0 +1,69 @@
+---
+permalink: install/reference_array_lun_is_either_smaller_or_larger_than_the_supported_values.html 
+sidebar: sidebar 
+keywords: array, lun, size, smaller, larger, supported, values, show, message, storage, errors 
+summary: 'Lors de la planification des tailles de LUN de baie, vous devez respecter les limites de taille minimale et maximale de LUN de baie ONTAP. Ces limites varient en fonction de la version ONTAP. Le résultat de l"affichage des erreurs de stockage identifie les LUN de baie qui ne répondent pas aux exigences de taille.' 
+---
+= La taille de LUN de la baie est inférieure ou supérieure aux valeurs prises en charge
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Lors de la planification des tailles de LUN de baie, vous devez respecter les limites de taille minimale et maximale de LUN de baie ONTAP. Ces limites varient en fonction de la version ONTAP. Le `storage errors show` résultat de cette commande identifie les LUN de baie qui ne répondent pas aux exigences de taille.
+
+Vous ne pouvez pas attribuer de LUN de baie présentant des problèmes de taille à un système ONTAP.
+
+
+
+== Les erreurs de stockage affichent le message
+
+[listing]
+----
+NAME (Serial #): This array LUN is too large and is not usable. The maximum array LUN size supported is xTB
+----
+OU
+
+[listing]
+----
+NAME (Serial #): This array LUN is too small and is not usable. The minimum array LUN size supported is xGB.
+----
+
+
+== Explication
+
+Ce message est généré lorsque la LUN de la baie est inférieure à la taille minimale de LUN de la baie prise en charge par ONTAP ou supérieure à la taille maximale prise en charge. Les principales raisons pour lesquelles les tailles de LUN de baie sont supérieures ou inférieures aux valeurs prises en charge peuvent être les suivantes :
+
+* L'administrateur de la baie de stockage n'a pas converti les limites de taille de LUN de la baie ONTAP en limites équivalentes, conformément à la définition d'unités de mesure définie par le fournisseur.
++
+Certains fournisseurs calculent les limites de taille de LUN de baie différemment de ONTAP pour déterminer les limites de taille de LUN de baie minimale et maximale.
+
++
+Le _Hardware Universe_ répertorie les valeurs des limites de taille maximale et minimale de LUN de la baie prises en charge.
+
+* Les LUN de baie sont destinées à un autre hôte dont les limites de taille sont différentes des limites de ONTAP.
++
+Dans un SAN ouvert, ONTAP est exposé aux LUN de baie destinées à d'autres hôtes si ces LUN de baie n'ont pas été masquées.
+
++
+ONTAP génère un message d'erreur sur les problèmes de taille pour toute LUN de baie qui y est exposée.
+
+
+
+
+
+== Dépannage et résolution des problèmes
+
+. Vérifiez le `storage errors show` résultat afin de déterminer quelle LUN de baie a un problème de taille.
++
+** Si la LUN de la baie présentant un problème de taille est pour ONTAP, l'administrateur de la baie de stockage doit redimensionner la LUN de la baie pour la satisfaire aux exigences ONTAP, puis la présenter à nouveau à ONTAP.
+** Si la LUN de la baie présentant le problème de taille concerne un autre hôte, l'administrateur de la baie de stockage doit masquer la LUN de la baie de manière à ce qu'elle ne soit pas exposée à ONTAP.
+
+
+. Une fois le problème résolu, exécutez `storage array config show` à nouveau pour confirmer que l'erreur ne persiste pas.
+
+
+*Informations connexes*
+
+https://hwu.netapp.com["NetApp Hardware Universe"]

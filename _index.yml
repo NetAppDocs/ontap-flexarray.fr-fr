@@ -1,0 +1,28 @@
+---
+indexpage:
+  title: Documentation ONTAP FlexArray
+  summary: Documentation ONTAP FlexArray
+  keywords: flexarray, ontap, array
+  lead: Documentation ONTAP FlexArray
+  tiles:
+  - title: Mise en œuvre du stockage E-Series
+    links:
+    - title: Configuration requise pour la configuration des baies de stockage E-Series
+      url: "/implement-e-series/reference_requirements_for_configuring_e_series_storage_arrays.html"
+    - title: Configurations FAS prises en charge pour les baies de stockage E-Series
+      url: "/implement-e-series/reference_supported_fabric_attached_configurations_for_storage_arrays.html"
+    - title: Prise en charge de configurations DAS avec les baies de stockage E-Series
+      url: "/implement-e-series/reference_supported_direct_attached_configurations_for_e_series_storage_arrays.html"
+  - title: Implémentation d'un stockage tiers
+    links:
+    - title: Instructions de configuration pour toutes les baies de stockage
+      url: "/implement-third-party/concept_general_configuration_guidelines_for_all_storage_arrays.html"
+    - title: Configurations FAS prises en charge
+      url: "/implement-third-party/reference_supported_fabric_attached_configurations_for_storage_arrays.html"
+  - title: Installation de FlexArray
+    links:
+    - title: Planification d'une configuration avec des LUN de baies
+      url: "/install/concept_planning_a_configuration_with_array_luns.html"
+    - title: Préparation d'une baie de stockage à l'utilisation avec les systèmes
+        ONTAP
+      url: "/install/task_preparing_a_storage_array_for_use_with_ontap_systems.html"

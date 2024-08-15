@@ -1,0 +1,36 @@
+---
+section: implement-e-series
+title: Mise en œuvre du stockage E-Series
+url: "/implement-e-series/index.html"
+entries:
+- title: Où trouver des informations sur les configurations avec des baies de stockage
+  url: "/implement-e-series/concept_where_to_find_information_for_configurations_with_storage_arrays.html"
+  entries:
+  - title: Où trouver des informations sur le support ONTAP pour les baies de stockage
+    url: "/implement-e-series/concept_where_to_find_information_about_support_for_storage_arrays.html"
+- title: Systèmes ONTAP qui peuvent utiliser des LUN de baie sur des baies de stockage
+  url: "/implement-e-series/concept_systems_that_can_use_array_luns_on_storage_arrays.html"
+- title: Configuration requise pour la configuration des baies de stockage E-Series
+  url: "/implement-e-series/reference_requirements_for_configuring_e_series_storage_arrays.html"
+  entries:
+  - title: Type d'hôte requis pour les baies de stockage E-Series
+    url: "/implement-e-series/reference_required_host_type_for_e_series_storage_arrays_reference.html"
+- title: Configurations FAS prises en charge pour les baies de stockage E-Series
+  url: "/implement-e-series/reference_supported_fabric_attached_configurations_for_storage_arrays.html"
+  entries:
+  - title: Configuration de base autonome
+    url: "/implement-e-series/concept_stand_alone_basic_configuration.html"
+  - title: Système autonome avec deux groupes LUN de baie à 2 ports
+    url: "/implement-e-series/concept_stand_alone_system_with_two_2_port_array_lun_groups.html"
+  - title: Configuration d'un seul groupe de LUN de baie à 4 ports
+    url: "/implement-e-series/concept_single_4_port_array_lun_group_configuration.html"
+  - title: Deux configurations LUN group de baie à 4 ports
+    url: "/implement-e-series/concept_two_4_port_array_lun_group_configuration.html"
+  - title: Configuration du groupe de LUN de la baie à huit ports
+    url: "/implement-e-series/concept_eight_port_array_lun_group_configuration.html"
+  - title: Connexion d'un port FC initiator à plusieurs ports cibles
+    url: "/implement-e-series/concept_attaching_fc_initiator_port_to_multiple_targets_ports.html"
+  - title: Partage d'un port cible avec deux ports FC initiator
+    url: "/implement-e-series/concept_sharing_a_target_port_with_two_fc_initiator_ports.html"
+- title: Prise en charge de configurations DAS avec les baies de stockage E-Series
+  url: "/implement-e-series/reference_supported_direct_attached_configurations_for_e_series_storage_arrays.html"

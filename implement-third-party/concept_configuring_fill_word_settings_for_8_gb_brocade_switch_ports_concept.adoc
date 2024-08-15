@@ -1,0 +1,41 @@
+---
+permalink: implement-third-party/concept_configuring_fill_word_settings_for_8_gb_brocade_switch_ports_concept.html 
+sidebar: sidebar 
+keywords: required fill word, settings, 8 gb, brocade, switch, ports 
+summary: 'Si vous utilisez des commutateurs Brocade de 8 Go exécutant la version de micrologiciel FOS 6.3.1 ou ultérieure dans votre environnement de stockage, vous devez vérifier que les paramètres de mot de remplissage appropriés sont configurés sur les ports de commutateur connectés aux systèmes ONTAP et que les ports de commutateur sont connectés aux matrices de stockage. La saisie de mots de remplissage incorrects peut entraîner des échecs d"initialisation de la liaison dans les ports du commutateur.' 
+---
+= Paramètres de mot de remplissage requis pour les ports de commutateur Brocade 8 Go
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Si vous utilisez des commutateurs Brocade de 8 Go exécutant la version de micrologiciel FOS 6.3.1 ou ultérieure dans votre environnement de stockage, vous devez vérifier que les paramètres de mot de remplissage appropriés sont configurés sur les ports de commutateur connectés aux systèmes ONTAP et que les ports de commutateur sont connectés aux matrices de stockage. La saisie de mots de remplissage incorrects peut entraîner des échecs d'initialisation de la liaison dans les ports du commutateur.
+
+Pour les systèmes ONTAP, vous devez définir le mot de remplissage sur les ports de commutateur correspondants sur 3.
+
+Pour les matrices de stockage, vous devez définir le mot de remplissage en fonction des valeurs recommandées suivantes, en utilisant la documentation du commutateur Brocade pour obtenir des instructions :
+
+[cols="2*"]
+|===
+| Baie de stockage | Saisissez la valeur du mot sur les ports de commutateur Brocade 
+
+
+ a| 
+Hitachi
+| 2 
+
+
+ a| 
+HP XP
+|  
+
+
+ a| 
+Toutes les autres baies de stockage sont prises en charge par les systèmes Data ONTAP
+| 3 
+|===
+*Informations connexes*
+
+https://mysupport.netapp.com/matrix["Matrice d'interopérabilité NetApp"]

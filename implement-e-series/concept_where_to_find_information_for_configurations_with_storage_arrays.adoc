@@ -1,0 +1,16 @@
+---
+permalink: implement-e-series/concept_where_to_find_information_for_configurations_with_storage_arrays.html 
+sidebar: sidebar 
+keywords: Where, find, information, configurations, storage, arrays 
+summary: 'Lors de la planification de votre configuration pour l"utilisation de systèmes ONTAP avec des baies de stockage, vous devez vérifier, en plus de la documentation produit, les informations sur la configuration des LUN de la baie provenant de diverses sources.' 
+---
+= Où trouver des informations sur les configurations avec des baies de stockage
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Lors de la planification de votre configuration pour l'utilisation de systèmes ONTAP avec des baies de stockage, vous devez vérifier, en plus de la documentation produit, les informations sur la configuration des LUN de la baie provenant de diverses sources.
+
+Les outils disponibles sur le site de support NetApp fournissent, à partir d'un emplacement central, des informations spécifiques sur les fonctionnalités, les configurations et les modèles de baies de stockage pris en charge dans certaines versions.

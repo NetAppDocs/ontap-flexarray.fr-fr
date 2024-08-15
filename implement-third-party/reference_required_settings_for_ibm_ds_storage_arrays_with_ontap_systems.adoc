@@ -1,0 +1,36 @@
+---
+permalink: implement-third-party/reference_required_settings_for_ibm_ds_storage_arrays_with_ontap_systems.html 
+sidebar: sidebar 
+keywords: required, settings, ibm ds, storage, arrays, ontap, systems. host type, ds8xxx, configuring, ds8300 9a2 lpar models 
+summary: Certains paramètres sont requis sur la matrice de stockage pour que la matrice de stockage fonctionne correctement avec les systèmes ONTAP. 
+---
+= Paramètres requis pour les baies de stockage IBM DS avec les systèmes ONTAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Certains paramètres sont requis sur la matrice de stockage pour que la matrice de stockage fonctionne correctement avec les systèmes ONTAP.
+
+
+
+== Type d'hôte requis pour les matrices de stockage DS8xxx
+
+Le paramètre de type d'hôte requis est indiqué dans le tableau suivant :
+
+|===
+| Paramètre | Réglage 
+
+
+ a| 
+`Host type`
+ a| 
+Passerelle N series
+
+|===
+
+
+== Configuration requise pour les modèles DS8300 9A2 LPAR
+
+Lors de la configuration du modèle DS8300 9A2 LPAR (partition logique système) pour interagir avec les systèmes ONTAP, vous devez configurer l'accès à chaque LUN de baie de manière à ce que les chemins redondants accèdent tous les deux au même LPAR.

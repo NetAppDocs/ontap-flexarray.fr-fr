@@ -1,0 +1,62 @@
+---
+permalink: install/concept_example_configuration_shared_target_ports.html 
+sidebar: sidebar 
+keywords: example, configuration, shared, target, ports, multiple, initiator 
+summary: Un maximum de deux ports initiateurs FC ONTAP peuvent être connectés à un port cible unique de la matrice de stockage. 
+---
+= Exemple de configuration : ports cibles partagés
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Un maximum de deux ports initiateurs FC ONTAP peuvent être connectés à un port cible unique de la matrice de stockage.
+
+La meilleure pratique pour la segmentation consiste à faire en sorte que chaque paire de ports FC initiator-target se trouve dans une zone distincte (1:1).
+
+
+
+== Port cible partagé connecté à plusieurs ports initiateurs
+
+L'illustration suivante montre les connexions et le zoning permettant le partage d'un port cible avec plusieurs ports FC initiator sur différents systèmes ONTAP.
+
+Les lignes continues de l'illustration suivante montrent les connexions des ports FC initiator sur le système vs1 et les lignes en pointillés indiquent les connexions des ports FC initiator sur le système vs2.
+
+image::../media/shared_target_ports.gif[Les connexions et le zoning de la configuration de port cible partagé sont décrits dans le texte qui les entoure.]
+
+Le tableau ci-dessous présente les définitions de segmentation 1:1 dans l'exemple d'un port cible partageant deux ports FC initiator à partir de contrôleurs d'une paire haute disponibilité :
+
+|===
+| Zone | Système ONTAP et port FC initiator | Baie de stockage 
+
+
+ a| 
+*Commutateur 1*
+
+
+
+ a| 
+z1
+| vs1 : 0a | Contrôleur 1 : port 1A 
+
+
+ a| 
+z3
+| vs2 : 0a |  
+
+
+ a| 
+*Commutateur 2*
+
+
+
+ a| 
+z2
+| vs1:0c | Contrôleur 2 : port 2A 
+
+
+ a| 
+z4
+| vs2:0c |  
+|===

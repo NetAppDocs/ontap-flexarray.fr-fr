@@ -1,0 +1,16 @@
+---
+permalink: implement-third-party/concept_alua_support_for_hp_eva_storage_arrays.html 
+sidebar: sidebar 
+keywords: alua, support, hp eva, storage, arrays 
+summary: 'La prise en charge du protocole ALUA (Asymmetric Logical Unit Access) avec les baies HP EVA a été ajoutée.' 
+---
+= Prise en charge ALUA pour baies de stockage HP EVA
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La prise en charge du protocole ALUA (Asymmetric Logical Unit Access) avec les baies HP EVA a été ajoutée.
+
+Par défaut, la prise en charge du protocole ALUA est activée dans ONTAP ainsi que sur toutes les baies de stockage HP EVA.

@@ -1,0 +1,18 @@
+---
+permalink: implement-third-party/concept_caution_about_using_the_aclx_lun.html 
+sidebar: sidebar 
+keywords: caution, aclx, lun 
+summary: 'Sur les baies VMAX, le LUN ACLX (Access Control Logix) est créé lors de l"initialisation si le client demande que ACLX soit utilisé. Le LUN ACLX n"est pas un LUN de stockage, il ne doit donc pas être mappé sur ONTAP.' 
+---
+= Attention à propos de l'utilisation du LUN ACLX
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Sur les baies VMAX, le LUN ACLX (Access Control Logix) est créé lors de l'initialisation si le client demande que ACLX soit utilisé. Le LUN ACLX n'est pas un LUN de stockage, il ne doit donc pas être mappé sur ONTAP.
+
+Si la LUN ACLX est mappée sur un système ONTAP, ONTAP consigne un message indiquant que la LUN ACLX est inférieure à la taille minimale requise et indique que la LUN a échoué. Le système ONTAP continue de fonctionner normalement après la journalisation de ce message d'erreur, mais ne peut pas utiliser la LUN.
+
+Le LUN ACLX doit être démappé à partir des ports du directeur frontal sur le système ONTAP.

@@ -1,0 +1,58 @@
+---
+permalink: install/concept_pre_cluster_array_lun_name_format.html 
+sidebar: sidebar 
+keywords: pre cluster, array, lun, name, format, ontap, systems 
+summary: 'Avant qu"un nœud ne se connecte à un cluster ou lorsque le système est en mode de maintenance, le nom de LUN de la baie suit un format utilisé avant Data ONTAP 8.3, le format pré-cluster.' 
+---
+= Format du nom de LUN de la baie pré-cluster
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Avant qu'un nœud ne se connecte à un cluster ou lorsque le système est en mode de maintenance, le nom de LUN de la baie suit un format utilisé avant Data ONTAP 8.3, le format _pre-cluster_.
+
+Dans ce format, le nom de la LUN de la baie est un nom basé sur le chemin qui inclut les périphériques dans le chemin entre le système ONTAP et la baie de stockage, les ports utilisés et l'ID de LUN SCSI sur le chemin que la baie de stockage présente en externe pour le mappage vers les hôtes.
+
+Sur un système ONTAP qui prend en charge les LUN de baie, chaque LUN de baie peut avoir plusieurs noms, car il existe plusieurs chemins vers chaque LUN.
+
+
+
+== Format du nom de LUN de la baie pour les systèmes ONTAP
+
+|===
+| Configuration | Format du nom de LUN de la baie | Description des composants 
+
+
+ a| 
+Connexion directe
+ a| 
+`node-name.adapter.idlun-id`
+ a| 
+`node-name` est le nom du nœud en cluster. Avec ONTAP, le nom du nœud est précédé du nom de la LUN de sorte que le nom basé sur le chemin d'accès soit unique au sein du cluster. L'adaptateur est le numéro de l'adaptateur sur le système ONTAP.
+
+`id` est le port de l'adaptateur de canal sur la matrice de stockage.
+
+`lun-id` Est le numéro de LUN de la baie que la baie de stockage présente aux hôtes.
+
+Exemple : `node1.0a.0L1`
+
+
+
+ a| 
+Connexion en fabric
+ a| 
+`node-name:switch-name:port.idlun-id`
+ a| 
+`node-name` est le nom du nœud. Avec ONTAP, le nom du nœud est précédé du nom de la LUN de sorte que le nom basé sur le chemin d'accès soit unique au sein du cluster. `switch-name` est le nom du commutateur.
+
+`port` est le port de commutateur connecté au port cible (point final).
+
+`id` Est l'ID du périphérique.
+
+`lun-id` Est le numéro de LUN de la baie que la baie de stockage présente aux hôtes.
+
+Exemple : `node1:brocade3:6.126L1`
+
+|===

@@ -1,0 +1,48 @@
+---
+permalink: install/task_changing_the_checksum_type_of_an_array_lun.html 
+sidebar: sidebar 
+keywords: change, checksum, type, array, lun 
+summary: 'Vous devez modifier le type de checksum d"une LUN de baie si vous souhaitez l"ajouter à un agrégat dont le type de checksum est différent de celui de la LUN.' 
+---
+= Modification du type de somme de contrôle d'une LUN de baie
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez modifier le type de checksum d'une LUN de baie si vous souhaitez l'ajouter à un agrégat dont le type de checksum est différent de celui de la LUN.
+
+*Ce dont vous aurez besoin*
+
+Vous devez avoir examiné les compromis entre les performances de certains types de charges de travail et l'utilisation de la capacité de stockage de chaque type de checksum.
+
+Vous pouvez également contacter votre ingénieur commercial pour plus d'informations sur l'utilisation des checksums.
+
+* Vous devez affecter un type de checksum *zoné* à une LUN de baie que vous prévoyez d'ajouter à un agrégat avancé de checksum zonée (AZC). Lorsqu'une LUN de baie de somme de contrôle zonée est ajoutée à un agrégat AZCS, elle devient une LUN de baie de somme de contrôle zonée avancée. De même, lorsqu'une LUN de baie de contrôle zonée est ajoutée à un agrégat zoné, il s'agit d'un type de checksum zoné.
+* Vous ne pouvez pas modifier la somme de contrôle des LUN de baies lors de l'attribution de la propriété. Vous ne pouvez modifier le checksum que sur les LUN de baies déjà attribuées.
+
+
+.Étapes
+. Entrez la commande suivante pour changer le type de checksum : `storage disk assign -disk disk name -owner owner -c new_checksum_type`
++
+_Disk name_ est la LUN de la baie dont vous souhaitez modifier le type de checksum.
+
++
+_Owner_ est le nœud auquel la LUN de la baie est affectée.
+
++
+_new_checksum_type_ peut être bloc ou zoné.
+
++
+`storage disk assign -disk EMC-1.1 -owner system147b -c block`
+
++
+Le type de somme de contrôle de la LUN de la baie est remplacé par le nouveau type de somme de contrôle que vous avez spécifié.
+
+. Entrez la commande suivante pour accéder au nodeshell : `system node run -node node_name`
++
+_nom_noeud_ est le nom de ce système.
+
+. Entrez la commande suivante pour quitter le nodeshell : `exit`
+

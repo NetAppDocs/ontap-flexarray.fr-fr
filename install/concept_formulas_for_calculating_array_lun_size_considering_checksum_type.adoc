@@ -1,0 +1,192 @@
+---
+permalink: install/concept_formulas_for_calculating_array_lun_size_considering_checksum_type.html 
+sidebar: sidebar 
+keywords: formulas, calculate, array, lun, size, checksum, type, usable, capacity, snapshot, reserve, maximum 
+summary: 'Un certain nombre d"éléments, y compris le type de checksum, ont un impact sur la capacité utilisable d"une LUN de baie. Vous pouvez utiliser une formule pour calculer la capacité utilisable d"une LUN de baie de taille donnée ou pour calculer la taille d"une LUN de baie de manière à fournir la quantité de stockage souhaitée.' 
+---
+= Formules de calcul de la taille de la LUN du tableau basées sur le type de checksum
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Un certain nombre d'éléments, y compris le type de checksum, ont un impact sur la capacité utilisable d'une LUN de baie. Vous pouvez utiliser une formule pour calculer la capacité utilisable d'une LUN de baie de taille donnée ou pour calculer la taille d'une LUN de baie de manière à fournir la quantité de stockage souhaitée.
+
+Un certain nombre d'éléments, y compris le type de somme de contrôle, ont un impact sur la taille de la LUN de baie requise pour la quantité de _capacité utilisable_. La capacité utilisable correspond à la quantité d'espace disponible pour le stockage.
+
+Le tableau suivant indique les méthodes de calcul de la taille de LUN de la baie dont vous avez besoin :
+
+[cols="2*"]
+|===
+| Si vous savez... | Vous voulez le savoir... 
+
+
+ a| 
+La taille des LUN de votre baie
+ a| 
+Quelle est la capacité disponible pour le stockage (capacité utilisable) ? Vous devez tenir compte de la quantité d'espace nécessaire pour tous les éléments.
+
+
+
+ a| 
+Volume de stockage souhaité dans la baie LUN
+ a| 
+La taille requise pour un LUN de baie. Vous devez tenir compte de la quantité de stockage et de l'espace requis pour les autres éléments.
+
+|===
+[NOTE]
+====
+2 To dans ces formules représentent 2 Tio, ou 2199023255552 octets, soit 2097.152 GnaB ou 2.097 TnaB selon la façon dont ONTAP calcule les mesures.
+
+====
+
+
+== Formule de calcul de la capacité utilisable
+
+Lorsque vous connaissez la taille des LUN de votre baie, vous pouvez utiliser la formule suivante pour déterminer la capacité utilisable pour le stockage dans une LUN de baie. Cette formule prend en compte la réserve Snapshot.
+
+* Y est la capacité utilisable pour le stockage.
+* N est la capacité totale de la LUN de la baie.
+
+
+[cols="2*"]
+|===
+| Type de checksum | Formule 
+
+
+ a| 
+BCS--LUN de baie de moins de 2 To
+ a| 
+N x {0.875 x 0.9 x 0.99 x (1 - réserve Snapshot)} = y
+
+
+
+ a| 
+BCS--LUN de baie de plus de 2 To
+ a| 
+N x {0.875 x 0.9 x 0.998 x (1 - réserve Snapshot)} = y
+
+
+
+ a| 
+AZC--LUN de baie inférieure à 2 To
+ a| 
+N x {0.984 x 0.9 x 0.99 x (1 - réserve Snapshot)} = y
+
+
+
+ a| 
+AZC--LUN de baie supérieure à 2 To
+ a| 
+N x {0.984 x 0.9 x 0.998 x (1 - réserve Snapshot)} = y
+
+|===
+
+
+== Exemple 1 : calculs _avec_ une réserve Snapshot
+
+Dans l'exemple suivant, la capacité totale de la LUN de la baie est de 4 Go, avec une réserve Snapshot de volume définie par défaut pour Data ONTAP 8.1.1 (5 %).
+
+Les exemples suivants concernent une LUN de baie inférieure à 2 To :
+
+[cols="2*"]
+|===
+| Type de checksum | Formule 
+
+
+ a| 
+BCS (LUN de baie inférieure à 2 To)
+ a| 
+4 x {0.875 x 0.9 x 0.99 x 0.95}= 2.96 Go d'espace utilisable pour le stockage
+
+
+
+ a| 
+AZC (LUN de baie inférieure à 2 To)
+ a| 
+4 x {0.984 x 0.9 x 0.99 x 0.95}=3.33 Go d'espace utilisable pour le stockage
+
+|===
+
+
+== Formule de calcul de la taille maximale de LUN de la baie requise
+
+Lorsque vous connaissez la capacité de LUN de la baie requise pour obtenir la capacité de stockage souhaitée, utilisez la formule suivante pour déterminer la taille totale de LUN de la baie requise, en tenant compte des éléments nécessitant de l'espace dans la LUN.
+
+* Y correspond à la quantité exacte d'espace dans la LUN de la baie que vous souhaitez.
+* Si vous utilisez des copies Snapshot, la réserve Snapshot est prise en compte.
+
+
+Les exemples suivants concernent une LUN de baie inférieure à 2 To :
+
+[cols="2*"]
+|===
+| Type de checksum | Formule 
+
+
+ a| 
+BCS (LUN de baie inférieure à 2 To)
+ a| 
+Y ÷ {0.875 x 0.9 x 0.99 x (1 - réserve Snapshot)} = capacité réelle requise
+
+
+
+ a| 
+AZC (LUN de baie inférieure à 2 To)
+ a| 
+Y ÷ {0.984 x 0.9 x 0.99 x (1 - réserve Snapshot)} = capacité réelle requise
+
+|===
+
+
+== Exemple 2 : calculs _avec_ réserves Snapshot
+
+Dans cet exemple, la réserve Snapshot du volume est le paramètre par défaut de Data ONTAP 8.1.1 (5 %).
+
+Les exemples suivants concernent une LUN de baie inférieure à 2 To :
+
+[cols="2*"]
+|===
+| Type de checksum | Formule 
+
+
+ a| 
+BCS (LUN de baie inférieure à 2 To)
+ a| 
+10 Go ÷ {0.875 x 0.9 x 0.99 x 0.95}=13.5 Go de capacité réelle requise
+
+
+
+ a| 
+AZC (LUN de baie inférieure à 2 To)
+ a| 
+10 Go ÷ {0.984 x 0.9 x 0.99 x 0.95} = 12.05 Go de capacité réelle requise
+
+|===
+
+
+== Exemple 3 : calculs _sans_ réserves Snapshot
+
+Vous souhaitez 10 Go de capacité utilisable pour le stockage. L'exemple suivant montre le calcul de la taille réelle des LUN de la baie lorsque vous n'utilisez pas de copies Snapshot.
+
+Les exemples suivants concernent une LUN de baie inférieure à 2 To :
+
+[cols="2*"]
+|===
+| Type de checksum | Formule 
+
+
+ a| 
+BCS (LUN de baie inférieure à 2 To)
+ a| 
+10 Go ÷ {0.875 x 0.9 x 0.99}=12.8 Go de capacité réelle requise
+
+
+
+ a| 
+AZC (LUN de baie inférieure à 2 To)
+ a| 
+10 Go ÷ {0.984 x 0.9 x 0.99}=11.41 Go de capacité réelle requise
+
+|===

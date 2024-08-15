@@ -1,0 +1,29 @@
+---
+permalink: install/concept_rules_for_mixing_storage_in_aggregates_for_v_series_systems.html 
+sidebar: sidebar 
+keywords: rules, mix, storage, array, lun, aggregates 
+summary: 'Lors de la planification d"agrégats, vous devez tenir compte des règles pour combiner le stockage dans des agrégats. Vous ne pouvez pas associer plusieurs types de stockage ou LUN de baies provenant de différents fournisseurs ou familles de fournisseurs au sein d"un même agrégat.' 
+---
+= Règles pour l'association du stockage dans des agrégats array LUN
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Lors de la planification d'agrégats, vous devez tenir compte des règles pour combiner le stockage dans des agrégats. Vous ne pouvez pas associer plusieurs types de stockage ou LUN de baies provenant de différents fournisseurs ou familles de fournisseurs au sein d'un même agrégat.
+
+L'ajout de ce qui suit au même agrégat n'est pas pris en charge :
+
+* Disques et LUN de baie
+* LUN de baie avec différents types de checksum
+* LUN de baies provenant de différents types de disques (par exemple, FC et SATA) ou de vitesses différentes
+* De baies LUN de différents fournisseurs de baies de stockage
+* LUN de baie de différentes familles de modèles de baie de stockage
+
+
+[NOTE]
+====
+Les baies de stockage de la même famille partagent les mêmes performances et les mêmes caractéristiques de basculement. Par exemple, les membres de la même famille effectuent tous un basculement actif-actif ou tous un basculement actif-passif. Plusieurs facteurs peuvent être utilisés pour déterminer les familles de baies de stockage. Par exemple, les baies de stockage ayant des architectures différentes se trouvent dans des familles différentes, même si les autres caractéristiques peuvent être identiques.
+
+====

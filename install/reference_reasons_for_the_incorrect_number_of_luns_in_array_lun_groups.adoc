@@ -1,0 +1,57 @@
+---
+permalink: install/reference_reasons_for_the_incorrect_number_of_luns_in_array_lun_groups.html 
+sidebar: sidebar 
+keywords: reasons, incorrect, number, luns, array, groups, issue, resolve 
+summary: 'Lors de la validation de votre configuration, vous devez vérifier le résultat de l"affichage de la configuration de la baie de stockage pour vous assurer que le nombre de LUN de chaque groupe de LUN correspond à ce que vous souhaitez. La cause la plus probable d"un nombre incorrect de LUN dans un groupe de LUN est que la LUN de baie n"est pas mappée sur un système ONTAP.' 
+---
+= Motifs du nombre incorrect de LUN dans les groupes de LUN de baie
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Lors de la validation de votre configuration, vérifiez `storage array config show` le résultat pour vous assurer que le nombre de LUN de chaque groupe de LUN correspond à votre objectif. La cause la plus probable d'un nombre incorrect de LUN dans un groupe de LUN est que la LUN de baie n'est pas mappée sur un système ONTAP.
+
+
+
+== Exemple de résultat de l'affichage de la configuration de la baie de stockage
+
+Le nombre de LUN de baies dans chaque groupe de LUN s'affiche dans le `storage array config show` résultat de la commande, comme l'exemple suivant montre :
+
+[listing]
+----
+mysystem1::> storage array config show
+
+               LUN     LUN
+Node           Group   Count Array Name     Array Target Port  Initiator
+------         ------ ----- -------------- -------------------- ----------
+mysystem1        0      50   DGC_RAID5_1     201A00a0b80fee04     0a
+                                             202A00a0b80fee04     0c
+----
+
+
+== Explication
+
+Les raisons les plus probables pour lesquelles une LUN de baie dans un groupe de LUN est manquante sont les suivantes :
+
+* La LUN de la baie n'est pas mappée sur le système ONTAP.
+* Une erreur de mappage a entraîné la création d'une LUN de baie dans un groupe de LUN incorrect.
++
+Par exemple, la configuration du groupe d'hôtes est peut-être incorrecte.
+
+* La matrice de stockage est toujours en cours d'initialisation et de mise à disposition des LUN de la baie (état transitoire).
+* Le scanner de LUN ONTAP n'a pas encore découvert les LUN (état transitoire).
+
+
+
+
+== Résolution du problème
+
+. Si la LUN de la baie n'a pas été mappée sur le système ONTAP, l'administrateur de la baie de stockage doit la mapper.
++
+Le processus de mappage des LUN de baie aux hôtes varie selon les baies de stockage.
+
+. Si la LUN de la baie a été mappée sur le système ONTAP, vérifiez le zoning et la configuration du groupe hôte.
+. Une fois le problème résolu, exécutez `storage array config show` à nouveau pour confirmer que le problème est résolu.
+

@@ -1,0 +1,33 @@
+---
+permalink: install/task_checking_the_checksum_type_of_spare_array_luns.html 
+sidebar: sidebar 
+keywords: check, checksum, type, spare, array, luns 
+summary: 'Si vous prévoyez d"ajouter une LUN de baie de secours à un agrégat en spécifiant son nom, vous devez vous assurer que le type de somme de contrôle de la LUN de baie à ajouter est le même que le type de somme de contrôle d"agrégat.' 
+---
+= Vérification du type de somme de contrôle des LUN de baie de réserve
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Si vous prévoyez d'ajouter une LUN de baie de secours à un agrégat en spécifiant son nom, vous devez vous assurer que le type de somme de contrôle de la LUN de baie à ajouter est le même que le type de somme de contrôle d'agrégat.
+
+Vous ne pouvez pas mélanger des LUN de baies de différents types de checksum dans un agrégat de LUN de baie. Le type de somme de contrôle de l'agrégat et le type de somme de contrôle des LUN de baie qui lui ont été ajoutés doivent être les mêmes.
+
+Si vous spécifiez un certain nombre de LUN de baie de secours à ajouter à un agrégat, ONTAP sélectionne par défaut les LUN de baie de même type que l'agrégat.
+
+[NOTE]
+====
+Le type de somme de contrôle de tous les agrégats nouvellement créés à l'aide de LUN de baie de total de contrôle zonées est _Advanced zoned checksum_ (AZC). Le type de checksum zoné reste pris en charge pour les agrégats zonés existants. Les LUN de baie de réserve de checksum zonées ajoutées à un agrégat de checksum zoné existant continuent d'être zonées les LUN de baie de checksum. Les LUN de baie de réserve de checksum zonées ajoutées à un agrégat de type checksum AZC utilisent le schéma de checksum AZC pour la gestion des checksums.
+
+====
+.Étape
+. Vérifiez le type de checksum des LUN de baie de spare en entrant la commande suivante :
++
+`storage disk show -fields checksum-compatibility -container-type spare`
+
++
+Vous pouvez ajouter une LUN de tableau de contrôle de bloc à un agrégat de total de contrôle de bloc et une LUN de baie zonée à un agrégat _Advanced zoned checksum_ (AZCS).
+
+

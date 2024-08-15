@@ -1,0 +1,18 @@
+---
+permalink: install/concept_overview_of_setting_up_ontap_to_work_with_array_luns.html 
+sidebar: sidebar 
+keywords: set, up, ontap, work, array, luns 
+summary: 'Le processus de configuration d"un système ONTAP pour qu"il fonctionne avec des LUN de baies diffère selon que les systèmes ONTAP sont commandés avec ou sans disques.' 
+---
+= Configuration de ONTAP pour travailler avec les LUN de baies
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Le processus de configuration d'un système ONTAP pour qu'il fonctionne avec des LUN de baies diffère selon que les systèmes ONTAP sont commandés avec ou sans disques.
+
+Si un système ONTAP est commandé avec des tiroirs disques, le logiciel ONTAP est installé en usine. Dans une telle configuration, il n'est pas nécessaire de créer le volume racine et d'installer les licences et le logiciel ONTAP.
+
+Vous pouvez installer le logiciel ONTAP sur les systèmes commandés sans tiroirs disques. Sur ces systèmes, vous devez d'abord installer ONTAP, puis configurer un cluster.

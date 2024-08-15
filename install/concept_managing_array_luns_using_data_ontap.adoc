@@ -1,0 +1,14 @@
+---
+permalink: install/concept_managing_array_luns_using_data_ontap.html 
+sidebar: sidebar 
+keywords: manage, array, luns, ontap 
+summary: 'Si l"administrateur de la baie de stockage souhaite modifier la configuration d"une LUN de baie après son affectation à un nœud, par exemple pour la redimensionner, vous devrez peut-être effectuer certaines opérations dans ONTAP avant de pouvoir reconfigurer la LUN sur la baie de stockage.' 
+---
+= Gestion des LUN de baie à l'aide de ONTAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Si l'administrateur de la baie de stockage souhaite modifier la configuration d'une LUN de baie après son affectation à un nœud, par exemple pour la redimensionner, vous devrez peut-être effectuer certaines opérations dans ONTAP avant de pouvoir reconfigurer la LUN sur la baie de stockage.

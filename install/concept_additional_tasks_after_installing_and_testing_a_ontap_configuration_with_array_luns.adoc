@@ -1,0 +1,23 @@
+---
+permalink: install/concept_additional_tasks_after_installing_and_testing_a_ontap_configuration_with_array_luns.html 
+sidebar: sidebar 
+keywords: additional, tasks, after, install, test, ontap, configuration, array, luns, netapp 
+summary: 'Après avoir terminé l"installation et le test d"une configuration ONTAP avec des LUN de baie, vous pouvez attribuer des LUN de baie supplémentaires à vos systèmes ONTAP et configurer diverses fonctionnalités ONTAP sur vos systèmes.' 
+---
+= Tâches supplémentaires après l'installation et le test d'une configuration ONTAP avec des LUN de baie
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Après avoir terminé l'installation et le test d'une configuration ONTAP avec des LUN de baie, vous pouvez attribuer des LUN de baie supplémentaires à vos systèmes ONTAP et configurer diverses fonctionnalités ONTAP sur vos systèmes.
+
+Voici quelques-unes des tâches que vous pouvez effectuer après l'installation et le test du système ONTAP avec des LUN de baie :
+
+* Si nécessaire, attribuez des LUN de baie supplémentaires aux systèmes ONTAP.
+* Créez des volumes et des agrégats ONTAP selon les besoins.
+* Configurez des fonctionnalités ONTAP supplémentaires sur votre système en fonction des besoins, par exemple des fonctionnalités de sauvegarde et de restauration.
+
+
+Pour plus d'informations sur la configuration des différentes fonctionnalités de ONTAP, reportez-vous au guide ONTAP approprié.

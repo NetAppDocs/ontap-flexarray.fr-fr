@@ -1,0 +1,38 @@
+---
+permalink: install/reference_fc_initiator_ports_required_for_connection_with_disks.html 
+sidebar: sidebar 
+keywords: fc initiator, ports, required, connection, native, disks 
+summary: Vous devez connecter un système V-Series aux tiroirs disques natifs via les ports FC initiator. Le nombre de ports initiateurs requis pour la connexion dépend du fait que le système V-Series soit un système autonome ou une paire haute disponibilité. 
+---
+= Ports initiateurs FC requis pour la connexion à des disques natifs
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez connecter un système V-Series aux tiroirs disques natifs via les ports FC initiator. Le nombre de ports initiateurs requis pour la connexion dépend du fait que le système V-Series soit un système autonome ou une paire haute disponibilité.
+
+Le tableau ci-dessous répertorie le nombre de ports FC initiator requis pour la connexion d'un système V-Series à des tiroirs disques natifs, en fonction de la configuration du système :
+
+|===
+| Configuration | Nombre de ports FC initiator 
+
+
+ a| 
+Système autonome
+ a| 
+* Si vous utilisez une boucle, un port FC initiator
+* Si vous connectez deux boucles, deux ports FC initiator : un pour chaque boucle
+
+
+
+
+ a| 
+Paire HA
+ a| 
+* Si vous utilisez un stockage multivoie, deux ports FC initiator pour chaque boucle
+* Si vous n'utilisez pas de stockage multivoie, un port FC initiator par contrôleur pour chaque boucle de la configuration
+
+
+|===

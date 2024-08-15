@@ -1,0 +1,18 @@
+---
+permalink: install/concept_minimum_number_of_array_luns_required_per_ontap_system.html 
+sidebar: sidebar 
+keywords: minimum, number, array, luns, required, ontap, system 
+summary: 'Le nombre de LUN de baie requis par système ONTAP dépend de l"emplacement du volume racine.' 
+---
+= Nombre minimal de LUN de baie requis par système ONTAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Le nombre de LUN de baie requis par système ONTAP dépend de l'emplacement du volume racine.
+
+Le volume root peut se trouver sur un disque ou sur des LUN de baie. L'emplacement du volume racine détermine ensuite le nombre minimal de LUN de baie dont vous avez besoin. Si le volume racine se trouve sur une baie de stockage, chaque système ONTAP autonome et chaque nœud d'une paire haute disponibilité doivent posséder au moins une LUN de baie. Si le volume racine se trouve sur un disque natif, les seules LUN de baie nécessaires sont celles destinées au stockage des données.
+
+Pour une configuration MetroCluster utilisant des LUN de baie, deux LUN de baie sont requises (une LUN sur chaque site) si le volume racine se trouve sur une baie de stockage. Les deux LUN sont nécessaires pour que le volume root puisse être mis en miroir.

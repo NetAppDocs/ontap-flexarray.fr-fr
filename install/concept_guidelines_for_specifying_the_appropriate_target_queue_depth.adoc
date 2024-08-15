@@ -1,0 +1,30 @@
+---
+permalink: install/concept_guidelines_for_specifying_the_appropriate_target_queue_depth.html 
+sidebar: sidebar 
+keywords: guidelines, specify, appropriate, target, queue, depth 
+summary: 'Lorsque vous planifiez la configuration d"un système ONTAP spécifique ou d"un hôte spécifique qui n"exécute pas ONTAP, vous devez tenir compte de l"impact de tous les initiateurs qui accèdent au port de la baie de stockage.' 
+---
+= Instructions pour spécifier la profondeur de file d'attente cible appropriée
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Lorsque vous planifiez la configuration d'un système ONTAP spécifique ou d'un hôte spécifique qui n'exécute pas ONTAP, vous devez tenir compte de l'impact de tous les initiateurs qui accèdent au port de la baie de stockage.
+
+Si votre déploiement inclut plusieurs initiateurs sur un port cible, vous devez tenir compte du nombre total de commandes envoyées à un port cible par tous les initiateurs lors de la définition de la profondeur de la file d'attente cible.
+
+Les instructions pour spécifier la profondeur de file d'attente cible appropriée sont les suivantes :
+
+* Ne configurez pas une valeur de 0 (zéro).
++
+Une valeur de 0 signifie qu'il n'y a pas de limite pour les commandes en attente.
+
+* Tenez compte du volume de commandes que des initiateurs spécifiques seraient susceptibles d'envoyer au port cible.
++
+Vous pouvez ensuite configurer des valeurs supérieures pour les initiateurs susceptibles d'envoyer un plus grand nombre de demandes et une valeur inférieure pour les initiateurs susceptibles d'envoyer un nombre inférieur de demandes.
+
+* Configurez les hôtes qui n'exécutent pas ONTAP conformément aux instructions fournies pour ces hôtes.
+* Envisagez de définir la profondeur de la file d'attente cible par port cible lorsque les charges de travail diffèrent entre les ports.
+

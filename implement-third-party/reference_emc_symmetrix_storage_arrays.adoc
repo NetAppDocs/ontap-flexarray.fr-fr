@@ -1,0 +1,14 @@
+---
+permalink: implement-third-party/reference_emc_symmetrix_storage_arrays.html 
+sidebar: sidebar 
+keywords: emc, symmetrix, storage, arrays 
+summary: 'Lorsque vous configurez des baies de stockage pour qu"elles fonctionnent avec des systèmes ONTAP qui utilisent des LUN de baies, vous devez répondre à des exigences spécifiques. Ces exigences incluent la définition de paramètres de configuration sur vos baies de stockage et le déploiement de configurations prises en charge uniquement.' 
+---
+= Baies de stockage EMC Symmetrix
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Lorsque vous configurez des baies de stockage pour qu'elles fonctionnent avec des systèmes ONTAP qui utilisent des LUN de baies, vous devez répondre à des exigences spécifiques. Ces exigences incluent la définition de paramètres de configuration sur vos baies de stockage et le déploiement de configurations prises en charge uniquement.

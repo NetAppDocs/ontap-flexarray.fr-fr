@@ -1,0 +1,14 @@
+---
+permalink: implement-e-series/reference_requirements_for_configuring_e_series_storage_arrays.html 
+sidebar: sidebar 
+keywords: requirements, configure, e-series, storage, arrays 
+summary: 'Vous devez définir des paramètres système et prendre en compte les considérations à prendre en compte lors de la configuration d"une baie de stockage pour qu"elle fonctionne avec un système ONTAP.' 
+---
+= Configuration requise pour la configuration des baies de stockage E-Series
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez définir des paramètres système et prendre en compte les considérations à prendre en compte lors de la configuration d'une baie de stockage pour qu'elle fonctionne avec un système ONTAP.

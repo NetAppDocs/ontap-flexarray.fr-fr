@@ -1,0 +1,219 @@
+---
+permalink: install/reference_terminology_comparison_between_storage_array_vendors.html 
+sidebar: sidebar 
+keywords: terminology, comparison, between, storage, array, vendors 
+summary: 'Les différents fournisseurs de baies de stockage utilisent parfois des termes différents pour décrire des concepts similaires. Inversement, la signification de ce terme peut différer d"un fournisseur de baies à l"autre.' 
+---
+= Comparaison terminologique entre les fournisseurs de baies de stockage
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Les différents fournisseurs de baies de stockage utilisent parfois des termes différents pour décrire des concepts similaires. Inversement, la signification de ce terme peut différer d'un fournisseur de baies à l'autre.
+
+Le tableau suivant décrit les différents termes utilisés par les fournisseurs :
+
+|===
+| Durée | Fournisseur | Définition 
+
+
+ a| 
+groupe d'hôtes
+ a| 
+Hitachi
+ a| 
+Entité de configuration qui vous permet de spécifier l'accès de l'hôte aux ports de la matrice de stockage. Vous identifiez les WWN de port FC initiator du système ONTAP pour lequel vous souhaitez accéder aux LUN. Le processus diffère selon le fournisseur et peut parfois varier selon le modèle de baie de stockage d'un même fournisseur.
+
+
+
+ a| 
+HP XP
+ a| 
+
+
+
+| Groupe de stockage  a| 
+EMC CX, EMC VNX
+ a| 
+
+
+
+| définition de l'hôte  a| 
+3PAR
+ a| 
+
+
+
+| hôte  a| 
+3PAR, HP EVA, HP XP, HITACHI
+ a| 
+
+
+
+ a| 
+
+
+
+| groupe de parité  a| 
+Hitachi, HP XP
+ a| 
+Disposition des disques dans le back-end qui, ensemble, constituent le niveau RAID défini.
+
+
+
+ a| 
+Groupe RAID
+ a| 
+ONTAP, EMC CX et EMC VNX
+ a| 
+
+
+
+| groupe de disques  a| 
+HP EVA
+ a| 
+Ensemble de disques physiques formant des pools de stockage à partir desquels vous pouvez créer des disques virtuels.
+
+
+
+ a| 
+Jeu de parité, jeu RAID
+ a| 
+3PAR
+ a| 
+Un groupe de _grosses_ protégées par parité. (Un chunklet est un bloc de 256 Mo d'espace contigu sur un disque physique.)
+
+
+
+ a| 
+ a| 
+|  
+
+
+| cluster  a| 
+ONTAP
+ a| 
+Dans ONTAP , regroupement de nœuds permettant à plusieurs nœuds de regrouper leurs ressources en un grand serveur virtuel et de distribuer le travail à travers le cluster.
+
+
+
+ a| 
+| Hitachi, HP XP  a| 
+Composant matériel des matrices de stockage qui contient les ports auxquels les hôtes se connectent.
+
+
+
+ a| 
+ a| 
+|  
+
+
+| contrôleur  a| 
+ONTAP
+ a| 
+Composant d'un système de stockage qui exécute le système d'exploitation ONTAP et interagit avec les baies de stockage internes. Les contrôleurs sont également parfois appelés « têtes » ou « modules UC ».
+
+
+
+ a| 
+| HITACHI, HP EVA, HP XP  a| 
+Matériel de la matrice de stockage sur laquelle se trouvent les ports cibles.
+
+
+
+ a| 
+nœud
+ a| 
+3-PAR
+ a| 
+Composant matériel des matrices de stockage qui contient les ports auxquels les hôtes se connectent.
+
+
+
+ a| 
+Carte FEBE
+ a| 
+EMC Symmetrix
+ a| 
+
+
+
+| Processeur de stockage (SP)  a| 
+EMC CX, EMC VNX
+ a| 
+
+
+
+ a| 
+LUN
+ a| 
+De nombreuses baies de stockage
+ a| 
+Regroupement d'un ou de plusieurs disques ou partitions de disque en un espace de stockage unique. Dans la documentation ONTAP, on parle de _array LUN_.
+
+
+
+ a| 
+LDEV
+ a| 
+Hitachi, HP XP
+ a| 
+
+
+
+| LUN  a| 
+ONTAP
+ a| 
+Le système ONTAP peut virtualiser le stockage qui lui est rattaché et fournir le stockage sous forme de LUN aux applications et clients externes (par exemple, via iSCSI et FC). Les clients ne savent pas où est stocké une LUN front-end.
+
+
+
+ a| 
+LUN, disque virtuel
+ a| 
+HP EVA
+ a| 
+Un disque virtuel (appelé _vdisk_ dans l'interface utilisateur) est un disque simulé créé dans un groupe de disques. Vous pouvez attribuer une combinaison de caractéristiques à un disque virtuel, comme un nom, un niveau de redondance et une taille. La présentation d'un disque virtuel offre son stockage à un hôte.
+
+
+
+ a| 
+LUN de baie
+ a| 
+Documentation ONTAP, outils de gestion du stockage ONTAP
+ a| 
+La documentation ONTAP utilise le terme _array LUN_ pour distinguer les LUN des baies de stockage des LUN front-end (LUN ONTAP).
+
+
+
+ a| 
+LUN virtuel
+ a| 
+3PAR
+ a| 
+(Volume-LUN) Association entre un volume virtuel et un numéro d'unité logique (LUN). Pour qu'un hôte puisse voir un volume virtuel, le volume doit être exporté en tant que LUN en créant des LUN virtuels sur la baie de stockage.
+
+
+
+ a| 
+ a| 
+|  
+
+
+| volumétrie  a| 
+ONTAP
+ a| 
+Entité logique contenant des données utilisateur accessibles via un ou plusieurs protocoles d'accès pris en charge par ONTAP, notamment NFS (Network File System), CIFS (Common Internet File System), HTTP (HyperText Transfer Protocol), FC (Fibre Channel) et iSCSI (Internet SCSI).
+
+
+
+ a| 
+volume virtuel
+ a| 
+3PAR
+ a| 
+Unité de stockage virtuelle créée en mappant les données d'un ou plusieurs disques logiques.
+
+|===

@@ -1,0 +1,79 @@
+---
+permalink: install/concept_back_end_configuration_errors_detected_by_ontap_commands.html 
+sidebar: sidebar 
+keywords: back-end, configuration, errors, detected, ontap, commands, output, examples 
+summary: La commande Storage Errors show fournit des détails, au niveau de la LUN de la baie, sur les erreurs courantes de configuration back-end. Vous pouvez également utiliser les commandes error show du disque de stockage et show -errors du disque de stockage pour afficher les erreurs. 
+---
+= Erreurs de configuration back-end détectées par les commandes ONTAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La `storage errors show` commande fournit des détails, au niveau de la LUN de la baie, sur les erreurs courantes de configuration back-end. Vous pouvez également utiliser les `storage disk error show` commandes et `storage disk show -errors` pour afficher les erreurs.
+
+Vous devez corriger les erreurs de configuration internes identifiées par ces commandes avant de configurer ONTAP pour qu'il fonctionne avec les LUN de baies.
+
+[NOTE]
+====
+Bien que la `storage errors show` commande fournisse des détails d'erreur se rapportant uniquement aux LUN de baie, `storage disk error show` et les `storage disk show -errors` commandes peuvent fournir des détails d'erreur relatifs aux LUN de baie ainsi qu'aux disques.
+
+====
+Lorsqu'une erreur de configuration interne empêche les périphériques de votre configuration de fonctionner ensemble, la `storage array config show` commande vous demande d'exécuter Storage Errors show pour obtenir les détails de l'erreur.
+
+
+
+== Liste des erreurs de configuration back-end
+
+Les `storage errors show`commandes , , `storage disk error show`et `storage disk show -errors` peuvent aider à identifier les erreurs de configuration back-end telles que :
+
+* Il y a moins de deux chemins vers une LUN de baie.
+* Tous les chemins d'accès à une LUN de baie se trouvent sur le même contrôleur de baie de stockage.
+* Deux LUN de baie sont présentées avec le même ID de LUN.
+* Les ID de LUN pour le même LDEV ne correspondent pas sur tous les ports cibles sur lesquels le LDEV sera visible.
+* La LUN de la baie dépasse la taille de LUN maximale de la baie ONTAP.
+* La LUN de la baie ne correspond pas à la taille de LUN minimale de la baie ONTAP.
+* La taille de bloc d'une LUN de baie n'est pas valide.
+* Une LUN d'accès est présentée à ONTAP.
+
+
+
+
+== Exemples de résultats affichant les erreurs de configuration back-end
+
+Le `storage errors show` résultat est regroupé par matrice de stockage (s'il existe plusieurs matrices de stockage derrière le système ONTAP). Le nom et l'identifiant unique (UID) d'une LUN de baie sont affichés, le cas échéant.
+
+L'exemple de sortie suivant montre un type d'erreur - un seul chemin vers une LUN de baie. Il s'agit d'une erreur car ONTAP nécessite deux chemins vers une LUN de baie.
+
+[NOTE]
+====
+Quatre chemins vers une LUN de baie sont pris en charge dans les configurations en cluster.
+
+====
+L'exemple suivant montre les erreurs renvoyées par la `storage errors show` commande en raison d'un seul chemin configuré pour une LUN de baie :
+
+[listing]
+----
+
+systemf47ab::*> storage errors show
+DGC-1.51         onepath           DGC-1.51 (6006016044d03500ae553e55b09fe311): This array LUN is only available on one path. Proper configuration requires two paths.
+DGC-1.54         onepath           DGC-1.54 (6006016044d03500b4553e55b09fe311): This array LUN is only available on one path. Proper configuration requires two paths.
+DGC-1.55         onepath           DGC-1.55 (6006016044d03500b6553e55b09fe311): This array LUN is only available on one path. Proper configuration requires two paths.
+DGC-1.56         onepath           DGC-1.56 (6006016044d03500b8553e55b09fe311): This array LUN is only available on one path. Proper configuration requires two paths.
+DGC-1.57         onepath           DGC-1.57 (6006016044d03500ba553e55b09fe311): This array LUN is only available on one path. Proper configuration requires two paths.
+DGC-1.58         onepath           DGC-1.58 (6006016044d03500bc553e55b09fe311): This array LUN is only available on one path. Proper configuration requires two paths.
+----
+L'exemple suivant montre des erreurs similaires renvoyées par `storage disk show -errors` la commande :
+
+[listing]
+----
+
+systemf47ab::*> storage disk show -errors
+DGC-1.2          onepath           DGC-1.2 (6006016044d03500e0720e22b59fe311): This array LUN is only available on one path. Proper configuration requires two paths.
+DGC-1.3          onepath           DGC-1.3 (6006016044d03500e2720e22b59fe311): This array LUN is only available on one path. Proper configuration requires two paths.
+DGC-1.4          onepath           DGC-1.4 (6006016044d03500e3720e22b59fe311): This array LUN is only available on one path. Proper configuration requires two paths.
+DGC-1.5          onepath           DGC-1.5 (6006016044d03500e4720e22b59fe311): This array LUN is only available on one path. Proper configuration requires two paths.
+DGC-1.6          onepath           DGC-1.6 (6006016044d03500e5720e22b59fe311): This array LUN is only available on one path. Proper configuration requires two paths.
+DGC-1.7          onepath           DGC-1.7 (6006016044d03500e6720e22b59fe311): This array LUN is only available on one path. Proper configuration requires two paths.
+----

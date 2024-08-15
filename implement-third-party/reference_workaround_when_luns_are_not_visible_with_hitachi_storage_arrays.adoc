@@ -1,0 +1,86 @@
+---
+permalink: implement-third-party/reference_workaround_when_luns_are_not_visible_with_hitachi_storage_arrays.html 
+sidebar: sidebar 
+keywords: workaround, luns, not, visible, hitachi, storage, arrays, aggregates, created, ontap, system, 
+summary: Les paramètres de matrice de stockage spécifiés dans la section Paramètres requis pour les baies de stockage Hitachi avec des systèmes exécutant ONTAP doivent être définis et les LUN doivent être mappés aux groupes hôtes avant que le commutateur ne soit zoné pour connecter le système ONTAP qui utilise des LUN de baie à une baie de stockage Hitachi. 
+---
+= Solution de contournement lorsque les LUN ne sont pas visibles avec les baies de stockage Hitachi
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Les paramètres de matrice de stockage spécifiés dans la section Paramètres requis pour les baies de stockage Hitachi avec des systèmes exécutant ONTAP doivent être définis et les LUN doivent être mappés aux groupes hôtes avant que le commutateur ne soit zoné pour connecter le système ONTAP qui utilise des LUN de baie à une baie de stockage Hitachi.
+
+xref:reference_required_parameters_for_hitachi_storage_arrays_with_ontap_systems.adoc[Paramètres requis pour les baies de stockage Hitachi avec des systèmes exécutant ONTAP]
+
+Si la segmentation a été configurée avant de définir les paramètres et de mapper les LUN aux groupes hôtes, vous pouvez résoudre le problème des LUN qui ne sont pas visibles en procédant à une réinitialisation du chemin. La réinitialisation du chemin force une redécouverte des LUN de baie qui sont mappées à partir d'une baie de stockage Hitachi.
+
+La procédure à suivre varie selon que les agrégats avec des LUN de baie Hitachi ont déjà été configurés sur le système ONTAP. (Dans les procédures suivantes, supposons que les nœuds Node-1 et Node-2 soient les noms des nœuds ONTAP.)
+
+
+
+== Si des agrégats avec des LUN de baie Hitachi sont déjà créés sur un système ONTAP qui utilise des LUN de baie
+
+. Exécutez la commande suivante pour vous assurer que la configuration haute disponibilité est activée sur vos systèmes ONTAP : *`cluster ha show`*
++
+Les valeurs de sortie suivantes sont affichées :
+
++
+[listing]
+----
+
+High Availability Configured: true
+----
+. Exécutez la commande suivante pour vous assurer que le basculement du stockage est configuré sur votre système ONTAP : *`storage failover show`*
++
+Les valeurs de sortie suivantes sont affichées :
+
++
+[listing]
+----
+          Takeover
+Node           Partner        Possible State Description
+-------------- -------------- -------- -------------------------------------
+Node-1    Node-2    true     Connected to Node-2
+Node-2    Node-1    true     Connected to Node-1
+2 entries were displayed.
+----
+. Exécutez la commande suivante pour effectuer une opération de basculement sur le nœud 1 : *`storage failover takeover -ofnode Node-1`*
+. Exécutez à nouveau la commande suivante pour vérifier que le nœud 2 est prêt pour une opération de rétablissement : *`storage failover show`*
++
+Les valeurs de sortie suivantes sont affichées :
+
++
+[listing]
+----
+          Takeover
+Node           Partner        Possible State Description
+-------------- -------------- -------- -------------------------------------
+Node-2    Node-1    false    In takeover, Auto giveback will be
+                                      initiated in 348 seconds
+Node-1    Node-2    -        Waiting for giveback (HA mailboxes)
+2 entries were displayed.
+----
+. Exécutez la commande suivante pour effectuer une opération de rétablissement sur le nœud-1: *`storage failover giveback -ofnode Node-1 -require-partner-waiting true`*
+. À partir des autres nœuds du cluster, répétez les étapes 3 à 5.
+
+
+
+
+== Si des agrégats avec des LUN de baie Hitachi n'ont pas été créés sur un système ONTAP qui utilise des LUN de baie
+
+. Exécutez la commande suivante pour répertorier tous les ports initiateurs FC ONTAP connectés à la baie de stockage Hitachi : *`system node run -node <node name> -command "sysconfig -v"`*
++
+Par exemple : *`system node run -node Node-1 -command "sysconfig -v"`*
+
+. Exécutez la commande suivante pour mettre tous les ports répertoriés hors ligne : *`system node run -node <node name> -command "priv set advanced;fcadmin offline <adapter>"`*
++
+Par exemple : *`system node run -node Node-1 -command "priv set advanced;fcadmin offline 0a"`*
+
+. Exécutez la commande suivante pour mettre en ligne tous les ports répertoriés : *`system node run -node <node name> -command "priv set advanced;fcadmin online <adapter>"`*
++
+Par exemple : *`system node run -node Node-1 -command "priv set advanced;fcadmin online 0a"`*
+
+

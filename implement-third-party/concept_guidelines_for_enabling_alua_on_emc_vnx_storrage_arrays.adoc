@@ -1,0 +1,20 @@
+---
+permalink: implement-third-party/concept_guidelines_for_enabling_alua_on_emc_vnx_storrage_arrays.html 
+sidebar: sidebar 
+keywords: guidelines, enabling, alua, emc, vnx, storage arrays 
+summary: 'La prise en charge du protocole ALUA (Asymmetric Logical Unit Access) avec les baies CLARiiON et VNX a été ajoutée.' 
+---
+= Instructions pour l'activation d'ALUA sur les baies de stockage EMC VNX
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La prise en charge du protocole ALUA (Asymmetric Logical Unit Access) avec les baies CLARiiON et VNX a été ajoutée.
+
+Par défaut, la prise en charge du protocole ALUA est activée dans ONTAP. Toutefois, pour l'utiliser, ALUA doit être activé sur la baie de stockage.
+
+Vous devez activer ALUA uniquement pour les nouvelles configurations. Vous ne devez pas activer ALUA dans une configuration existante.
+
+Si vous configurez ALUA sur la baie de stockage, vous devez vous assurer que tous les hôtes d'un Storage Group se trouvent dans le même mode de basculement, c'est-à-dire le mode de basculement 4 (ALUA).

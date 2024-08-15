@@ -1,0 +1,33 @@
+---
+permalink: install/concept_multiple_paths_to_an_array_lun_can_be_used_to_distribute_load.html 
+sidebar: sidebar 
+keywords: multiple, paths, array, lun, used, distribute, load, commands 
+summary: 'Les demandes d"E/S pour une LUN donnée peuvent être réparties sur tous les chemins optimisés disponibles pour cette LUN. Contrairement aux versions précédentes, les demandes d"E/S pour une LUN donnée ont été envoyées sur un seul chemin optimisé actif même si plusieurs chemins étaient disponibles.' 
+---
+= Plusieurs chemins d'accès à une LUN de baie peuvent être utilisés pour répartir la charge
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Les demandes d'E/S pour une LUN donnée peuvent être réparties sur tous les chemins optimisés disponibles pour cette LUN. Contrairement aux versions précédentes, les demandes d'E/S pour une LUN donnée ont été envoyées sur un seul chemin optimisé actif même si plusieurs chemins étaient disponibles.
+
+La distribution des demandes d'E/S pour une LUN donnée sur plusieurs chemins permet de bénéficier des avantages suivants :
+
+* Meilleure efficacité grâce à une utilisation maximale de tous les chemins disponibles et optimisés
+* Performances améliorées grâce à l'équilibrage de la charge sur plusieurs chemins
+
+
+Par exemple, sur une baie actif-actif, les demandes d'E/S pour une LUN donnée peuvent être distribuées sur les quatre ports cibles disponibles pour cette LUN. Dans le cas d'une LUN de baie actif-actif asymétrique, les demandes d'E/S peuvent être réparties sur tous les chemins optimisés pour une LUN donnée.
+
+
+
+== Commandes permettant de visualiser l'équilibrage de la charge sur plusieurs chemins d'accès pour une LUN donnée
+
+Vous pouvez exécuter les commandes suivantes pour afficher la distribution de la charge d'une LUN donnée sur plusieurs chemins d'accès :
+
+* ``storage disk show -disk <LUN name>`` Affiche la répartition de la charge d'E/S sur les chemins disponibles pour une LUN de baie donnée.
+* ``storage path show-by-initiator -array-name <array name>`` Affiche la répartition de la charge d'E/S sur tous les ports initiateurs du système ONTAP connecté à une matrice de stockage donnée.
+* ``storage path show -by-target -array-name <array name>`` Affiche la répartition de la charge d'E/S sur tous les ports cibles d'une matrice de stockage donnée.
+

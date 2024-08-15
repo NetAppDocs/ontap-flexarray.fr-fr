@@ -1,0 +1,29 @@
+---
+permalink: implement-e-series/reference_required_host_type_for_e_series_storage_arrays_reference.html 
+sidebar: sidebar 
+keywords: required, host, type, e-series, storage, arrays 
+summary: 'Vous devez définir l"option de type d"hôte appropriée pour que la baie de stockage E-Series communique avec les systèmes ONTAP. Vous pouvez utiliser SANtricity Storage Manager pour définir le type d"hôte.' 
+---
+= Type d'hôte requis pour les baies de stockage E-Series
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez définir l'option de type d'hôte appropriée pour que la baie de stockage E-Series communique avec les systèmes ONTAP. Vous pouvez utiliser SANtricity Storage Manager pour définir le type d'hôte.
+
+Pour une version ONTAP donnée, vous pouvez définir le type d'hôte requis en fonction de la version du micrologiciel de la matrice de stockage.
+
+Si votre version du micrologiciel est 08.10.15.00 et ultérieure, définissez le type d'hôte sur _Data ONTAP (ALUA)_.
+
+[NOTE]
+====
+La version minimale prise en charge de SANtricity Storage Manager pour le micrologiciel version 08.10.15.00 et ultérieure est 11.10.0G00.0026.
+
+====
+Lors de l'utilisation du micrologiciel de contrôleur E-Series 8.25, ONTAP RDAC n'est plus pris en charge en tant que type d'hôte sur le système E-Series. Par conséquent, si vous utilisez ONTAP RDAC, vous devez suivre cet article de la base de connaissances avant de mettre à niveau la baie back-end vers CFW 8.25 ou une version ultérieure pour la convertir en ALUA ONTAP.
+
+*Informations connexes*
+
+https://kb.netapp.com/Advice_and_Troubleshooting/Data_Storage_Systems/E-Series_Storage_Array/How_to_non-disruptively_change_between_Active-Passive_and_ALUA_failover_modes["Modification non disruptive des modes de basculement Active/passive et ALUA sur les baies NetApp E-Series connectées aux systèmes clustered Data ONTAP"]

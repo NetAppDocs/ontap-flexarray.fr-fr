@@ -1,0 +1,71 @@
+---
+permalink: install/concept_planning_summary_for_a_ontap_system_using_array_luns.html 
+sidebar: sidebar 
+keywords: plan, summary, ontap, systems, array, luns 
+summary: 'Lorsque vous prévoyez d"utiliser des LUN de baie avec des systèmes ONTAP, vous devez communiquer avec les administrateurs de baie de stockage et de commutateur de manière à ce que les périphériques internes soient configurés pour fonctionner avec les systèmes ONTAP.' 
+---
+= Récapitulatif de planification pour les systèmes ONTAP utilisant des LUN de baie
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Lorsque vous prévoyez d'utiliser des LUN de baie avec des systèmes ONTAP, vous devez communiquer avec les administrateurs de baie de stockage et de commutateur de manière à ce que les périphériques internes soient configurés pour fonctionner avec les systèmes ONTAP.
+
+Le tableau suivant récapitule les principales tâches de planification et l'emplacement des informations pour vous aider dans chaque tâche.
+
+|===
+| Tâche de planification | Où trouver des informations 
+
+
+ a| 
+Détermination des conditions requises pour la configuration de votre baie de stockage afin qu'elle fonctionne avec ONTAP
+ a| 
+* https://docs.netapp.com/us-en/ontap-flexarray/implement-third-party/index.html["Implémentation de la virtualisation FlexArray pour stockage tiers"]
+* https://docs.netapp.com/us-en/ontap-flexarray/implement-e-series/index.html["Implémentation de la virtualisation FlexArray pour le stockage NetApp E-Series"]
+* https://mysupport.netapp.com/matrix["Matrice d'interopérabilité NetApp"]
+
+
+
+
+ a| 
+Instructions relatives à l'utilisation de LUN de baie avec ONTAP
+ a| 
+xref:concept_planning_for_ontap_use_of_array_luns.adoc[Planification de l'utilisation ONTAP des LUN de baies]
+
+
+
+ a| 
+Détermination des limites de ONTAP relatives aux LUN de baies
+ a| 
+https://hwu.netapp.com["NetApp Hardware Universe"]
+
+
+
+ a| 
+Détermination d'un schéma de sécurité des LUN, définition de contrôles d'accès sur la matrice de stockage et, si les commutateurs sont déployés, définition de la segmentation sur les commutateurs
+ a| 
+* xref:concept_planning_for_lun_security_on_storage_arrays.adoc[Planification de la sécurité des LUN sur les baies de stockage]
+* xref:concept_zoning_for_a_configuration_with_storage_arrays.adoc[Exigences de segmentation]
+
+
+
+
+ a| 
+Détermination d'un schéma de connectivité port à port entre les systèmes ONTAP et la baie de stockage
+ a| 
+* xref:concept_planning_a_port_to_port_connectivity_scheme.adoc[Planification d'un schéma de connectivité port à port]
+* https://mysupport.netapp.com/matrix["Matrice d'interopérabilité NetApp"]
+
+
+
+
+ a| 
+Détermination du système ONTAP « propriétaire » de la LUN de baie (propriété du disque)
+ a| 
+* xref:concept_how_array_luns_become_available_for_ontap_storage_use.adoc[Mise à disposition des LUN de baie pour l'utilisation du stockage ONTAP]
+* xref:task_assigning_ownership_of_array_luns.adoc[Attribution de la propriété des LUN de baie]
+
+
+|===

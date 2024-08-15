@@ -1,0 +1,22 @@
+---
+permalink: install/concept_planning_for_lun_security_on_storage_arrays.html 
+sidebar: sidebar 
+keywords: plan, lun, security, storage, arrays 
+summary: 'Si vous utilisez votre système ONTAP avec des baies de stockage, vous devez utiliser une méthode de sécurité des LUN pour éliminer la possibilité qu"un système non ONTAP remplace les LUN de baie détenues par un système ONTAP, ou inversement.' 
+---
+= Planification de la sécurité des LUN sur les baies de stockage
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Si vous utilisez votre système ONTAP avec des baies de stockage, vous devez utiliser une méthode de sécurité des LUN pour éliminer la possibilité qu'un système non ONTAP remplace les LUN de baie détenues par un système ONTAP, ou inversement.
+
+La sécurité des LUN est une méthode permettant d'isoler les hôtes qui peuvent accéder à des LUN de baie spécifiques. La sécurité des LUN est similaire au zoning de commutateur en concept, mais elle s'effectue sur la baie de stockage. _LUN Security_ et _LUN masking_ sont des termes équivalents pour décrire cette fonctionnalité.
+
+[NOTE]
+====
+Le schéma de propriété de disque ONTAP empêche un système ONTAP de remplacer une LUN de baie appartenant à un autre système ONTAP. Cependant, elle n'empêche pas un système ONTAP de remplacer une LUN de baie accessible par un hôte non-ONTAP. De même, sans méthode pour empêcher le remplacement des données, un hôte non-ONTAP pourrait remplacer un LUN de baie utilisé par un système ONTAP.
+
+====

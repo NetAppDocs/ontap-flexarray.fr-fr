@@ -1,0 +1,28 @@
+---
+permalink: install/concept_how_the_checksum_type_is_determined_for_aggregates_with_array_luns.html 
+sidebar: sidebar 
+keywords: how, checksum, type, determined, array, lun, aggregates 
+summary: 'Chaque agrégat ONTAP est associé à un type de checksum. Le type de somme de contrôle de l"agrégat est déterminé par le type de somme de contrôle des LUN de baie qui y sont ajoutées.' 
+---
+= Détermination du type de checksum pour les agrégats Array LUN
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Chaque agrégat ONTAP est associé à un type de checksum. Le type de somme de contrôle de l'agrégat est déterminé par le type de somme de contrôle des LUN de baie qui y sont ajoutées.
+
+Le type de checksum d'un agrégat est déterminé par le type de checksum de la première LUN de baie ajoutée à l'agrégat. Le type de checksum s'applique à un agrégat entier (c'est-à-dire à tous les volumes de l'agrégat). L'association de LUN de baies de différents types de checksum dans un agrégat n'est pas prise en charge.
+
+* Une LUN de baie de type _block_ doit être utilisée avec des agrégats de type checksum de bloc.
+* Une LUN de baie de type _zoned_ doit être utilisée avec des agrégats de type Advanced zoned checksum (AZC ou Advanced_zoned).
+
+
+Avant d'ajouter des LUN de baie à un agrégat, vous devez connaître le type de checksum des LUN que vous souhaitez ajouter, pour les raisons suivantes :
+
+* Vous ne pouvez pas ajouter de LUN de baies de différents types de checksum au même agrégat.
+* Vous ne pouvez pas convertir un agrégat d'un type de checksum à un autre.
+
+
+Lorsque vous créez un agrégat, vous pouvez spécifier le nombre de LUN de baie à ajouter ou le nom des LUN à ajouter. Si vous souhaitez spécifier un certain nombre de LUN de baies à ajouter à l'agrégat, le même nombre ou plusieurs LUN de baies de ce type de checksum doivent être disponibles.

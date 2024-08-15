@@ -1,0 +1,20 @@
+---
+permalink: install/concept_sharing_storage_arrays_among_hosts.html 
+sidebar: sidebar 
+keywords: share, storage, arrays, hosts 
+summary: 'Une baie de stockage typique permet le stockage d"hôtes de différents fournisseurs. Cependant, pour ONTAP, certaines baies de stockage doivent être dédiées aux systèmes ONTAP.' 
+---
+= Partage des baies de stockage entre les hôtes
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Une baie de stockage typique permet le stockage d'hôtes de différents fournisseurs. Cependant, pour ONTAP, certaines baies de stockage doivent être dédiées aux systèmes ONTAP.
+
+Pour déterminer si la baie de stockage de votre fournisseur doit être dédiée aux systèmes ONTAP, consultez la _matrice d'interopérabilité_.
+
+*Informations connexes*
+
+https://mysupport.netapp.com/matrix["Matrice d'interopérabilité NetApp"]

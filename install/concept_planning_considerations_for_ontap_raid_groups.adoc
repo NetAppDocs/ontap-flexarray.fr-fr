@@ -1,0 +1,32 @@
+---
+permalink: install/concept_planning_considerations_for_ontap_raid_groups.html 
+sidebar: sidebar 
+keywords: plan, considerations, ontap, raid, groups 
+summary: Avant de configurer des groupes RAID ONTAP pour des LUN de baies, vous devez planifier la taille des agrégats, le nombre et la taille des groupes RAID, ainsi que la taille des LUN de baies. Les groupes RAID qui répondent le mieux à vos besoins en données assurent une protection adéquate sur la baie pour les données et sa disponibilité. 
+---
+= Considérations de planification pour les groupes RAID ONTAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Avant de configurer des groupes RAID ONTAP pour des LUN de baies, vous devez planifier la taille des agrégats, le nombre et la taille des groupes RAID, ainsi que la taille des LUN de baies. Les groupes RAID qui répondent le mieux à vos besoins en données assurent une protection adéquate sur la baie pour les données et sa disponibilité.
+
+La planification des groupes RAID ONTAP implique les tâches suivantes :
+
+. Planification de la taille de l'agrégat qui répond le mieux à vos besoins en matière de données.
+. Planification du nombre et de la taille des groupes RAID requis pour la taille de l'agrégat.
+. Planification de la taille des LUN de baie requises dans les groupes RAID ONTAP :
++
+** Pour éviter une baisse des performances, toutes les LUN de baie d'un groupe RAID ONTAP particulier doivent être de la même taille.
+** Les LUN de baie doivent être de la même taille dans tous les groupes RAID du même agrégat.
+
+
+. Communiquer avec l'administrateur de la baie de stockage pour créer le nombre de LUN de la baie dont vous avez besoin pour l'agrégat.
++
+Les LUN de baie doivent être optimisées pour les performances, conformément aux instructions de la documentation du fournisseur de la baie de stockage.
+
+
+
+Pour plus de recommandations sur la configuration de groupes RAID ONTAP à utiliser avec les matrices de stockage, reportez-vous à la section https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-psmg/home.html["_Gestion des disques et des agrégats_"].

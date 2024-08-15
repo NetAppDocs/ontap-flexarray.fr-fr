@@ -1,0 +1,27 @@
+---
+permalink: install/concept_planning_for_ontap_use_of_array_luns.html 
+sidebar: sidebar 
+keywords: plan, ontap, use, array, luns 
+summary: 'Pour que ONTAP utilise des LUN de baie, un administrateur de baie de stockage doit d"abord créer des LUN sur la baie de stockage et les mettre à disposition de ONTAP. L"administrateur ONTAP doit ensuite configurer ONTAP pour qu"il utilise les LUN de baie mises à disposition par la baie de stockage.' 
+---
+= Planification de l'utilisation ONTAP des LUN de baies
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Pour que ONTAP utilise des LUN de baie, un administrateur de baie de stockage doit d'abord créer des LUN sur la baie de stockage et les mettre à disposition de ONTAP. L'administrateur ONTAP doit ensuite configurer ONTAP pour qu'il utilise les LUN de baie mises à disposition par la baie de stockage.
+
+La planification du provisionnement des LUN de baie à l'usage de ONTAP inclut les considérations suivantes :
+
+* Types de LUN de baies pris en charge par ONTAP
+* Tailles minimale et maximale des LUN de baie ONTAP
+* Le nombre de LUN de baies dont vous avez besoin
+
+
+[NOTE]
+====
+ONTAP considère qu'une LUN de baie est un disque virtuel.
+
+====

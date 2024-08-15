@@ -1,0 +1,34 @@
+---
+permalink: install/concept_what_happens_when_a_link_failure_occurs.html 
+sidebar: sidebar 
+keywords: happens, link, failure, occurs 
+summary: 'ONTAP surveille périodiquement l"utilisation d"un lien. La réponse du ONTAP à une défaillance de liaison varie en fonction de l"endroit où la défaillance se produit.' 
+---
+= Que se passe-t-il lorsqu'une défaillance de liaison se produit
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+ONTAP surveille régulièrement l'utilisation d'une liaison. La réponse du ONTAP à une défaillance de liaison varie en fonction de l'endroit où la défaillance se produit.
+
+Le tableau suivant indique ce qui se produit en cas de défaillance dans une configuration FAS :
+
+|===
+| Si une défaillance se produit dans le lien entre... | Alors... 
+
+
+ a| 
+Système ONTAP et commutateur
+ a| 
+ONTAP reçoit immédiatement une notification et envoie le trafic vers l'autre chemin immédiatement.
+
+
+
+ a| 
+Et la matrice de stockage
+ a| 
+ONTAP n'est pas immédiatement conscient qu'il y a une défaillance de liaison car la liaison est toujours établie entre le système ONTAP et le commutateur. ONTAP est conscient que la défaillance se produit lorsque les E/S sont hors service. ONTAP tente trois fois d'envoyer le trafic sur le chemin d'origine, puis il bascule le trafic vers l'autre chemin.
+
+|===

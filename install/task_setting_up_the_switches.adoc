@@ -1,0 +1,78 @@
+---
+permalink: install/task_setting_up_the_switches.html 
+sidebar: sidebar 
+keywords: set, up, switches 
+summary: 'La configuration des switchs s"effectue généralement par l"administrateur du stockage ou du SAN. Les switchs doivent être zonés de sorte que les systèmes ONTAP et les baies de stockage puissent se voir mutuellement. Vous devez utiliser la segmentation à un seul initiateur comme stratégie de segmentation.' 
+---
+= Configuration des commutateurs
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La configuration des switchs s'effectue généralement par l'administrateur du stockage ou du SAN. Les switchs doivent être zonés de sorte que les systèmes ONTAP et les baies de stockage puissent se voir mutuellement. Vous devez utiliser la segmentation à un seul initiateur comme stratégie de segmentation.
+
+.Étapes
+. Connectez-vous à la baie de stockage et obtenez les WWPN des adaptateurs FC de la baie de stockage.
+. Utilisez les commandes du commutateur Fibre Channel pour segmenter chaque commutateur de sorte que la baie de stockage et le système ONTAP voient les WWPN des autres.
++
+Prenons l'exemple suivant de systèmes ONTAP dans une paire haute disponibilité :
+
++
+image::../media/one_4_port_array_lun_gp.gif[Ce graphique est décrit par le texte environnant.]
+
++
+Dans l'exemple de configuration, les zones sont les suivantes :
+
++
+|===
+| Zone | Système et port ONTAP | Port et contrôleur de matrice de stockage 
+
+
+ a| 
+Contacteur 1
+
+
+
+ a| 
+z1
+ a| 
+vs1, 0a
+ a| 
+Contrôleur 1, 1A
+
+
+
+ a| 
+z2
+ a| 
+vs2, 0a
+ a| 
+Contrôleur 1, 1B
+
+
+
+ a| 
+Contacteur 2
+
+
+
+ a| 
+z3
+ a| 
+vs1, 0c
+ a| 
+Contrôleur 2, 2A
+
+
+
+ a| 
+z4
+ a| 
+vs2, 0c
+ a| 
+Contrôleur 2, 2B
+
+|===
+

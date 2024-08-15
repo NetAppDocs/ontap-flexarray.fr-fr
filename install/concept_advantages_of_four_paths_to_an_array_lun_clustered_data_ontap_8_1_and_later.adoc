@@ -1,0 +1,21 @@
+---
+permalink: install/concept_advantages_of_four_paths_to_an_array_lun_clustered_data_ontap_8_1_and_later.html 
+sidebar: sidebar 
+keywords: advantages, four, paths, array, lun 
+summary: Lorsque vous planifiez le nombre de chemins vers une LUN de baie pour ONTAP, vous devez déterminer si vous souhaitez configurer deux ou quatre chemins. 
+---
+= Avantages de quatre chemins vers une LUN de baie
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Lorsque vous planifiez le nombre de chemins vers une LUN de baie pour ONTAP, vous devez déterminer si vous souhaitez configurer deux ou quatre chemins.
+
+Les avantages de la configuration de quatre chemins vers une LUN de baie sont les suivants :
+
+* Si un commutateur tombe en panne, les deux contrôleurs de matrice de stockage sont toujours disponibles.
+* Si un contrôleur de matrice de stockage tombe en panne, les deux commutateurs sont toujours disponibles.
+* L'équilibrage de la charge passe de quatre chemins à deux.
+

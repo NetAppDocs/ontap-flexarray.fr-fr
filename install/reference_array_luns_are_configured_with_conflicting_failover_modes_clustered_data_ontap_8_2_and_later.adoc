@@ -1,0 +1,130 @@
+---
+permalink: install/reference_array_luns_are_configured_with_conflicting_failover_modes_clustered_data_ontap_8_2_and_later.html 
+sidebar: sidebar 
+keywords: array, luns, configured, conflict, failover, modes 
+summary: ONTAP nécessite que les LUN de baies visibles pour un système ONTAP particulier soient configurées avec le même mode de basculement. Sur certaines baies de stockage, il est possible de configurer des modes de basculement incohérents sur différents chemins vers une LUN de baie. 
+---
+= Les LUN de baie sont configurées avec des modes de basculement conflictuels
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+ONTAP nécessite que les LUN de baies visibles pour un système ONTAP particulier soient configurées avec le même mode de basculement. Sur certaines baies de stockage, il est possible de configurer des modes de basculement incohérents sur différents chemins vers une LUN de baie.
+
+
+
+== Les erreurs de stockage affichent le message
+
+[listing]
+----
+NAME(UID): This array LUN is configured with conflicting failover modes. Each path to this LUN must use the same mode.
+----
+
+
+== Explication
+
+Sur certaines baies de stockage, par exemple les baies de stockage EMC CLARiiON, le mode de basculement peut être défini par le port FC initiator. Sur ces baies de stockage, il est possible de définir des modes de basculement incohérents pour les LUN de baie visibles par les initiateurs FC sur le même système ONTAP. ONTAP ne prend pas en charge les modes de basculement incohérents pour les chemins vers une LUN de baie à partir d'un système ONTAP particulier.
+
+Si votre baie de stockage permet de définir le mode de basculement d'une LUN de baie par un initiateur FC, une partie du processus de validation de l'installation doit inclure la vérification pour s'assurer qu'il n'y a pas de problème avec les paramètres du mode de basculement pour les LUN de baie visibles par le système ONTAP. La `storage errors show` commande vous alerte lorsque les paramètres du mode de basculement des LUN de baies sont incohérents et génère un message EMS.
+
+Bien que votre système puisse fonctionner avec des paramètres de mode de basculement LUN de baie incohérents, vous devez résoudre ce problème dès que possible. Dans le cas contraire, si un chemin tombe en panne, le système ONTAP risque de ne pas fonctionner correctement, il se peut que le basculement ne se produise pas ou que le système fonctionne de manière incohérente.
+
+[NOTE]
+====
+ONTAP prend en charge différents paramètres de mode de basculement entre les nœuds exécutant ONTAP. Par exemple, le nœud A peut utiliser le mode actif-passif pour les chemins d'accès à une LUN de baie, et le nœud B peut utiliser le protocole ALUA pour les chemins d'accès à la même LUN de baie.
+
+====
+
+
+== Dépannage et résolution des problèmes
+
+Le mode de basculement du premier chemin découvert par ONTAP lors de l'initialisation de la LUN est le mode de basculement attendu par ONTAP pour tous les chemins d'accès à la LUN depuis un système ONTAP spécifique. Si le mode de basculement des chemins découverts suivants ne correspond pas au mode de basculement du premier chemin, ONTAP émet un message d'erreur.
+
+Dans l'exemple suivant `storage errors show` , ONTAP vous indique que le mode de basculement de la LUN EMC-1.128, visible sur l'initiateur FC 0a mysystem1, est _Proprietary_ et que le mode de basculement est différent du mode de basculement découvert par ONTAP sur le premier chemin de cette LUN de baie.
+
+[listing]
+----
+
+mysystem1::> storage errors show
+EMC-1.128 (60060160e1b0220008071baf6046e211): hba 0a port 500601603ce014de mode Proprietary: This array LUN is configured with conflicting failover modes. Each path to this LUN must use the same mode.
+
+Disk: EMC-1.128
+UID: 60060160:E1B02200:1C65EB20:BFF7E111:00000000:00000000:00000000:...
+----
+Vous devez résoudre le problème de non-concordance de basculement sur la matrice de stockage. Cependant, la procédure complète de résolution de l'incohérence dépend de la capacité du mode de basculement détecté par ONTAP sur le premier chemin à utiliser pour tous les chemins de ce système ONTAP vers la LUN de la baie.
+
+. Saisissez `storage errors show` si vous ne l'avez pas déjà fait dans le cadre de votre processus de vérification de l'installation.
++
+[NOTE]
+====
+La `storage array config` commande vous indique d'exécuter `storage error show` si un problème doit être résolu.
+
+====
+. Vérifiez `storage errors show` le résultat pour déterminer le paramètre de mode de basculement de la LUN de la baie qui n'est pas cohérent avec le mode de basculement attendu par ONTAP.
++
+|===
+| Si le mode de basculement détecté par le système sur le premier chemin est... | Exemple | Vous devez... 
+
+
+ a| 
+Ce que vous voulez
+ a| 
+Vous voulez qu'un mode de basculement d'ALUA et d'ALUA soit le mode de basculement détecté par ONTAP pour le premier chemin.
+ a| 
+Modifiez, sur la baie de stockage, le mode de basculement de l'initiateur identifié par ONTAP dans le message d'erreur. Passez à l'étape 3.
+
+
+
+ a| 
+Pas ce que vous voulez
+ a| 
+Vous souhaitez disposer d'un mode de basculement actif/passif, mais ALUA est le mode de basculement détecté par ONTAP pour le premier chemin.
+ a| 
+Supprimez le LUN de la baie de la vue du système ONTAP. Passez à l'étape 4.
+
+|===
+. Si vous devez modifier le mode de basculement de l'initiateur, procédez comme suit pour corriger la discordance.
++
+Utilisez cette étape si le mode de basculement détecté par le système sur le premier chemin _est_ ce que vous voulez.
+
++
+.. Dans ONTAP, mettez le second chemin hors ligne.
+.. Sur la baie de stockage, modifiez le mode de basculement de l'initiateur identifié par ONTAP dans le message d'erreur.
+.. Dans ONTAP, remettez le deuxième chemin en ligne.
+
+
+. Si vous devez supprimer la LUN de la baie de la vue du système ONTAP pour corriger la discordance, sélectionnez l'une des méthodes suivantes, selon que les LUN de baie sont des unités de rechange ou dans un agrégat.
++
+Vous utiliseriez l'une de ces méthodes si le mode de basculement détecté par le système sur le premier chemin _n'est pas_ ce que vous voulez.
+
++
+|===
+| Méthode 1 : les LUN de baies concernées sont des spares (ne font pas partie d'un agrégat) | Méthode 2 : les LUN affectées se trouvent dans un agrégat 
+
+
+ a| 
+Avec cette méthode, le système ONTAP n'a pas besoin d'être redémarré.
+
+.. Dans ONTAP, exécutez la commande suivante pour chaque LUN de spare concernée : `disk remove_ownership LUNfullname`
+.. Sur la baie de stockage, masquez chaque LUN de baie affectée sur tous les chemins d'accès au système ONTAP.
+.. Attendez environ une minute, puis vérifiez que les LUN de baie ne sont plus visibles pour le système ONTAP.
+.. Définissez le même mode de basculement pour chaque initiateur FC sur le système ONTAP.
+.. Présentez à nouveau toutes les LUN de baie affectées au système ONTAP.
++
+ONTAP doit détecter les LUN lors de la prochaine exécution de la découverte des LUN
+
+.. Exécutez `storage errors show` pour confirmer qu'il n'y a plus d'erreur de mode de basculement.
+
+ a| 
+Avec cette méthode, le système ONTAP doit être redémarré.
+
+.. Redémarrez le système ONTAP et maintenez-le enfoncé à l'invite Loader.
+.. Sur la baie de stockage, vérifiez les paramètres du mode de basculement sur les initiateurs FC de ce système et mettez-les à jour selon les besoins pour le mode de basculement souhaité.
+.. Redémarrez le système ONTAP.
+.. Exécutez `storage errors show` pour confirmer qu'il n'y a plus d'erreur de mode de basculement.
+
+
+|===
+

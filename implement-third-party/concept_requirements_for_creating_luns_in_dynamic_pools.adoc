@@ -1,0 +1,14 @@
+---
+permalink: implement-third-party/concept_requirements_for_creating_luns_in_dynamic_pools.html 
+sidebar: sidebar 
+keywords: requirements, creating, luns, dynamic pools 
+summary: Lors de la création de LUN dans les pools dynamiques, ne surprovisionnez pas la capacité du pool. 
+---
+= Conditions requises pour la création de LUN dans des pools dynamiques
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Lors de la création de LUN dans les pools dynamiques, ne surprovisionnez pas la capacité du pool.

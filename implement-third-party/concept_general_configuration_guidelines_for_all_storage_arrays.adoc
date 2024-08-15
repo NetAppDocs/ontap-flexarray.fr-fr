@@ -1,0 +1,14 @@
+---
+permalink: implement-third-party/concept_general_configuration_guidelines_for_all_storage_arrays.html 
+sidebar: sidebar 
+keywords: configuration, guidelines, storage, arrays 
+summary: Vous devez suivre certaines instructions de configuration pour toutes les baies de stockage prises en charge par ONTAP. 
+---
+= Instructions de configuration générales pour toutes les baies de stockage
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez suivre certaines instructions de configuration pour toutes les baies de stockage prises en charge par ONTAP.

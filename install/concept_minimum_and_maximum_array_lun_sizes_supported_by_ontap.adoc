@@ -1,0 +1,47 @@
+---
+permalink: install/concept_minimum_and_maximum_array_lun_sizes_supported_by_ontap.html 
+sidebar: sidebar 
+keywords: minimum, maximum, array, lun, sizes, supported, ontap, configurations 
+summary: 'Les LUN de baie présentées à partir des baies de stockage doivent respecter les exigences de taille minimale et maximale pour une configuration ONTAP avec des LUN de baie. ONTAP émet un message d"erreur identifiant une LUN de baie qui ne respecte pas les exigences de taille minimale ou maximale.' 
+---
+= Tailles minimales et maximales de LUN de baie prises en charge pour les configurations ONTAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Les LUN de baie présentées à partir des baies de stockage doivent respecter les exigences de taille minimale et maximale pour une configuration ONTAP avec des LUN de baie. ONTAP émet un message d'erreur identifiant une LUN de baie qui ne respecte pas les exigences de taille minimale ou maximale.
+
+Les tailles minimale et maximale des LUN de baie sont calculées en fonction de la façon dont ONTAP définit les unités de mesure. La définition de ONTAP pour un Go et un To est la suivante :
+
+[cols="2*"]
+|===
+| Un... | Égale... 
+
+
+ a| 
+GO
+ a| 
+1000 x 1024 x 1024 octets (1000 Mo)
+
+
+
+ a| 
+TO
+ a| 
+1000 x 1000 x 1024 x 1024 octets (1000 Go)
+
+|===
+Différents fournisseurs de baies de stockage utilisent différentes formules pour calculer les unités de mesure. Vous devez utiliser les unités de mesure de votre fournisseur pour calculer la taille de LUN de la baie équivalente aux tailles minimale et maximale prises en charge par une configuration ONTAP.
+
+La taille de LUN maximale prise en charge par ONTAP diffère de celle prise en charge par ONTAP. Pour plus d'informations sur la taille minimale et maximale des LUN de la baie, reportez-vous au _Hardware Universe_.
+
+[NOTE]
+====
+La taille minimale de LUN de baie pour une LUN de données (stockage) est différente de la taille minimale de LUN de baie pour le volume racine.
+
+====
+*Informations connexes*
+
+https://hwu.netapp.com["NetApp Hardware Universe"]

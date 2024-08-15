@@ -1,0 +1,28 @@
+---
+permalink: install/concept_rules_for_sharing_a_target_port_with_multiple_fc_initiator_ports.html 
+sidebar: sidebar 
+keywords: rules, share, target, port, multiple, fc initiator 
+summary: 'La connexion d"un maximum de deux ports initiateurs FC ONTAP à un port cible unique de la matrice de stockage est prise en charge. Chaque port cible est zoné en deux ports FC initiator, un à partir de chaque nœud du cluster. Le partage d"un port cible connecté à des systèmes ONTAP avec un autre hôte n"est pas pris en charge.' 
+---
+= Règles de partage d'un port cible avec plusieurs ports FC initiator
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La connexion d'un maximum de deux ports initiateurs FC ONTAP à un port cible unique de la matrice de stockage est prise en charge. Chaque port cible est zoné en deux ports FC initiator, un à partir de chaque nœud du cluster. Le partage d'un port cible connecté à des systèmes ONTAP avec un autre hôte n'est pas pris en charge.
+
+Le partage d'un port cible avec plusieurs initiateurs permet d'optimiser l'utilisation des ports de la matrice de stockage pour la connectivité avec les systèmes ONTAP.
+
+Les règles de cette configuration sont les suivantes :
+
+* Lorsque les systèmes ONTAP font partie d'une paire haute disponibilité, chaque nœud peut partager le même port FC initiator avec le même port cible.
+* Toutes les baies de stockage doivent provenir du même fournisseur et de la même famille de modèles.
+* La connexion d'un port cible unique à plusieurs ports FC initiator est prise en charge dans les configurations MetroCluster.
+* La meilleure pratique pour la segmentation consiste à faire en sorte que chaque paire de ports FC initiator-target se trouve dans une zone distincte (1:1).
+
+
+*Informations connexes*
+
+https://docs.netapp.com/us-en/ontap-metrocluster/install-fc/index.html["Installation et configuration de la solution Fabric-Attached MetroCluster"]

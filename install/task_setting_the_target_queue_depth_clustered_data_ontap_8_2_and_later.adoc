@@ -1,0 +1,41 @@
+---
+permalink: install/task_setting_the_target_queue_depth_clustered_data_ontap_8_2_and_later.html 
+sidebar: sidebar 
+keywords: set, target, queue, depth 
+summary: 'La profondeur de file d"attente cible par défaut est acceptable pour la plupart des implémentations, mais elle peut être modifiée en cas de problèmes de performances.' 
+---
+= Définition de la profondeur de la file d'attente cible
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La profondeur de file d'attente cible par défaut est acceptable pour la plupart des implémentations, mais elle peut être modifiée en cas de problèmes de performances.
+
+Vous pouvez définir la profondeur de la file d'attente cible par matrice de stockage ou par port cible.
+
+.Étape
+. Utilisez l'une des commandes suivantes pour définir la profondeur de file d'attente du port cible sur tous les ports cibles ou sur un port cible spécifique d'une matrice de stockage.
++
+|===
+| Les fonctions que vous recherchez... | Utilisez cette séquence de commandes... 
+
+
+ a| 
+Définissez la profondeur de la file d'attente du port cible sur tous les ports cibles d'une matrice de stockage
+ a| 
+`set advanced` `storage array port modify -name array_name -max-queue-depth value`
+
+
+
+ a| 
+Définissez la profondeur de la file d'attente du port cible sur un port cible spécifique d'une matrice de stockage
+ a| 
+`set advanced` `storage array port modify -name array_name -wwnn value -wwpn value -max-queue-depth value`
+
+|===
++
+Pour plus d'informations sur ces commandes, consultez les pages de manuels.
+
+

@@ -1,0 +1,112 @@
+---
+permalink: install/reference_fewer_than_two_paths_to_an_array_lun.html 
+sidebar: sidebar 
+keywords: fewer, two, paths, array, lun 
+summary: 'Une erreur de mappage, une erreur de zoning ou la chute d"un câble sont des raisons courantes de moins de deux chemins vers une LUN de baie. Le résultat de l"affichage des erreurs de stockage identifie les LUN de baie avec un seul chemin.' 
+---
+= Moins de deux chemins vers une LUN de baie
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Une erreur de mappage, une erreur de zoning ou la chute d'un câble sont des raisons courantes de moins de deux chemins vers une LUN de baie. Le `storage errors show` résultat identifie les LUN de baie avec un seul chemin.
+
+ONTAP nécessite des chemins redondants vers une LUN de baie afin que l'accès à la LUN soit maintenu en cas de défaillance d'un périphérique. Deux chemins doivent exister pour chaque LUN de baie.
+
+
+
+== Les erreurs de stockage affichent le message
+
+[listing]
+----
+
+NAME (UID):  This Array LUN is only available on one path.  Proper configuration requires two paths.
+----
+
+
+== Explication
+
+Voici les raisons pour lesquelles vous voyez moins de deux chemins vers une LUN de baie :
+
+* Le LDEV est mappé sur un seul port de matrice de stockage.
+* Le second chemin vers la LUN de baie n'est pas zoné.
+* Il y a un problème avec le mappage du groupe d'hôtes.
+* Il y a un problème au niveau des connexions du commutateur.
+* Le câble est tombé.
+* Échec des SFP sur l'adaptateur.
+
+
+[NOTE]
+====
+Si un chemin tombe sur un système en cours d'exécution, un message EMS est généré.
+
+====
+
+
+== Scénario de problème
+
+Pour cet exemple d'erreur de mappage, supposons que l'administrateur de stockage a créé un nouveau LDEV Z. l'administrateur a mappé LDEV Z en tant qu'ID de LUN 3 sur le port cible 1A. Cependant, l'administrateur n'a pas mappé le LDEV sur le port cible 2A, comme l'illustre l'illustration suivante. Le résultat n'est qu'un chemin vers la LUN de la baie.
+
+image::../media/ldev_mapped_on_only_one_array_port.gif[Ce graphique est décrit dans le texte qui l'entoure.]
+
+Lorsque cette erreur est commise, le `storage array config show` résultat de la commande affiche un seul chemin vers la LUN, comme l'exemple suivant l'indique.
+
+[listing]
+----
+
+mysystem1::> storage array config show
+           LUN     LUN
+Node       Group   Count  Array Name    Array Target Ports      Switch Port   Initiator
+-------   -------  -----  ----------   -------------------      -----------    ---------
+mysystem1a    0      1    DGC_RAID5_1  20:1A:00:a0:b8:0f:ee:04  vnbr20es25:5   0a
+
+Warning: Configuration errors were detected.  Use 'storage errors show' for detailed information.
+----
+ `storage errors show`La commande fournit les détails dont vous avez besoin pour déterminer quelle LUN a moins de deux chemins d'accès.
+
+[listing]
+----
+
+mysystem1a::> storage errors show
+Disk: EMC-1.2
+UID: 600508B4:000B6314:00008000:00200000:00000000:00000000:00000000:...
+--------------------
+EMC-1.2 (600508b4000b63140000800000200000): This array LUN is only available on one path. Proper configuration requires two paths.
+----
+[NOTE]
+====
+L'UID de cet exemple est 600508B4:000B6314:00008000:00200000:00000000:00000000:00000000:00000000:00000000:00000000. Il est tronqué en raison de l'espace.
+
+====
+
+
+== Dépannage et résolution des problèmes
+
+Il est utile d'examiner à la fois `storage array config show` les erreurs de sortie et de stockage indiquent la sortie lors du dépannage de moins de deux chemins vers une LUN de baie.
+
+. Vérifiez le `storage errors show` résultat pour obtenir le numéro de série de la LUN de la baie disponible sur un seul chemin.
+. Vérifiez le `storage array config show` résultat pour essayer d'isoler la cause du problème.
++
+|===
+| Si le `storage array config show` résultat indique... | La cause est très probable... 
+
+
+ a| 
+Autres LUN de baie
+ a| 
+Erreur de mappage
+
+
+
+ a| 
+Aucune autre LUN de baie
+ a| 
+Erreur de câblage, erreur de segmentation ou problème matériel
+
+|===
+. Si la cause est une erreur de mappage, demandez à l'administrateur de la matrice de stockage de mapper la LUN de la baie identifiée à deux ports de matrice de stockage redondants.
+. Si la cause semble être un problème autre que le mappage, vérifiez le zoning, le mappage de groupe d'hôtes, le câblage et la connectivité.
+. Une fois le problème résolu, exécutez `storage array config show` à nouveau pour confirmer que l'erreur est corrigée.
+

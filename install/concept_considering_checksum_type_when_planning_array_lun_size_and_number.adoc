@@ -1,0 +1,16 @@
+---
+permalink: install/concept_considering_checksum_type_when_planning_array_lun_size_and_number.html 
+sidebar: sidebar 
+keywords: consider, checksum, type, plan, array, lun, size, number 
+summary: 'Lors de la planification du nombre et de la taille de LUN de baie nécessaires pour ONTAP, vous devez tenir compte de l"impact du type de checksum sur la quantité d"espace utilisable dans la LUN de baie. Un type de checksum doit être spécifié pour chaque LUN de baie attribuée à un système ONTAP.' 
+---
+= Prise en compte du type de checksum lors de la planification de la taille et du nombre de LUN de la baie
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Lors de la planification du nombre et de la taille de LUN de baie nécessaires pour ONTAP, vous devez tenir compte de l'impact du type de checksum sur la quantité d'espace utilisable dans la LUN de baie. Un type de checksum doit être spécifié pour chaque LUN de baie attribuée à un système ONTAP.
+
+Lorsqu'une LUN de baie sur la baie de stockage est mappée pour être utilisée par un système ONTAP , ONTAP traite la LUN de baie comme un disque brut non formaté. Lorsque vous attribuez une LUN de baie à un système ONTAP, vous spécifiez le type de somme de contrôle, qui indique à ONTAP comment formater la LUN de baie brute. L'impact du type de checksum sur l'espace utilisable dépend du type de checksum que vous spécifiez pour la LUN.

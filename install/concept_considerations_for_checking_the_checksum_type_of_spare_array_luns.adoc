@@ -1,0 +1,28 @@
+---
+permalink: install/concept_considerations_for_checking_the_checksum_type_of_spare_array_luns.html 
+sidebar: sidebar 
+keywords: checksum, type, considerations, add, spare, array, luns, aggregates 
+summary: 'Vous devez tenir compte de certaines considérations relatives aux types de checksum lors de l"ajout de LUN de baie de rechange à des agrégats. Par exemple, si vous prévoyez d"ajouter une LUN de baie de secours à un agrégat en spécifiant son nom, vous devez vous assurer que la LUN de baie et l"agrégat ont le même type de checksum.' 
+---
+= Considérations relatives au type de checksum pour l'ajout de LUN de baie de spare à des agrégats
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez tenir compte de certaines considérations relatives aux types de checksum lors de l'ajout de LUN de baie de rechange à des agrégats. Par exemple, si vous prévoyez d'ajouter une LUN de baie de secours à un agrégat en spécifiant son nom, vous devez vous assurer que la LUN de baie et l'agrégat ont le même type de checksum.
+
+Voici quelques considérations relatives au type de checksum pour l'ajout de LUN de baie de secours à des agrégats :
+
+* Vous ne pouvez pas mélanger des LUN de baies de différents types de checksum dans un agrégat de LUN de baie.
+* Si vous spécifiez un certain nombre de LUN de baie de secours à ajouter à un agrégat, ONTAP sélectionne par défaut les LUN de baie du même type de checksum que l'agrégat.
+* Les LUN de baie de type checksum zonée lorsqu'elles sont ajoutées à un agrégat checksum zoné existant continuent d'être zonées LUNs de baie de contrôle.
+* Les LUN de baie de réserve de somme de contrôle zonée ajoutées à un agrégat de type Advanced zone Checksum (AZC) utilisent le schéma de somme de contrôle AZCS.
+
+
+[NOTE]
+====
+Vous pouvez vérifier le type de checksum des LUN de baie de spare à l'aide de la `storage disk show` commande. Pour plus d'informations sur la commande, consultez les pages de manuels.
+
+====

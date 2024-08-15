@@ -1,0 +1,32 @@
+---
+permalink: install/concept_when_to_check_for_redundant_paths_to_array_luns.html 
+sidebar: sidebar 
+keywords: when, check, redundant, paths, array, luns 
+summary: 'Vous devez vérifier les chemins redondants vers une LUN de baie après l"installation et pendant les activités de maintenance de la structure.' 
+---
+= Quand vérifier les chemins redondants vers les LUN de baie
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez vérifier les chemins redondants vers une LUN de baie après l'installation et pendant les activités de maintenance de la structure.
+
+Vous devez vérifier à nouveau la redondance des chemins lors de l'exécution des activités suivantes :
+
+* Installation initiale
+* Maintenance de la structure, par exemple :
++
+** Avant, pendant et après une mise à niveau de l'infrastructure
+** Avant et après la mise hors service d'un commutateur pour entretien
++
+Assurez-vous que les chemins ont été configurés en tant que chemins redondants avant de supprimer un commutateur entre les systèmes ONTAP et la baie de stockage, de sorte que l'accès aux LUN de la baie ne soit pas interrompu.
+
+** Avant et après la maintenance du matériel sur une matrice de stockage
++
+Par exemple, vous devez vérifier à nouveau la redondance de chemin lors de la maintenance du composant matériel sur lequel se trouvent les adaptateurs hôte et les ports. (Le nom de ce composant varie selon les modèles de matrice de stockage).
+
+
+
+

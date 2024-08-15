@@ -1,0 +1,34 @@
+---
+permalink: install/reference_factors_impacting_the_required_number_of_array_luns.html 
+sidebar: sidebar 
+keywords: factors, impact, required, number, array, luns 
+summary: 'Lors de la planification de l"utilisation de ONTAP pour les LUN de baie, vous devez tenir compte de facteurs tels que la taille de LUN de baie, la surcharge ONTAP et le type de checksum qui ont un impact sur le nombre de LUN de baie requis dans votre environnement ONTAP.' 
+---
+= Facteurs ayant un impact sur le nombre requis de LUN de baies
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Lors de la planification de l'utilisation de ONTAP pour les LUN de baie, vous devez tenir compte de facteurs tels que la taille de LUN de baie, la surcharge ONTAP et le type de checksum qui ont un impact sur le nombre de LUN de baie requis dans votre environnement ONTAP.
+
+Pour déterminer le nombre requis de LUN de baies, tenez compte des points suivants :
+
+* Plus les LUN de baie sont petites, plus le nombre de LUN requis pour le stockage est important.
++
+Dans l'idéal, il est recommandé de créer une LUN de baie de stockage de grande taille à partir d'un groupe RAID de matrice de stockage donné.
+
+* Les limites de périphériques définissent le nombre maximal de disques et de LUN de baies pouvant être affectés à un système ONTAP.
++
+Le _Hardware Universe_ contient des informations sur les limites de périphérique.
+
+* Plus l'espace utilisable d'une LUN de baie est important, moins il y a de LUN de baie requises.
++
+La quantité d'espace utilisable dans une LUN de baie est déterminée par l'espace requis par ONTAP, le type de checksum et des facteurs supplémentaires tels que l'espace requis pour les réserves Snapshot facultatives.
+
+* Différentes applications génèrent des charges différentes.
++
+Lors de la détermination de l'affectation des LUN de baie aux systèmes ONTAP, vous devez tenir compte du stockage à utiliser et du nombre de requêtes susceptibles d'être générées par des applications différentes.
+
+

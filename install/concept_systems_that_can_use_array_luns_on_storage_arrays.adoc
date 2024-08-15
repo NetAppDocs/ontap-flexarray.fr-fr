@@ -1,0 +1,20 @@
+---
+permalink: install/concept_systems_that_can_use_array_luns_on_storage_arrays.html 
+sidebar: sidebar 
+keywords: ontap, systems, use, array, luns, storage 
+summary: Vous pouvez utiliser des systèmes FAS et V-Series pris en charge avec des LUN de baies. 
+---
+= Systèmes ONTAP qui peuvent utiliser des LUN de baie sur des baies de stockage
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez utiliser des systèmes FAS et V-Series pris en charge avec des LUN de baies.
+
+La matrice d'interopérabilité NetApp répertorie les combinaisons matérielles et logicielles prises en charge.
+
+*Informations connexes*
+
+https://mysupport.netapp.com/matrix["Matrice d'interopérabilité NetApp"]

@@ -1,0 +1,24 @@
+---
+permalink: install/concept_spare_core_array_lun_requirement_for_core_dumps.html 
+sidebar: sidebar 
+keywords: spare, array, lun, requirement, core, dumps 
+summary: 'Pour les systèmes ONTAP autonomes et les nœuds de paires haute disponibilité, vous devez créer une LUN de baie de secours de taille adéquate pour contenir les « core dumps » si aucun disque de secours n"est disponible.' 
+---
+= Exigence LUN de baie de secours pour les « core dumps »
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Pour les systèmes ONTAP autonomes et les nœuds de paires haute disponibilité, vous devez créer une LUN de baie de secours de taille adéquate pour contenir les « core dumps » si aucun disque de secours n'est disponible.
+
+Sur un système qui utilise à la fois des disques et des LUN de baie, une LUN de baie de spare n'est pas requise pour un « core dump » si un disque de spare est disponible. Si ni une LUN de baie de secours ni un disque de secours ne sont disponibles, il n'y a pas de place pour le core à vider.
+
+Un « core dump » contient le contenu de la mémoire et de NVRAM. Lors d'une panne système, ONTAP vire le cœur vers une LUN de baie de secours ou un disque de secours, si un disque de secours existe. Au redémarrage, le « core » est lu depuis la réserve et enregistré dans un « core dump » du système de fichiers racine. Le support technique peut ensuite utiliser le « core dump » pour vous aider à résoudre le problème.
+
+Le _Hardware Universe_ contient la taille minimale de LUN de baie de disques de réserve pour chaque plate-forme.
+
+*Informations connexes*
+
+https://hwu.netapp.com["NetApp Hardware Universe"]

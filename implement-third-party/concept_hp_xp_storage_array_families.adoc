@@ -1,0 +1,34 @@
+---
+permalink: implement-third-party/concept_hp_xp_storage_array_families.html 
+sidebar: sidebar 
+keywords: hp, xp, storage, array, families 
+summary: ONTAP ne prend pas en charge le mélange de certains types de stockage dans les agrégats. Pour vous aider à déterminer les LUN de baie qui peuvent être associées dans un agrégat, les baies de stockage de chaque fournisseur sont regroupées en familles. Lorsque vous créez des agrégats, vous ne pouvez pas combiner des LUN de baie de différents fournisseurs et des familles de baies de stockage différentes dans un même agrégat. 
+---
+= Gammes de matrices de stockage HP XP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+ONTAP ne prend pas en charge le mélange de certains types de stockage dans les agrégats. Pour vous aider à déterminer les LUN de baie qui peuvent être associées dans un agrégat, les baies de stockage de chaque fournisseur sont regroupées en familles. Lorsque vous créez des agrégats, vous ne pouvez pas combiner des LUN de baie de différents fournisseurs et des familles de baies de stockage différentes dans un même agrégat.
+
+Les baies de stockage de la même famille partagent les mêmes performances et les mêmes caractéristiques de basculement. Par exemple, les membres de la même famille effectuent tous un basculement actif-actif ou tous un basculement actif-passif. Plusieurs facteurs peuvent être utilisés pour déterminer les familles de baies de stockage. Par exemple, les baies de stockage ayant des architectures différentes se trouvent dans des familles différentes, même si les autres caractéristiques peuvent être identiques.
+
+La liste suivante présente les baies de stockage organisées par famille :
+
+La liste suivante indique la famille de matrices de stockage HP XP prises en charge par les systèmes ONTAP :
+
+* Famille 1
++
+** P9500
+** XP7
+
+
+
+
+La matrice d'interopérabilité est la référence en matière d'informations sur les baies de stockage prises en charge par chaque fournisseur.
+
+*Informations connexes*
+
+https://mysupport.netapp.com/matrix["Matrice d'interopérabilité NetApp"]

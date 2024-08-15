@@ -1,0 +1,67 @@
+---
+permalink: install/task_getting_started_with_troubleshooting.html 
+sidebar: sidebar 
+keywords: get, started, troubleshoot, ontap, configuration, array, luns 
+summary: 'Lors du dépannage d"une configuration ONTAP avec des LUN de baie, vous devez suivre une approche systématique pour déterminer la cause du problème.' 
+---
+= Mise en route du dépannage d'une configuration ONTAP avec des LUN de baie
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Lors du dépannage d'une configuration ONTAP avec des LUN de baie, vous devez suivre une approche systématique pour déterminer la cause du problème.
+
+Cette procédure suggère un ordre d'approche du dépannage.
+
+[NOTE]
+====
+Au fur et à mesure que vous poursuivez les étapes de dépannage, vous devez enregistrer toutes les informations que vous recueillez sur le problème afin que vous puissiez fournir ces informations au support technique en cas de réaffectation.
+
+====
+.Étapes
+. Déterminez si le problème se situe au niveau de _front end_ (un problème ONTAP affectant toutes les plates-formes correspondantes) ou du _back end_ (un problème avec la configuration du commutateur ou de la baie de stockage).
++
+Par exemple, si vous essayez d'utiliser une fonction ONTAP et qu'elle ne fonctionne pas comme vous l'aviez prévu, le problème est probablement lié à l'interface
+
+. Prendre les mesures appropriées pour résoudre le problème, selon sa nature :
++
+|===
+| Si la configuration ONTAP a un... | Alors, procédez comme ça... 
+
+
+ a| 
+Problème frontal
+ a| 
+Procédez au dépannage de la fonction ONTAP en suivant les instructions des guides ONTAP.
+
+https://docs.netapp.com/us-en/ontap/index.html["Documentation ONTAP 9"^]
+
+
+
+ a| 
+Problème interne
+ a| 
+.. Vérifiez la matrice d'interopérabilité pour vous assurer que les éléments suivants sont pris en charge : configuration, matrice de stockage, micrologiciel de baie de stockage, commutateur et micrologiciel de commutateur.
++
+https://mysupport.netapp.com/matrix["Matrice d'interopérabilité NetApp"^]
+
+.. Utilisez `storage array config show` la commande pour vérifier s'il existe des erreurs de configuration back-end courantes que le système peut détecter.
++
+Si ONTAP détecte une erreur de configuration interne, vous devez exécuter `storage errors show` la commande pour obtenir des détails sur l'erreur.
+
+
+
+|===
+. Si la cause du problème n'est toujours pas claire, vérifiez les sources suivantes pour vous assurer que votre système est conforme à la configuration requise pour travailler avec des baies de stockage :
++
+** xref:concept_verifying_an_installation_with_storage_arrays.adoc[Vérification d'une installation avec des matrices de stockage]
+** https://docs.netapp.com/us-en/ontap-flexarray/implement-third-party/index.html["Implémentation de la virtualisation FlexArray pour stockage tiers"]
+** https://docs.netapp.com/us-en/ontap-flexarray/implement-e-series/index.html["Implémentation de la virtualisation FlexArray pour le stockage NetApp E-Series"]
+** https://mysupport.netapp.com/matrix["Matrice d'interopérabilité NetApp"^]
+** https://hwu.netapp.com["NetApp Hardware Universe"^]
+
+
+. Si vous avez toujours besoin d'aide pour résoudre le problème, contactez le support technique.
+

@@ -1,0 +1,28 @@
+---
+permalink: install/reference_reasons_storage_arrays_are_missing_from_command_output.html 
+sidebar: sidebar 
+keywords: reasons, storage, arrays, miss, command, output 
+summary: 'Une matrice de stockage qui n"est pas connectée au système ONTAP n"apparaît pas dans la sortie d"affichage de la configuration de la matrice de stockage. Les problèmes de câblage, de segmentation et de configuration de groupe d"hôtes peuvent empêcher une connexion entre les deux périphériques.' 
+---
+= Raisons pour lesquelles les baies de stockage manquent dans la sortie de la commande
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Une matrice de stockage qui n'est pas connectée au système ONTAP n'apparaît pas dans la `storage array config show` sortie. Les problèmes de câblage, de segmentation et de configuration de groupe d'hôtes peuvent empêcher une connexion entre les deux périphériques.
+
+
+
+== Résolution du problème
+
+. Vérifiez le câblage, la configuration des groupes d'hôtes et la segmentation comme suit :
++
+** Vérifiez que les câbles sont branchés.
+** Vérifier que les WWPN des initiateurs FC sur les systèmes ONTAP font partie du groupe d'hôtes.
+** Vérifiez que la baie de stockage et l'initiateur FC se trouvent dans la même zone.
+
+
+. Une fois le problème résolu, exécutez `storage array config show` ONTAP pour confirmer que le problème a été résolu.
+

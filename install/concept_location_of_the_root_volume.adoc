@@ -1,0 +1,30 @@
+---
+permalink: install/concept_location_of_the_root_volume.html 
+sidebar: sidebar 
+keywords: location, root, volume 
+summary: 'L"emplacement du volume racine dépend du fait que le système ONTAP soit pré-commandé avec des disques natifs ou que vous ajoutiez des disques à un système ONTAP configuré pour les LUN de baies.' 
+---
+= Emplacement du volume racine
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+L'emplacement du volume racine dépend du fait que le système ONTAP soit pré-commandé avec des disques natifs ou que vous ajoutiez des disques à un système ONTAP configuré pour les LUN de baies.
+
+Pour déterminer l'emplacement du volume root sur le système ONTAP, suivez les instructions ci-dessous :
+
+* Le volume racine peut se trouver sur une baie de stockage ou sur un tiroir disque natif.
++
+Cependant, vous devez installer le volume racine sur un disque natif si le système ONTAP possède à la fois des disques natifs et des LUN de baie.
+
++
+Si vous commandez un système de stockage avec des disques, l'usine installe le volume racine sur un disque natif.
+
+* Dans une paire haute disponibilité, il est recommandé que le volume racine se trouve sur le même type de stockage pour les deux nœuds, soit sur un tiroir disque natif, soit sur une baie de stockage pour les deux nœuds.
+* Pour les configurations MetroCluster avec disques et LUN de baie, vous devez créer le volume racine sur un disque si vous configurez une nouvelle configuration.
++
+Si vous ajoutez des disques à une configuration MetroCluster existante avec des LUN de baie, vous pouvez laisser le volume racine sur une LUN de baie.
+
+

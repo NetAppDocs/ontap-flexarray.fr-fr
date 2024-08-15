@@ -1,0 +1,28 @@
+---
+permalink: install/concept_elements_that_reduce_the_usable_space_in_an_array_lun.html 
+sidebar: sidebar 
+keywords: elements, reduce, usable, space, array, lun 
+summary: 'Plusieurs facteurs ont un impact sur l"espace utilisable dans une LUN de baie. Lors de la planification du nombre et de la taille requis des LUN de baie, vous devez tenir compte de l"espace utilisable dans la LUN de baie en fonction du type de checksum que vous utilisez et des éléments que vous pouvez configurer.' 
+---
+= Éléments qui réduisent l'espace utilisable dans une LUN de baie
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Plusieurs facteurs ont un impact sur l'espace utilisable dans une LUN de baie. Lors de la planification du nombre et de la taille requis des LUN de baie, vous devez tenir compte de l'espace utilisable dans la LUN de baie en fonction du type de checksum que vous utilisez et des éléments que vous pouvez configurer.
+
+Lors du calcul de l'espace utilisable dans une LUN de baie, vous devez tenir compte des facteurs suivants qui réduisent l'espace utilisable de la LUN :
+
+* Espace réservé à ONTAP
+* Espace pour le « core dump »
+* Réserve Snapshot au niveau des volumes
+* Copie Snapshot au niveau de l'agrégat
+* Type de checksum (vous attribuez un type) :
++
+** Somme de contrôle de bloc (BCS)
+** Total de contrôle zoné avancé (AZC)
+
+
+

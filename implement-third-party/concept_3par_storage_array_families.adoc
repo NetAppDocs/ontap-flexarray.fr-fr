@@ -1,0 +1,42 @@
+---
+permalink: implement-third-party/concept_3par_storage_array_families.html 
+sidebar: sidebar 
+keywords: 3par, storage, array, families 
+summary: ONTAP ne prend pas en charge le mélange de certains types de stockage dans les agrégats. Pour vous aider à déterminer les LUN de baie qui peuvent être associées dans un agrégat, les baies de stockage de chaque fournisseur sont regroupées en familles. Lorsque vous créez des agrégats, vous ne pouvez pas combiner des LUN de baie de différents fournisseurs et des familles de baies de stockage différentes dans un même agrégat. 
+---
+= Gammes de baies de stockage 3PAR
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+ONTAP ne prend pas en charge le mélange de certains types de stockage dans les agrégats. Pour vous aider à déterminer les LUN de baie qui peuvent être associées dans un agrégat, les baies de stockage de chaque fournisseur sont regroupées en familles. Lorsque vous créez des agrégats, vous ne pouvez pas combiner des LUN de baie de différents fournisseurs et des familles de baies de stockage différentes dans un même agrégat.
+
+Les baies de stockage de la même famille partagent les mêmes performances et les mêmes caractéristiques de basculement. Par exemple, les membres de la même famille effectuent tous un basculement actif-actif ou tous un basculement actif-passif. Plusieurs facteurs peuvent être utilisés pour déterminer les familles de baies de stockage. Par exemple, les baies de stockage ayant des architectures différentes se trouvent dans des familles différentes, même si les autres caractéristiques peuvent être identiques.
+
+La liste ci-dessous présente les baies de stockage 3PAR prises en charge, organisées par différentes familles :
+
+* Gamme 1 : stockage 3PAR InServ
++
+** Tx00
+
+
+* Gamme 2 : stockage 3PAR InServ
++
+** Fx00
+
+
+* Gamme 3 : stockage 3PAR StoreServ
++
+** 20000
+** 208xx
+
+
+
+
+La matrice d'interopérabilité est la référence en matière d'informations sur les baies de stockage prises en charge par chaque fournisseur.
+
+*Informations connexes*
+
+https://mysupport.netapp.com/matrix["Matrice d'interopérabilité NetApp"]

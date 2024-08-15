@@ -1,0 +1,14 @@
+---
+permalink: implement-third-party/reference_emc_vnx_storage_arrays.html 
+sidebar: sidebar 
+keywords: emc, vnx, storage, arrays 
+summary: 'Vous devez répondre à des exigences spécifiques lors de la configuration des baies de stockage EMC VNX pour qu"elles fonctionnent avec les systèmes ONTAP qui utilisent les LUN de baies. Ces exigences incluent la définition de paramètres de configuration sur vos baies de stockage et le déploiement de configurations prises en charge uniquement.' 
+---
+= Baies de stockage EMC VNX
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez répondre à des exigences spécifiques lors de la configuration des baies de stockage EMC VNX pour qu'elles fonctionnent avec les systèmes ONTAP qui utilisent les LUN de baies. Ces exigences incluent la définition de paramètres de configuration sur vos baies de stockage et le déploiement de configurations prises en charge uniquement.

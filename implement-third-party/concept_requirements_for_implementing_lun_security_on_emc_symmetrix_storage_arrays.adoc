@@ -1,0 +1,32 @@
+---
+permalink: implement-third-party/concept_requirements_for_implementing_lun_security_on_emc_symmetrix_storage_arrays.html 
+sidebar: sidebar 
+keywords: requirements, implementing, lun, security, emc, symmetrix, storage, arrays 
+summary: 'Vous utilisez la sécurité des LUN pour éliminer la possibilité pour un hôte d"écrire des données sur une LUN qui n"appartient pas à cet hôte.' 
+---
+= Configuration requise pour la mise en œuvre de la sécurité des LUN sur les baies de stockage EMC Symmetrix
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous utilisez la sécurité des LUN pour éliminer la possibilité pour un hôte d'écrire des données sur une LUN qui n'appartient pas à cet hôte.
+
+Pour éliminer la possibilité qu'un hôte non-ONTAP écrase des LUN de baie EMC Symmetrix appartenant à un système ONTAP ou inversement, vous devez présenter les périphériques logiques Symmetrix via les ports du directeur (canal) de l'hôte de l'une des manières suivantes :
+
+* Présentez uniquement les périphériques logiques Symmetrix pour ONTAP sur des ports de directeur (canal) d'hôte Symmetrix spécifiques dédiés à l'utilisation de ONTAP.
++
+Si les ports ne peuvent pas être dédiés à ONTAP, vous devez vérifier que tous les autres hôtes utilisant ces ports sont compatibles avec la configuration requise pour ONTAP. Ceci est dû au fait que chaque hôte connecté à la baie Symmetrix a des exigences pour des paramètres d'attribut de port différents. Le partage de ports entre plusieurs hôtes connectés à la baie de stockage Symmetrix peut entraîner une configuration impossible à implémenter.
+
+* Pour les baies de stockage VMAX, créez des vues de masquage pour le mappage et le masquage requis en créant des groupes de ports, des groupes de stockage et des groupes initiateurs.
++
+Pour ce faire, vous devez d'abord activer l'attribut de port ACLX sur les ports de la baie de stockage VMAX.
+
+
+
+[NOTE]
+====
+Ne présentez pas la LUN VCMDB à tous les hôtes par défaut. Configurez le paramètre global pour restreindre la visibilité à VCMDB, sauf si celui-ci a été spécifiquement rendu visible par un hôte particulier.
+
+====

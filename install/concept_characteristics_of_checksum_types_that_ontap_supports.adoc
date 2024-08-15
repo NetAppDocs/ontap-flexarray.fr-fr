@@ -1,0 +1,40 @@
+---
+permalink: install/concept_characteristics_of_checksum_types_that_ontap_supports.html 
+sidebar: sidebar 
+keywords: characteristics, checksum, types, ontap, supports, block, advanced, zoned 
+summary: 'ONTAP prend en charge le type de checksum de niveau bloc (BCS) et le type AZC (Advanced zoned checksum type) pour les LUN, les disques et les agrégats de la baie.' 
+---
+= Caractéristiques des types de checksum pris en charge par ONTAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+ONTAP prend en charge le type de checksum de niveau bloc (BCS) et le type AZC (Advanced zoned checksum type) pour les LUN, les disques et les agrégats de la baie.
+
+Le type de somme de contrôle attribué à une LUN de baie dans ONTAP peut avoir un impact sur les performances ou sur l'espace utilisable d'une LUN de baie. Par conséquent, le nombre et la taille des LUN de baies dont vous avez besoin peuvent être affectés en fonction du type de somme de contrôle que vous attribuez aux LUN de baies.
+
+
+
+== Somme de contrôle de bloc (BCS)
+
+BCS est le type de checksum par défaut et recommandé pour les LUN de baies. BCS offre de meilleures performances pour les LUN de baie que les AZC.
+
+BCS a un impact plus important sur l'espace utilisable d'une LUN de baie que les AZC. BCS utilise 12.5 % de l'espace utilisable dans une LUN de baie.
+
+
+
+== Total de contrôle zoné avancé (AZC)
+
+AZC est une alternative à BCS. L'impact des AZC sur l'espace utilisable dans une LUN de baie est inférieur à celui des BCS ; LES AZC utilisent 1.56 % de la capacité du périphérique. Cependant, vous devez comparer l'espace utilisable nécessaire aux performances. LES CONTRÔLEURS AZC peuvent parfois causer des problèmes de performances pour les LUN de baies.
+
+IL n'est pas recommandé d'utiliser des contrôleurs AZC pour les LUN de baie pour les charges de travail aléatoires hautes performances. Cependant, vous pouvez utiliser des contrôleurs AZC avec des LUN de baie pour la reprise après incident, l'archivage ou des charges de travail similaires.
+
+Il n'y a pas d'impact AZC sur les performances des disques natifs.
+
+Les instructions relatives aux types de checksum varient en fonction de la taille et du type de disque. Pour plus d'informations, reportez-vous au _TR3838 - Guide de configuration du sous-système de stockage_.
+
+*Informations connexes*
+
+https://www.netapp.com/pdf.html?item=/media/19675-tr-3838.pdf["Rapport technique NetApp 3838 : Guide de configuration du sous-système de stockage"^]

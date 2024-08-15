@@ -1,0 +1,14 @@
+---
+permalink: implement-third-party/concept_limitation_on_array_lun_numbering_with_emc_and_vnx_arrays.html 
+sidebar: sidebar 
+keywords: limitation, array, lun, numbering, emc, vnx, array 
+summary: La baie de stockage EMC VNX prend uniquement en charge la numérotation des LUN de baie de 0 à 255. Les LUN de baie numérotées au-delà de cette plage ne sont pas visibles par ONTAP. 
+---
+= Limitation de la numérotation des LUN de baie avec la baie EMC VNX
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La baie de stockage EMC VNX prend uniquement en charge la numérotation des LUN de baie de 0 à 255. Les LUN de baie numérotées au-delà de cette plage ne sont pas visibles par ONTAP.

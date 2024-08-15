@@ -1,0 +1,27 @@
+---
+permalink: install/reference_requirements_for_zoning_in_a_configuration_with_storage_arrays.html 
+sidebar: sidebar 
+keywords: requirements, zone, configuration, storage, arrays 
+summary: Vous devez respecter les exigences de segmentation de votre configuration ONTAP avec des baies de stockage pour vous assurer que le système ONTAP peut accéder au bon ensemble de LUN. 
+---
+= Conditions requises pour le zoning dans une configuration avec des baies de stockage
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez respecter les exigences de segmentation de votre configuration ONTAP avec des baies de stockage pour vous assurer que le système ONTAP peut accéder au bon ensemble de LUN.
+
+* La _matrice d'interopérabilité_ doit identifier un commutateur et le micrologiciel du commutateur pris en charge pour la configuration ONTAP.
+* Le zoning doit être configuré de manière à limiter chaque port initiateur à un port cible unique sur chaque matrice de stockage.
+* Sur le commutateur, les ports du système ONTAP et les ports de la matrice de stockage doivent être affectés à la même zone.
++
+Cela permet aux systèmes ONTAP d'accéder aux LUN des baies de stockage.
+
+* Lorsque les ports de la baie de stockage sont partagés entre des systèmes hétérogènes, les LUN de la baie du système ONTAP ne peuvent pas être exposées à d'autres systèmes.
++
+La sécurité des LUN ou le masquage des LUN de baie doivent être utilisés pour s'assurer que les LUN de baie pour le stockage ONTAP ne sont visibles que par les systèmes ONTAP.
+
+* Un port de configuration hôte ne doit pas être inclus dans la même zone qu'un port cible.
+

@@ -1,0 +1,37 @@
+---
+permalink: install/concept_how_the_array_lun_name_is_displayed_in_ontap.html 
+sidebar: sidebar 
+keywords: how, array, lun, name, displayed, ontap, output, example, storage, disk 
+summary: 'Un nom unique est attribué à chaque LUN de baie au niveau du cluster, même s"il existe plusieurs chemins vers cette LUN. Contrairement aux versions précédentes, chaque LUN de baie porte plusieurs noms en fonction du chemin d"accès à la LUN à un moment donné.' 
+---
+= Affichage du nom de la LUN de la baie dans ONTAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Un nom unique est attribué à chaque LUN de baie au niveau du cluster, même s'il existe plusieurs chemins vers cette LUN. Contrairement aux versions précédentes, chaque LUN de baie porte plusieurs noms en fonction du chemin d'accès à la LUN à un moment donné.
+
+Vous pouvez afficher les anciens noms mappés sur chaque LUN de baie en exécutant la `storage disk show --disk <disk name> -fields diskpathnames` commande.
+
+
+
+== Exemple de résultat pour la commande Storage disk show --disk <disk name> -fields diskpathnames
+
+[listing]
+----
+vgv3270f47ab::*> storage disk show -type LUN
+                     Usable           Disk    Container   Container
+Disk                   Size Shelf Bay Type    Type        Name      Owner
+---------------- ---------- ----- --- ------- ----------- --------- --------
+EMC-1.7              8.66GB     -   - LUN     spare       Pool0     vgv3270f47a
+EMC-1.8              8.66GB     -   - LUN     spare       Pool0     vgv3270f47a
+EMC-1.9              8.66GB     -   - LUN     spare       Pool0     vgv3270f47a
+EMC-1.10             8.66GB     -   - LUN     spare       Pool0     vgv3270f47a
+
+vgv3270f47ab::*> storage disk show -disk EMC-1.10 -fields diskpathnames
+disk     diskpathnames
+-------- -------------------------------------------------------------------------------------------------------------------------------
+EMC-1.10 vgv3270f47a:vgbr300s181:5.126L9,vgv3270f47a:vgbr300s139:5.126L9,vgv3270f47b:vgbr300s181:5.126L9,vgv3270f47b:vgbr300s139:5.126L9
+----

@@ -1,0 +1,29 @@
+---
+permalink: install/concept_raid_protection_for_array_luns.html 
+sidebar: sidebar 
+keywords: raid, protection, array, luns 
+summary: 'Les baies de stockage fournissent une protection RAID aux LUN de baie qu"elles mettent à la disposition de ONTAP. ONTAP n"offre pas de protection RAID.' 
+---
+= Protection RAID pour les LUN de baies
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Les baies de stockage fournissent une protection RAID aux LUN de baie qu'elles mettent à la disposition de ONTAP. ONTAP n'offre pas de protection RAID.
+
+ONTAP utilise RAID0 (striping) pour les LUN de baies. ONTAP prend en charge divers types RAID sur les baies de stockage, à l'exception de RAID0 car RAID0 ne fournit pas de protection du stockage.
+
+Lors de la création de _RAID groups_ sur des matrices de stockage, vous devez suivre les meilleures pratiques du fournisseur de la matrice de stockage pour vous assurer qu'il existe un niveau de protection adéquat sur la matrice de stockage, de sorte que la défaillance du disque n'entraîne pas de perte de données ou d'accès aux données.
+
+[NOTE]
+====
+* Un _groupe RAID_ sur une matrice de stockage est la disposition des disques qui forment ensemble le niveau RAID défini.
++
+Chaque groupe RAID ne prend en charge qu'un seul type RAID. Le nombre de disques que vous sélectionnez pour un groupe RAID détermine le type RAID pris en charge par un groupe RAID particulier. Les différents fournisseurs de baies de stockage utilisent différents termes pour décrire cette entité : groupes RAID, groupes de parité, groupes de disques, groupes RAID de parité, etc.
+
+* ONTAP prend en charge RAID4 et RAID-DP sur les tiroirs disques natifs, mais ne prend en charge que RAID0 sur les LUN de la baie.
+
+
+====

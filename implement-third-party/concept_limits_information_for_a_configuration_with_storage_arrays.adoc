@@ -1,0 +1,30 @@
+---
+permalink: implement-third-party/concept_limits_information_for_a_configuration_with_storage_arrays.html 
+sidebar: sidebar 
+keywords: limit, types, configurations, storage, arrays 
+summary: 'Vous devez tenir compte de certaines limites de baie de stockage lors de la planification d"une configuration ONTAP.' 
+---
+= Limitez les types pour les configurations avec les baies de stockage
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez tenir compte de certaines limites de baie de stockage lors de la planification d'une configuration ONTAP.
+
+Le _Hardware Universe_ contient des valeurs limites spécifiques pour les matrices de stockage et les disques natifs.
+
+Les types de limites suivants s'appliquent uniquement aux matrices de stockage et non aux disques natifs :
+
+* Taille minimale et maximale des LUN de baie prises en charge par ONTAP
+* Taille minimale de la LUN de la baie pour le volume racine
+* Taille minimale de la LUN de la baie de disques de secours
+* Limites des groupes RAID avec LUN de baies
+* Taille minimale de l'agrégat d'un agrégat de LUNs de array
+* Nombre maximal de LUN de baie et de disques combinés, par plateforme
+
+
+*Informations connexes*
+
+https://hwu.netapp.com["NetApp Hardware Universe"]

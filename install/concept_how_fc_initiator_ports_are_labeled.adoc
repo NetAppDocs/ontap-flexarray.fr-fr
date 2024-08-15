@@ -1,0 +1,27 @@
+---
+permalink: install/concept_how_fc_initiator_ports_are_labeled.html 
+sidebar: sidebar 
+keywords: how, fc initiator, ports, labeled 
+summary: 'Tous les ports FC initiator sur les systèmes ONTAP sont identifiés par un chiffre et une lettre. L"étiquetage diffère selon que les ports se trouvent sur la carte mère ou sur les cartes des logements d"extension.' 
+---
+= Étiquetage des ports FC initiator
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Tous les ports FC initiator sur les systèmes ONTAP sont identifiés par un chiffre et une lettre. L'étiquetage diffère selon que les ports se trouvent sur la carte mère ou sur les cartes des logements d'extension.
+
+* Numérotation des ports sur la carte mère
++
+Les ports sont numérotés 0a, 0b, 0C, 0d...
+
+* Numérotation des ports sur les cartes d'extension
++
+Les ports sont numérotés en fonction du logement dans lequel la carte d'extension est installée. Une carte dans l'emplacement 3 produit les ports 3A et 3B.
+
++
+Les ports initiateurs FC sont étiquetés 1 et 2. Cependant, le logiciel les désigne Par A et B. ces étiquettes apparaissent dans l'interface utilisateur et les messages système s'affichent sur la console.
+
+

@@ -1,0 +1,36 @@
+---
+permalink: implement-third-party/concept_requirements_for_formatting_array_luns.html 
+sidebar: sidebar 
+keywords: requirements, formatting, array, luns 
+summary: 'Vous pouvez effectuer différents types de formatage de LUN de baie. Chaque type a un impact sur la disponibilité des LUN ou sur l"ensemble de la baie de stockage.' 
+---
+= Conditions requises pour le formatage des LUN de baie
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez effectuer différents types de formatage de LUN de baie. Chaque type a un impact sur la disponibilité des LUN ou sur l'ensemble de la baie de stockage.
+
+Si vous devez présenter immédiatement un nouveau LUN au système ONTAP, utilisez le formatage rapide. Si vous prévoyez de présenter des LUN au système ONTAP, un formatage rapide est recommandé, mais le formatage en ligne est acceptable.
+
+Le formatage rapide est recommandé car le formatage en ligne et hors ligne retarde la détection du disque jusqu'à la fin du formatage de la LUN, comme décrit dans la liste suivante :
+
+* Le formatage en ligne met le LUN de la baie en cours de formatage hors ligne et le LUN de la baie ne répond à aucune commande SCSI.
++
+Le formatage est effectué sur une LUN de baie à la fois jusqu'à ce que toutes les LUN de baie soient formatées.
+
+* Le formatage hors ligne met toute la matrice de stockage hors ligne et la matrice de stockage ne répond à aucune commande SCSI.
++
+Les LUN de la baie sont formatées six à la fois par contrôleur jusqu'à ce que le formatage soit terminé.
+
++
+La matrice de stockage ne répond pas tant que le formatage n'est pas terminé.
+
+* Si vous créez des LUN de baie (pour n'importe quel hôte) après la configuration initiale du système ONTAP et que vous utilisez le formatage hors ligne, le système fonctionne de manière incohérente.
++
+Toutes les LUN de baie mappées sur le système ONTAP, y compris les LUN de baie du volume racine, deviennent indisponibles jusqu'à la fin du formatage.
+
+* Le formatage rapide et en ligne des LUN pour les autres hôtes n'a aucun impact sur le système ONTAP.
+

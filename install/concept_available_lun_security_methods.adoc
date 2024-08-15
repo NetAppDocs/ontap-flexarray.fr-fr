@@ -1,0 +1,44 @@
+---
+permalink: install/concept_available_lun_security_methods.html 
+sidebar: sidebar 
+keywords: available, lun, security, methods, port-level, storage, array, dedicate, ontap 
+summary: Différentes méthodes de sécurité des LUN vous aident à désigner les hôtes pouvant accéder à des LUN de baie spécifiques. Vous pouvez utiliser des produits de sécurité au niveau des ports ou des LUN, ou dédier un stockage aux systèmes ONTAP. 
+---
+= Méthodes de sécurité des LUN disponibles
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Différentes méthodes de sécurité des LUN vous aident à désigner les hôtes pouvant accéder à des LUN de baie spécifiques. Vous pouvez utiliser des produits de sécurité au niveau des ports ou des LUN, ou dédier un stockage aux systèmes ONTAP.
+
+
+
+== Sécurité au niveau du port
+
+Vous pouvez utiliser la sécurité au niveau du port pour présenter uniquement les LUN de baie d'un hôte particulier. Ce port devient alors dédié à cet hôte.
+
+Toutes les baies de stockage ne prennent pas en charge la sécurité au niveau des ports. Certaines baies de stockage présentent toutes les LUN sur tous les ports par défaut et ne permettent pas de restreindre la visibilité des LUN à des hôtes particuliers. Pour ces baies, vous devez utiliser un produit de sécurité LUN ou dédier la baie de stockage au système ONTAP. Consultez la documentation de votre matrice de stockage pour déterminer si celle-ci prend en charge la sécurité au niveau des ports.
+
+
+
+== Produits de sécurité des LUN
+
+Vous pouvez utiliser un produit de sécurité LUN pour contrôler les hôtes zonés sur le même port afin qu'ils puissent accéder uniquement à des LUN spécifiques de baie sur ce port. Cela empêche d'autres hôtes d'accéder à ces mêmes LUN de baie en les masquant des autres hôtes.
+
+
+
+== Dédiez la baie de stockage à ONTAP
+
+Vous pouvez dédier la baie de stockage aux systèmes ONTAP. Dans ce cas, aucun hôte autre que les systèmes ONTAP n'est connecté à la baie de stockage.
+
+Vous devez utiliser à la fois le zoning et la sécurité LUN pour améliorer la protection et la redondance des systèmes ONTAP.
+
+En plus de suivre les méthodes de sécurité des LUN, vous devez également vérifier si des informations supplémentaires concernant la sécurité des LUN pour les baies de stockage de votre fournisseur sont disponibles. Certaines baies de stockage doivent être dédiées aux systèmes ONTAP.
+
+*Informations connexes*
+
+https://docs.netapp.com/us-en/ontap-flexarray/implement-third-party/index.html["Implémentation de la virtualisation FlexArray pour stockage tiers"]
+
+https://docs.netapp.com/us-en/ontap-flexarray/implement-e-series/index.html["Implémentation de la virtualisation FlexArray pour le stockage NetApp E-Series"]

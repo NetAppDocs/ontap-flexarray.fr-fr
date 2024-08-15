@@ -1,0 +1,20 @@
+---
+permalink: install/concept_supported_methods_for_connecting_a_v_series_system_to_a_storage_array.html 
+sidebar: sidebar 
+keywords: supported, methods, connect, ontap, system, storage, array 
+summary: Vous pouvez connecter le système ONTAP dans une configuration FAS avec des baies de stockage. Les configurations reliées au fabric sont prises en charge à la fois pour les systèmes autonomes et les paires haute disponibilité. Les configurations DAS sont limitées à certaines baies de stockage et à certaines versions de ONTAP. 
+---
+= Méthodes prises en charge pour connecter un système ONTAP à une matrice de stockage
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez connecter le système ONTAP dans une configuration FAS avec des baies de stockage. Les configurations reliées au fabric sont prises en charge à la fois pour les systèmes autonomes et les paires haute disponibilité. Les configurations DAS sont limitées à certaines baies de stockage et à certaines versions de ONTAP.
+
+La matrice d'interopérabilité contient des informations sur les méthodes de connexion prises en charge pour des baies de stockage et des plateformes spécifiques exécutant ONTAP.
+
+*Informations connexes*
+
+https://mysupport.netapp.com/matrix["Matrice d'interopérabilité NetApp"]

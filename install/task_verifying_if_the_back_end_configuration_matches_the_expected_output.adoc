@@ -1,0 +1,93 @@
+---
+permalink: install/task_verifying_if_the_back_end_configuration_matches_the_expected_output.html 
+sidebar: sidebar 
+keywords: verify, back-end, configuration, matches, intended, configuration 
+summary: Après avoir résolu les erreurs de configuration internes détectées par les erreurs de stockage, vous devez vérifier si la configuration interne existante correspond à la configuration souhaitée et résoudre les problèmes qui se produisent en cas de discordance. 
+---
+= Vérification que la configuration interne correspond à la configuration souhaitée
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Après avoir résolu les erreurs de configuration interne détectées par `storage errors show`, vous devez vérifier si la configuration interne existante correspond à la configuration que vous avez souhaitée et résoudre les problèmes liés à une incompatibilité.
+
+.Étapes
+. Entrez la commande suivante : `storage array config show`
++
+Le `storage array config show` résultat regroupe des informations sur les groupes de LUN, le nombre de LUN et les chemins par baie de stockage, comme l'exemple suivant pour une paire haute disponibilité le montre :
+
++
+[listing]
+----
+
+mysystem1::> storage array config show
+             LUN   LUN
+Node         Group Count  Array Name      Array Target Port   Initiator
+------------ ----- ----- ---------------  ------------------  ---------
+mysystem1a    0    10     DGC_RAID5_1      5005076303030124       1a
+                                           5005076303088124       1b
+                                           5005076303130124       1c
+                                           5005076303188124       1d
+mysystem1b    0    10     DGC_RAID5_1      5005076303030124       1a
+                                           5005076303088124       1b
+                                           5005076303130124       1c
+                                           5005076303188124       1d
+8 entries were displayed.
+----
+. Vérifiez la `storage array config show` sortie de chaque énoncé de problème dans le tableau suivant et reportez-vous aux informations appropriées pour la solution.
++
+|===
+| Si vous trouvez ce problème... | Voir ces informations... 
+
+
+ a| 
+Groupes de LUN vides
+ a| 
+xref:reference_reasons_for_no_luns_in_the_array_lun_group.adoc[Motifs de l'absence de LUN dans le groupe de LUN de baie]
+
+
+
+ a| 
+Baies de stockage attendues manquantes
+ a| 
+xref:reference_reasons_storage_arrays_are_missing_from_command_output.adoc[Raisons pour lesquelles vous ne pouvez pas voir toutes les baies de stockage attendues]
+
+
+
+ a| 
+Plus de groupes LUN de baies que prévu
+ a| 
+xref:reference_reasons_for_more_array_lun_groups_than_expected.adoc[Raisons justifiant le nombre de groupes de LUN de baie supérieur à la valeur attendue]
+
+
+
+ a| 
+Moins de groupes LUN de baie que prévu
+ a| 
+xref:reference_reasons_for_fewer_array_lun_groups_than_expected.adoc[Raisons pour lesquelles moins de groupes de LUN de baie sont attendus]
+
+
+
+ a| 
+Les groupes de LUN de baies n'affichent pas le nombre de LUN attendu
+ a| 
+xref:reference_reasons_for_the_incorrect_number_of_luns_in_array_lun_groups.adoc[Motifs du nombre incorrect de LUN dans les groupes de LUN de baie]
+
+
+
+ a| 
+Moins de chemins que prévu
+ a| 
+xref:reference_fewer_than_two_paths_to_an_array_lun.adoc[Moins de deux chemins vers une LUN de baie]
+
+
+
+ a| 
+Plus de chemins que prévu
+ a| 
+xref:reference_reasons_for_more_paths_to_an_array_lun_than_expected.adoc[Raisons pour lesquelles il y a plus de chemins vers une LUN de baie que prévu]
+
+|===
+

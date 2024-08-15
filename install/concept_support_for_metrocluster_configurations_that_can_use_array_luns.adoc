@@ -1,0 +1,33 @@
+---
+permalink: install/concept_support_for_metrocluster_configurations_that_can_use_array_luns.html 
+sidebar: sidebar 
+keywords: requirements, metrocluster, configurations, array, luns 
+summary: Avant de configurer une configuration MetroCluster avec des LUN de baie, vous devez vous assurer que les systèmes ONTAP et le stockage utilisé dans la configuration respectent les exigences de prise en charge de base. 
+---
+= Configuration requise pour les configurations MetroCluster avec LUN de baie
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Avant de configurer une configuration MetroCluster avec des LUN de baie, vous devez vous assurer que les systèmes ONTAP et le stockage utilisé dans la configuration respectent les exigences de prise en charge de base.
+
+Les conditions de base requises pour la prise en charge des configurations MetroCluster avec les LUN de baie sont les suivantes :
+
+* Vous pouvez utiliser à la fois des systèmes V-Series et FAS avec la prise en charge des LUN de baies dans les configurations MetroCluster.
++
+Cependant, vous devez vous assurer que tous les systèmes ONTAP utilisés dans une configuration MetroCluster sont du même modèle.
+
+* Les systèmes ONTAP peuvent utiliser des disques natifs uniquement, des LUN sur des baies de stockage uniquement, ou les deux.
+* Si vous configurez une configuration MetroCluster avec des disques natifs et des LUN de baie, vous devez utiliser des ponts FC-SAS et des disques natifs pris en charge par ces ponts.
+* Les systèmes ONTAP et les baies de stockage doivent être identifiés dans la _matrice d'interopérabilité_ comme étant pris en charge dans les configurations MetroCluster.
+
+
+*Informations connexes*
+
+https://mysupport.netapp.com/matrix["Matrice d'interopérabilité NetApp"]
+
+https://docs.netapp.com/us-en/ontap-metrocluster/install-fc/index.html["Installation et configuration de la solution Fabric-Attached MetroCluster"]
+
+https://docs.netapp.com/us-en/ontap-metrocluster/install-stretch/index.html["Installation et configuration d'Stretch MetroCluster"]

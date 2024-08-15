@@ -1,0 +1,22 @@
+---
+permalink: implement-third-party/concept_alua_behavior_of_vnx2_storage_arrays.html 
+sidebar: sidebar 
+keywords: alua, behavior, vnx2, storage, arrays 
+summary: 'Bien que toutes les baies EMC CLARiiON et VNX utilisent le mode de basculement ALUA (asymétrique actif-actif), les baies de stockage VNX2 peuvent différer dans leur comportement ALUA.' 
+---
+= Comportement ALUA des baies de stockage VNX2
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Bien que toutes les baies EMC CLARiiON et VNX utilisent le mode de basculement ALUA (asymétrique actif-actif), les baies de stockage VNX2 peuvent différer dans leur comportement ALUA.
+
+Comme toutes les autres LUN de baie EMC, les LUN de baie VNX2 présentées au système ONTAP à partir de pools de disques dynamiques utilisent le mode de basculement ALUA. Toutefois, les LUN de baie VNX2 présentées au système ONTAP à partir de groupes RAID traditionnels utilisent le mode de basculement actif-actif, tous les chemins étant signalés par *`AO`* (optimisé actif). Ce comportement des LUN de baie change lors de certaines opérations, telles que la création de Snapshot dans la baie back-end.
+
+Par conséquent, pour maintenir un comportement cohérent des LUN de baie VNX2, ONTAP traite ces LUN comme ALUA, que ces LUN de baie soient présentées dans des groupes RAID traditionnels ou des pools de disques dynamiques.
+
+Dans ce cas, les demandes d'E/S pour un LUN VNX2 donné sont distribuées uniquement sur les chemins signalés comme étant à *`INU`l'état * (en cours d'utilisation) et non sur tous les chemins signalés comme *`AO`* (optimisé pour l'activité).
+
+Par exemple, si vous disposez de quatre chemins vers une LUN de baie VNX2 présentée au système ONTAP à partir d'un groupe RAID traditionnel, tous les chemins sont signalés par *`AO`* ; cependant, seuls deux chemins sont à *`INU`l'état *, tandis que les deux autres ne sont pas utilisés mais sont à *`RDY`l'état * (prêt).

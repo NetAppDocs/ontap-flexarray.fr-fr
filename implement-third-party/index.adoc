@@ -1,0 +1,12 @@
+---
+permalink: implement-third-party/index.html 
+sidebar: sidebar 
+keywords: flexarray, virtualization, implementation, third-Party, storage 
+summary: 'Bienvenue dans la bibliothèque d"informations ONTAP FlexArray. Vous y trouverez des informations sur l"utilisation d"une baie de stockage tierce comme stockage interne pour les clusters.' 
+---
+= Implémentation de la virtualisation FlexArray® pour le stockage tiers
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+

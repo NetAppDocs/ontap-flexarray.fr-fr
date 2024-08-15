@@ -1,0 +1,62 @@
+---
+permalink: implement-third-party/reference_required_parameters_for_emc_vnx_storage_arrays_with_data_ontap_systems.html 
+sidebar: sidebar 
+keywords: required, parameters, emc, vnx, storage, arrays, ontap, systems 
+summary: Certains paramètres sont requis sur la matrice de stockage pour que la matrice de stockage fonctionne correctement avec les systèmes ONTAP. 
+---
+= Paramètres requis pour les baies de stockage EMC VNX avec les systèmes ONTAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Certains paramètres sont requis sur la matrice de stockage pour que la matrice de stockage fonctionne correctement avec les systèmes ONTAP.
+
+Les paramètres de configuration de l'hôte qui doivent être définis sur la matrice de stockage sont répertoriés dans le tableau suivant.
+
+|===
+| Paramètre | Réglage 
+
+
+ a| 
+`Initiator type`
+ a| 
+CLARiiON/VNX
+
+
+
+ a| 
+`Array Com Path`
+ a| 
+Activé
+
+
+
+ a| 
+`Failover mode`
+ a| 
+4
+
+
+
+ a| 
+`Unit serial number`
+ a| 
+LUN
+
+
+
+ a| 
+`Host name`
+ a| 
+Nom d'hôte et numéro de port fournis par l'utilisateur
+
+
+
+ a| 
+`IP address`
+ a| 
+Fausse adresse IP unique vous devez vous assurer que vous n'avez pas entré cette adresse IP ailleurs dans la configuration de la matrice de stockage et qu'il ne s'agit pas d'une adresse IP présente sur le réseau.
+
+|===

@@ -1,0 +1,14 @@
+---
+permalink: install/concept_planning_for_paths_to_array_luns.html 
+sidebar: sidebar 
+keywords: plan, paths, array, luns 
+summary: Les chemins correspondent aux connexions physiques entre le système ONTAP et la baie de stockage. Des chemins redondants sont nécessaires pour éliminer tout point de défaillance unique entre le système ONTAP et la baie de stockage. 
+---
+= Planification des chemins vers les LUN de baies
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Les chemins correspondent aux connexions physiques entre le système ONTAP et la baie de stockage. Des chemins redondants sont nécessaires pour éliminer tout point de défaillance unique entre le système ONTAP et la baie de stockage.

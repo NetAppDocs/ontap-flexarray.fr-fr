@@ -1,0 +1,14 @@
+---
+permalink: install/concept_planning_for_raid_implementation.html 
+sidebar: sidebar 
+keywords: plan, raid, implementation 
+summary: Vous devez planifier la taille et le nombre de LUN des groupes RAID de la baie de stockage et décider si vous souhaitez partager le groupe RAID entre les hôtes. 
+---
+= Planification de la mise en œuvre RAID
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez planifier la taille et le nombre de LUN des groupes RAID de la baie de stockage et décider si vous souhaitez partager le groupe RAID entre les hôtes.

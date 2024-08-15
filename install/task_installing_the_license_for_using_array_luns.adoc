@@ -1,0 +1,41 @@
+---
+permalink: install/task_installing_the_license_for_using_array_luns.html 
+sidebar: sidebar 
+keywords: install, license, use, array, luns 
+summary: 'La licence V_StorageAttach doit être installée sur chaque nœud ONTAP que vous souhaitez utiliser avec les LUN de baies. Il ne s"agit pas d"une seule licence pour le cluster. Les LUN de baie ne peuvent pas être utilisées dans les agrégats tant qu"une licence n"est pas installée.' 
+---
+= Installation de la licence pour l'utilisation de LUN de baie
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La licence V_StorageAttach doit être installée sur chaque nœud ONTAP que vous souhaitez utiliser avec les LUN de baies. Il ne s'agit pas d'une seule licence pour le cluster. Les LUN de baie ne peuvent pas être utilisées dans les agrégats tant qu'une licence n'est pas installée.
+
+*Ce dont vous aurez besoin*
+
+* Le cluster doit être installé.
+* Vous devez disposer de la clé de licence pour la licence V_StorageAttach.
++
+https://mysupport.netapp.com/site/global/dashboard["Support NetApp"]
+
+
+
+Vous n'avez pas besoin d'effectuer cette procédure si la clé de licence du package V_StorageAttach est déjà installée. Si le système ONTAP est commandé avec des disques, l'usine installe généralement le pack de licences pour vous. Sinon, de nombreux clients installent toutes les licences nécessaires dès le début du processus d'installation.
+
+.Étapes
+. Pour chaque nœud ONTAP du cluster à utiliser avec des LUN de baie, entrez la commande suivante sur le nœud : `system license add license key`
++
+[listing]
+----
+
+vgv3170f41a> license
+Serial Number: nnnnnnnn
+Owner: mysystem1a
+Package           Type    Description           Expiration
+----------------- ------- --------------------- --------------------
+V_StorageAttach   license Virtual Attached Storage
+----
+. Examinez le résultat pour vérifier que le package V_StorageAttach est affiché.
+

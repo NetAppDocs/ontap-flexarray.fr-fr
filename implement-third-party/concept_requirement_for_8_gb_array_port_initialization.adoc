@@ -1,0 +1,20 @@
+---
+permalink: implement-third-party/concept_requirement_for_8_gb_array_port_initialization.html 
+sidebar: sidebar 
+keywords: requirement, 8-Gb array, port, initialization 
+summary: 'Dans une structure Fibre Channel (FC) standard, les ports de la baie de stockage s"initialisent en tant que N-ports (ports de nœud) et leurs ports de commutateur correspondants s"initialisent en tant que ports F-ports (ports de structure). Dans certains cas, ces ports F peuvent se déconnecter et reprendre le fonctionnement en tant que ports L (ports de boucle), ce qui entraîne des erreurs de structure.' 
+---
+= Configuration requise pour l'initialisation des ports de la baie de 8 Go
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Dans une structure Fibre Channel (FC) standard, les ports de la baie de stockage s'initialisent en tant que N-ports (ports de nœud) et leurs ports de commutateur correspondants s'initialisent en tant que ports F-ports (ports de structure). Dans certains cas, ces ports F peuvent se déconnecter et reprendre le fonctionnement en tant que ports L (ports de boucle), ce qui entraîne des erreurs de structure.
+
+Ce comportement est causé par des problèmes de négociation automatique de la topologie dans le commutateur Brocade.
+
+Pour vous assurer que les ports de commutateur s'initialisent toujours en tant que ports F, vous devez exécuter la `portcfggport` ``<portnumber> 1` commande sur les ports de commutateur Brocade connectés aux matrices de stockage. Vous devez exécuter cette commande lorsque vous commencez à configurer le système pour éviter ce problème et vous devez le résoudre si cela se produit.
+
+Pour promouvoir l'efficacité sur l'ensemble de la structure, vous pouvez également utiliser cette solution de contournement sur tous les ports Brocade connectés aux ports initiateurs ONTAP.

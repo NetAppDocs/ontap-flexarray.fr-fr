@@ -1,0 +1,12 @@
+---
+permalink: install/index.html 
+sidebar: sidebar 
+keywords: flexarray, virtualization, installation, requirements, reference 
+summary: 'Bienvenue dans la bibliothèque d"informations ONTAP FlexArray. Vous y trouverez des informations sur la configuration des clusters pour qu"ils fonctionnent avec des baies de stockage.' 
+---
+= Configuration requise et référence pour l'installation de la virtualisation FlexArray®
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+

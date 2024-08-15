@@ -1,0 +1,24 @@
+---
+permalink: implement-third-party/concept_how_emc_vnx_storage_arrays_control_access_to_data.html 
+sidebar: sidebar 
+keywords: emc, vnx, storage, array, control, access, data 
+summary: 'La baie EMC VNX utilise les groupes de stockage pour contrôler l"accès aux données. Un Storage Group est une ou plusieurs LUN de la baie de stockage auxquelles vous pouvez accéder uniquement par l"hôte ou les hôtes que vous associez aux LUN de la baie. Un hôte ne peut ni accéder ni modifier les données d"une LUN de baie qui ne fait pas partie de son Storage Group.' 
+---
+= Comment la baie de stockage EMC VNX contrôle l'accès aux données
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La baie EMC VNX utilise les groupes de stockage pour contrôler l'accès aux données. Un Storage Group est une ou plusieurs LUN de la baie de stockage auxquelles vous pouvez accéder uniquement par l'hôte ou les hôtes que vous associez aux LUN de la baie. Un hôte ne peut ni accéder ni modifier les données d'une LUN de baie qui ne fait pas partie de son Storage Group.
+
+ONTAP prend en charge plusieurs Storage Groups si les règles suivantes sont respectées :
+
+* La segmentation du commutateur doit définir les ports cibles que les ports FC initiator du système ONTAP utilisent pour accéder à chaque Array LUN group.
+* Le masquage de LUN doit être utilisé pour limiter l'accès des hôtes aux LUN de baie.
+* Les Storage Groups doivent définir les Array LUN groups qui sont présentés à chaque port FC initiator.
+* Une paire de ports FC initiator sur chaque système ONTAP est requise pour chaque groupe de LUN de baie.
+
+
+Si des quartiers de LUN de baie sont utilisés, les systèmes V-Series situés dans le même voisinage doivent être dans le même Storage Group.

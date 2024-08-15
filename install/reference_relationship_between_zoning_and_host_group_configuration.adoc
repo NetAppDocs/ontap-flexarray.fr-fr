@@ -1,0 +1,14 @@
+---
+permalink: install/reference_relationship_between_zoning_and_host_group_configuration.html 
+sidebar: sidebar 
+keywords: relationship, between, zone, host, group, configuration 
+summary: Lorsque vous corrigez des erreurs de configuration de zoning, vous devez parfois également modifier la configuration des groupes hôtes, et inversement. 
+---
+= Relation entre la segmentation et la configuration des groupes hôtes
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Lorsque vous corrigez des erreurs de configuration de zoning, vous devez parfois également modifier la configuration des groupes hôtes, et inversement.

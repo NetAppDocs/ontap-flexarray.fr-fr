@@ -1,0 +1,20 @@
+---
+permalink: install/concept_zoning_recommendation_for_a_configuration_with_storage_arrays.html 
+sidebar: sidebar 
+keywords: zone, recommendation, configuration, storage, arrays 
+summary: 'Le type de zoning recommandé pour une configuration avec des matrices de stockage est le zoning 1:1. Avec un zoning 1:1, chaque zone contient un seul port FC initiator et un seul port Storage array target.' 
+---
+= Recommandation de zoning pour une configuration avec des baies de stockage
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Le type de zoning recommandé pour une configuration avec des matrices de stockage est le zoning 1:1. Avec un zoning 1:1, chaque zone contient un seul port FC initiator et un seul port Storage array target.
+
+Les avantages de la création d'un zoning 1:1 sont les suivants :
+
+* Vous limitez le nombre de ports sur lesquels vous pouvez accéder à une LUN de baie spécifique.
+* La détection et le temps de démarrage sont améliorés, car les initiateurs FC les systèmes ONTAP ne tentent pas de se détecter les uns les autres.
+

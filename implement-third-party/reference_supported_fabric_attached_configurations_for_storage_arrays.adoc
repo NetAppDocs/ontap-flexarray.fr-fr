@@ -1,0 +1,20 @@
+---
+permalink: implement-third-party/reference_supported_fabric_attached_configurations_for_storage_arrays.html 
+sidebar: sidebar 
+keywords: support, fabric-attached, configurations 
+summary: Sauf mention contraire, plusieurs configurations FAS sont prises en charge par tous les fournisseurs de baies de stockage. 
+---
+= Configurations FAS prises en charge
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Sauf mention contraire, plusieurs configurations FAS sont prises en charge par tous les fournisseurs de baies de stockage.
+
+La matrice d'interopérabilité contient des informations supplémentaires sur des modèles de baies spécifiques.
+
+*Informations connexes*
+
+https://mysupport.netapp.com/matrix["Matrice d'interopérabilité NetApp"]

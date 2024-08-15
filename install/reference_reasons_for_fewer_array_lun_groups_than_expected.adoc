@@ -1,0 +1,54 @@
+---
+permalink: install/reference_reasons_for_fewer_array_lun_groups_than_expected.html 
+sidebar: sidebar 
+keywords: reasons, fewer, array, lun, groups, expected, resolve, issue 
+summary: 'Lors de la validation de la configuration back-end, vous devez vérifier le résultat de l"affichage de la configuration de la baie de stockage pour déterminer si le nombre de groupes de LUN de la baie dans le résultat correspond à ce que vous souhaitez.' 
+---
+= Raisons pour lesquelles moins de groupes de LUN de baie sont attendus
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Lors de la validation de la configuration back-end, vous devez vérifier le `storage array config show` résultat pour déterminer si le nombre de groupes de LUN de la baie dans le résultat est celui que vous souhaitez.
+
+
+
+== Explication
+
+La cause la plus probable d'un nombre inférieur de groupes de LUN par rapport aux prévisions est que le mappage LDEV-to-LUN est identique pour les deux paires de ports FC initiator sur le système ONTAP. Si le mappage LDEV-to-LUN est identique pour les deux paires de ports FC initiator, le `storage array config show` résultat affiche un LUN group de moins que prévu.
+
+Le résultat suivant `storage array config show` n'affiche qu'un seul groupe de LUN de baie, car les deux paires de ports FC initiator sont mappées sur la même paire de ports cible :
+
+[listing]
+----
+
+mysystem1::> storage array config show
+
+         LUN   LUN
+Node     Group Count Array Name  Array Target Ports      Switch Port    Initiator
+------   ----- ----- ---------- -------------------      -----------    ---------
+
+mysystem1  0     2   DGC_RAID5_1  20:1A:00:a0:b8:0f:ee:04  vnbr200es25:5   0a
+                                  20:2A:00:a0:b8:0f:ee:04  vnci9124s53:6   0c
+                                  20:1A:00:a0:b8:0f:ee:04  vnbr200es25:5   0b
+                                  20:2A:00:a0:b8:0f:ee:04  vnci9124s53:6   0d
+----
+En regardant la colonne Array Target ports (ports cibles de la baie), vous pouvez voir le même port cible plusieurs fois au sein du groupe de LUN, et chaque occurrence a un initiateur différent.
+
+* Les initiateurs 0a et 0b ont tous deux accès au port 1A de la matrice de stockage.
+* Les initiateurs 0C et 0d ont tous deux accès au port 2A de la baie de stockage.
+
+
+
+
+== Résolution du problème
+
+ONTAP ne signale pas cette erreur, car un système ONTAP peut fonctionner lorsque le mappage LDEV-to-LUN est le même pour les deux paires de ports initiateurs FC. Toutefois, plusieurs initiateurs FC sur le même port cible ne sont pas pris en charge. Vous devez corriger le mappage de sorte que votre système ONTAP respecte une configuration prise en charge, et que vous ayez ainsi le nombre de groupes de LUN souhaités.
+
+Pour résoudre ce problème, procédez comme suit :
+
+. Sur la baie de stockage, corrigez le mappage de sorte que le mappage de la paire de ports FC initiator ne soit plus le même pour les deux paires de ports FC initiator sur le système ONTAP.
+. Sur le système ONTAP, exécutez `storage array config show` à nouveau et vérifiez que le nombre de groupes de LUN que vous attendiez est affiché et que les paires de ports FC initiator n'accèdent pas aux mêmes ports cibles.
+
